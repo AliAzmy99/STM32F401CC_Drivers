@@ -24,62 +24,17 @@ void RCC_voidInitSysClk(void)
     #if HSI == RCC_CLK_SRC
         /*1- Turn On HSI*/
         SET_BIT(RCC_CR, HSION);
-        /*2- Select the HSI as the System CLK Src When Ready*/
-        while (!GET_BIT(RCC_CR, HSIRDY))
-            {
-                /*Wait for HSI to Turn On*/
-            }
+        /*2- Select the HSI as the System CLK Src*/
         CLR_BIT(RCC_CFGR, SW0);
         CLR_BIT(RCC_CFGR, SW1);
-
     #elif HSE == RCC_CLK_SRC
         /*1- Turn On HSE*/
         SET_BIT(RCC_CR, HSEON);
-        /*2- Select the HSE as the System CLK Src When Ready*/
-        while (!GET_BIT(RCC_CR, HSERDY))
-            {
-                /*Wait for HSE to Turn On*/
-            }
+        /*2- Select the HSE as the System CLK Src*/
         SET_BIT(RCC_CFGR, SW0);
         CLR_BIT(RCC_CFGR, SW1);
-
     #elif PLL == RCC_CLK_SRC
-        /*1- Turn Off PLL*/
-        CLR_BIT(RCC_CR, PLLON);
-        /*2- Choosing PLL Multiplier Parameters*/
-        #if (2 <= PLLM && 63 >= PLLM) && (192 <= PLLN && 432 >= PLLN) && (2 == PLLP || 4 == PLLP || 6 == PLLP || 8 == PLLP) && (2 <= PLLQ && 15 >= PLLQ)
-            RCC_PLLCFGR = RCC_PLLCFGR_EMPTY | (PLLM<<PLLM0) | (PLLN<<PLLN0) | (((PLLP-2)>>1)<<PLLP0) | (PLLQ<<PLLQ0);
-        #else
-            #error Error: Invalid PLL Multiplier Parametes Configuration
-        #endif
-        /*3- Selecting PLL CLK Src*/
-        #if HSI == PLL_CLK_SRC
-            SET_BIT(RCC_CR, HSION);         /*Turn On HSI*/
-            while (!GET_BIT(RCC_CR, HSIRDY))
-            {
-                /*Wait for HSI to Turn On*/
-            }
-            CLR_BIT(RCC_PLLCFGR, PLLSRC);   /*Select HSI as PLL Src When Ready*/
-        #elif HSE == PLL_CLK_SRC
-            SET_BIT(RCC_CR, HSEON);         /*Turn On HSE*/
-            while (!GET_BIT(RCC_CR, HSERDY))
-            {
-                /*Wait for HSE to Turn On*/
-            }
-            SET_BIT(RCC_PLLCFGR, PLLSRC);    /*Select HSE as PLL Src When Ready*/
-        #else
-            #error Error: Invalid PLL_CLK_SRC Configuration
-        #endif
-        /*4- Turn On PLL*/
-        SET_BIT(RCC_CR, PLLON);
-        /*5- Select the PLL as the System CLK Src When Ready*/
-        while (!GET_BIT(RCC_CR, PLLRDY))
-            {
-                /*Wait for PLL to Turn On*/
-            }
-        CLR_BIT(RCC_CFGR, SW0);
-        SET_BIT(RCC_CFGR, SW1);
-
+        /*Assignment*/
     #else
         #error Error: Invalid RCC_CLK_SRC Configuration
     #endif
