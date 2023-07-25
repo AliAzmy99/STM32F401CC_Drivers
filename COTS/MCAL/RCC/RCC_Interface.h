@@ -60,15 +60,6 @@
 ErrorStatus RCC_errInitSysClk(void);
 
 /* 
- * Func. Name   : RCC_errSwitchSysClk
- * Description  : This function allows change the system clk
- * I/p Argument : Copy_u8ClkSrcId   Options: HSI, HSE, PLL
- * I/p Argument : Inptr_vdCallback	Options: Pointer to a callback function
- * Return 	    : Error status of function
- */
-ErrorStatus RCC_errSwitchSysClk(Copy_u8ClkSrcId, Inptr_vdCallback);
-
-/* 
  * Func. Name   : RCC_voidEnablePeripheralClk
  * Description  : This function allows the user to enable the clk of a certian peripheral
  * I/p Argument : Copy_u8PeripheralId   Options: PREI_USBFS -> PREI_WWDG
