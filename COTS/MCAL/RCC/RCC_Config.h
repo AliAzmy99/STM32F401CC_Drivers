@@ -10,16 +10,18 @@
 
 
 /*Choose RCC Preferences*/
-    /*Initial CLK Src*/
-#define RCC_INIT_CLK_SRC	PLL				/*Options: HSI, HSE, PLL*/
-    /*Whether to Enable Clk Security System*/
-#define RCC_CSS_ENABLE		DISABLE_CSS		/*Options: ENABLE_CSS, DISABLE_CSS*/  
+	/*Initial CLK Src*/
+#define RCC_INIT_CLK_SRC			PLL				/*Options: HSI, HSE, PLL*/
+	/*Whether to Bypass HSE Oscillator*/
+#define RCC_OSCILLATOR_BYPASS		DIS_OSC_BYPASS	/*Options: EN_OSC_BYPASS, DIS_OSC_BYPASS*/
+	/*Whether to Enable Clk Security System*/
+#define RCC_CSS_ENABLE				DIS_CSS			/*Options: EN_CSS, DIS_CSS*/  
 
     /*PLL Configuration*/
         /*Choosing PLL Multiplier Parametes*/
 #define PLLM    (2u)        /*Options: 2 --> 63*/
 #define PLLN    (192u)      /*Options: 192 --> 432*/
-#define PLLP    (2u)        /*Options: 2,4,6,8*/
+#define PLLP    (2u)        /*Options: 2, 4, 6, 8*/
 #define PLLQ    (2u)        /*Options: 2 --> 15*/
 /*
  * Calculating PLL Frequencies:

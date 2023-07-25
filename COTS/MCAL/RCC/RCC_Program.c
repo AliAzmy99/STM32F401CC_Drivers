@@ -3,8 +3,6 @@
 /* Author	    : Ali Azmy                                              */
 /* Description  : SWC for Reset and Clock Control                       */
 /************************************************************************/
-#warning Add Security to HSE
-#warning Add Bypass
 
 
 /*Include Needed Library Files*/
@@ -27,10 +25,19 @@
  */
 ErrorStatus RCC_errInitSysClk(void)
 {
-	#if (ENABLE_CSS	== RCC_CSS_ENABLE)
+	#if (EN_OSC_BYPASS == RCC_OSCILLATOR_BYPASS)
+		#error Check the conditions for enabling the bypass again
+		SET_BIT(RCC_CR, RCC_CR_HSEBYP);
+	#elif (DIS_OSC_BYPASS == RCC_OSCILLATOR_BYPASS)
+		CLR_BIT(RCC_CR, RCC_CR_HSEBYP);
+	#else
+		#error Error: Invalid RCC_CSS_ENABLE Configuration
+	#endif
+
+	#if (EN_CSS	== RCC_CSS_ENABLE)
 		SET_BIT(RCC_CR, RCC_CR_CSSON);
 		#error ISR not implemented yet and NMI not reset
-	#elif (DISABLE_CSS == RCC_CSS_ENABLE)
+	#elif (DIS_CSS == RCC_CSS_ENABLE)
 		CLR_BIT(RCC_CR, RCC_CR_CSSON);
 	#else
 		#error Error: Invalid RCC_CSS_ENABLE Configuration

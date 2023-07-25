@@ -14,9 +14,12 @@
 #define HSI (1u)
 #define HSE (2u)
 #define PLL (3u)
+	/*HSE Bypass HSE Options*/
+#define EN_OSC_BYPASS	(1u)
+#define DIS_OSC_BYPASS	(2u)
     /*CSS Enable Options*/
-#define ENABLE_CSS	(1u)
-#define DISABLE_CSS	(2u)
+#define EN_CSS	(1u)
+#define DIS_CSS	(2u)
 
 	/*Registers, RCC First Address: 0x40023800*/
 #define RCC_CR 			(*((volatile u32*)0x40023800))
@@ -49,6 +52,7 @@
 #define RCC_CR_HSIRDY			(1u)
 #define RCC_CR_HSERDY			(17u)
 #define RCC_CR_PLLRDY			(25u)
+#define RCC_CR_HSEBYP			(18u)
 #define RCC_CR_CSSON			(19u)
         /*RCC_PLLCFGR*/
 #define RCC_PLLCFGR_PLLM0		(0u)
