@@ -1,10 +1,10 @@
 /************************************************************************/
 /* SWC  	    : RCC Driver                                            */
 /* Author	    : Ali Azmy                                              */
-/* Version	    : V0.0                                                  */
-/* Date 	    : 21 Jul 2023                                           */
 /* Description  : SWC for Reset and Clock Control                       */
 /************************************************************************/
+#warning Add Security to HSE
+#warning Add Bypass
 
 
 /*Include Needed Library Files*/
@@ -21,52 +21,52 @@
 /*Public Functions Definitions*/
 /* 
  * Func. Name   : RCC_errInitSysClk
- * Description  : This function allows initiates the system clk
+ * Description  : This function allows the user to initiate the system clk
  * I/p Argument : No Inputs
  * Return 	    : Error status of function
  */
 ErrorStatus RCC_errInitSysClk(void)
 {
-    #if HSI == RCC_CLK_SRC
+    #if (HSI == RCC_INIT_CLK_SRC)
         /*1- Turn On HSI*/
-        SET_BIT(RCC_CR, HSION);
+        SET_BIT(RCC_CR, RCC_CR_HSION);
         /*2- Select the HSI as the System CLK Src When Ready*/
-        while (!GET_BIT(RCC_CR, HSIRDY))
+        while (!GET_BIT(RCC_CR, RCC_CR_HSIRDY))
             {
                 /*Wait for HSI to Turn On*/
             }
-        CLR_BIT(RCC_CFGR, SW0);
-        CLR_BIT(RCC_CFGR, SW1);
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW0);
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
-    #elif HSE == RCC_CLK_SRC
+    #elif (HSE == RCC_INIT_CLK_SRC)
         /*1- Turn On HSE*/
-        SET_BIT(RCC_CR, HSEON);
+        SET_BIT(RCC_CR, RCC_CR_HSEON);
         /*2- Select the HSE as the System CLK Src When Ready*/
-        while (!GET_BIT(RCC_CR, HSERDY))
+        while (!GET_BIT(RCC_CR, RCC_CR_HSERDY))
             {
                 /*Wait for HSE to Turn On*/
             }
-        SET_BIT(RCC_CFGR, SW0);
-        CLR_BIT(RCC_CFGR, SW1);
+        SET_BIT(RCC_CFGR, RCC_CFGR_SW0);
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
-    #elif PLL == RCC_CLK_SRC
+    #elif (PLL == RCC_INIT_CLK_SRC)
         /*1- Turn Off PLL*/
         CLR_BIT(RCC_CR, RCC_CR_PLLON);
         /*2- Choosing PLL Multiplier Parameters*/
-        #if (2 <= PLLM && 63 >= PLLM) && (192 <= PLLN && 432 >= PLLN) && (2 == PLLP || 4 == PLLP || 6 == PLLP || 8 == PLLP) && (2 <= PLLQ && 15 >= PLLQ)
+        #if ((2 <= PLLM && 63 >= PLLM) && (192 <= PLLN && 432 >= PLLN) && (2 == PLLP || 4 == PLLP || 6 == PLLP || 8 == PLLP) && (2 <= PLLQ && 15 >= PLLQ))
             RCC_PLLCFGR = RCC_PLLCFGR_EMPTY | (PLLM<<RCC_PLLCFGR_PLLM0) | (PLLN<<RCC_PLLCFGR_PLLN0) | (((PLLP-2)>>1)<<RCC_PLLCFGR_PLLP0) | (PLLQ<<RCC_PLLCFGR_PLLQ0);
         #else
             #error Error: Invalid PLL Multiplier Parametes Configuration
         #endif
         /*3- Selecting PLL CLK Src*/
-        #if HSI == PLL_CLK_SRC
+        #if (HSI == PLL_CLK_SRC)
             SET_BIT(RCC_CR, RCC_CR_HSION);      /*Turn On HSI*/
             while (!GET_BIT(RCC_CR, RCC_CR_HSIRDY))
             {
                 /*Wait for HSI to Turn On*/
             }
             CLR_BIT(RCC_PLLCFGR, RCC_PLLCFGR_PLLSRC);   /*Select HSI as PLL Src When Ready*/
-        #elif HSE == PLL_CLK_SRC
+        #elif (HSE == PLL_CLK_SRC)
             SET_BIT(RCC_CR, HSEON);         /*Turn On HSE*/
             while (!GET_BIT(RCC_CR, HSERDY))
             {
@@ -89,6 +89,86 @@ ErrorStatus RCC_errInitSysClk(void)
     #else
         #error Error: Invalid RCC_CLK_SRC Configuration
     #endif
+}
+
+/* 
+ * Func. Name   : RCC_errSwitchSysClk
+ * Description  : This function allows change the system clk
+ * I/p Argument : Copy_u8ClkSrcId   Options: HSI, HSE, PLL
+ * I/p Argument : Inptr_vdCallback	Options: Pointer to a callback function
+ * Return 	    : Error status of function
+ */
+ErrorStatus RCC_errSwitchSysClk(Copy_u8ClkSrcId, Inptr_vdCallback)
+{
+    switch (Copy_u8ClkSrcId)
+    {
+    case HSI:
+        /*1- Turn On HSI*/
+        SET_BIT(RCC_CR, RCC_CR_HSION);
+        /*2- Select the HSI as the System CLK Src When Ready*/
+        while (!GET_BIT(RCC_CR, RCC_CR_HSIRDY))
+            {
+                /*Wait for HSI to Turn On*/
+            }
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW0);
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
+        break;
+
+    case HSE:
+        /*1- Turn On HSE*/
+        SET_BIT(RCC_CR, RCC_CR_HSEON);
+        /*2- Select the HSE as the System CLK Src When Ready*/
+        while (!GET_BIT(RCC_CR, RCC_CR_HSERDY))
+            {
+                /*Wait for HSE to Turn On*/
+            }
+        SET_BIT(RCC_CFGR, RCC_CFGR_SW0);
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
+    
+    case PLL:
+        /*1- Turn Off PLL*/
+        CLR_BIT(RCC_CR, RCC_CR_PLLON);
+        /*2- Choosing PLL Multiplier Parameters*/
+        if ((2 <= PLLM && 63 >= PLLM) && (192 <= PLLN && 432 >= PLLN) && (2 == PLLP || 4 == PLLP || 6 == PLLP || 8 == PLLP) && (2 <= PLLQ && 15 >= PLLQ))
+        {
+            RCC_PLLCFGR = RCC_PLLCFGR_EMPTY | (PLLM<<RCC_PLLCFGR_PLLM0) | (PLLN<<RCC_PLLCFGR_PLLN0) | (((PLLP-2)>>1)<<RCC_PLLCFGR_PLLP0) | (PLLQ<<RCC_PLLCFGR_PLLQ0);
+        }
+        else
+        {
+            return INVALID_CONFIGS;
+        }
+        /*3- Selecting PLL CLK Src*/
+        #if (HSI == PLL_CLK_SRC)
+            SET_BIT(RCC_CR, RCC_CR_HSION);      /*Turn On HSI*/
+            while (!GET_BIT(RCC_CR, RCC_CR_HSIRDY))
+            {
+                /*Wait for HSI to Turn On*/
+            }
+            CLR_BIT(RCC_PLLCFGR, RCC_PLLCFGR_PLLSRC);   /*Select HSI as PLL Src When Ready*/
+        #elif (HSE == PLL_CLK_SRC)
+            SET_BIT(RCC_CR, HSEON);         /*Turn On HSE*/
+            while (!GET_BIT(RCC_CR, HSERDY))
+            {
+                /*Wait for HSE to Turn On*/
+            }
+            SET_BIT(RCC_PLLCFGR, PLLSRC);    /*Select HSE as PLL Src When Ready*/
+        #else
+            #error Error: Invalid PLL_CLK_SRC Configuration
+        #endif
+        /*4- Turn On PLL*/
+        SET_BIT(RCC_CR, RCC_CR_PLLON);
+        /*5- Select the PLL as the System CLK Src When Ready*/
+        while (!GET_BIT(RCC_CR, RCC_CR_PLLRDY))
+            {
+                /*Wait for PLL to Turn On*/
+            }
+        CLR_BIT(RCC_CFGR, RCC_CFGR_SW0);
+        SET_BIT(RCC_CFGR, RCC_CFGR_SW1);
+    
+    default:
+        return INVALID_CONFIGS;
+        break;
+    }
 }
 
 /* 

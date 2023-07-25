@@ -1,8 +1,6 @@
 /************************************************************************/
-/* SWC  	    : RCC Driver                                            */
-/* Author	    : Ali Azmy                                              */
-/* Version	    : V0.0                                                  */
-/* Date 	    : 21 Jul 2023                                           */
+/* SWC  	: RCC Driver                                            */
+/* Author	: Ali Azmy                                              */
 /* Description  : SWC for Reset and Clock Control                       */
 /************************************************************************/
 
@@ -18,45 +16,45 @@
 #define PLL (3u)
 
 	/*Registers, RCC First Address: 0x40023800*/
-#define RCC_CR 				(*((volatile u32*)0x40023800))
-#define RCC_PLLCFGR			(*((volatile u32*)0x40023804))
-#define RCC_CFGR			(*((volatile u32*)0x40023808))
-#define RCC_CIR				(*((volatile u32*)0x4002380C))
+#define RCC_CR 			(*((volatile u32*)0x40023800))
+#define RCC_PLLCFGR		(*((volatile u32*)0x40023804))
+#define RCC_CFGR		(*((volatile u32*)0x40023808))
+#define RCC_CIR			(*((volatile u32*)0x4002380C))
 #define RCC_AHB1RSTR		(*((volatile u32*)0x40023810))
 #define RCC_AHB2RSTR		(*((volatile u32*)0x40023814))
 #define RCC_APB1RSTR		(*((volatile u32*)0x40023820))
 #define RCC_APB2RSTR		(*((volatile u32*)0x40023824))
-#define RCC_AHB1ENR			(*((volatile u32*)0x40023830))
-#define RCC_AHB2ENR			(*((volatile u32*)0x40023834))
-#define RCC_APB1ENR			(*((volatile u32*)0x40023840))
-#define RCC_APB2ENR			(*((volatile u32*)0x40023844))
+#define RCC_AHB1ENR		(*((volatile u32*)0x40023830))
+#define RCC_AHB2ENR		(*((volatile u32*)0x40023834))
+#define RCC_APB1ENR		(*((volatile u32*)0x40023840))
+#define RCC_APB2ENR		(*((volatile u32*)0x40023844))
 #define RCC_AHB1LPENR		(*((volatile u32*)0x40023850))
 #define RCC_AHB2LPENR		(*((volatile u32*)0x40023854))
 #define RCC_APB1LPENR		(*((volatile u32*)0x40023860))
 #define RCC_APB2LPENR		(*((volatile u32*)0x40023864))
-#define RCC_BDCR			(*((volatile u32*)0x40023870))
-#define RCC_CSR				(*((volatile u32*)0x40023874))
-#define RCC_SSCGR			(*((volatile u32*)0x40023880))
+#define RCC_BDCR		(*((volatile u32*)0x40023870))
+#define RCC_CSR			(*((volatile u32*)0x40023874))
+#define RCC_SSCGR		(*((volatile u32*)0x40023880))
 #define RCC_PLLI2SCFGR		(*((volatile u32*)0x40023884))
-#define RCC_DCKCFGR			(*((volatile u32*)0x4002388C))
+#define RCC_DCKCFGR		(*((volatile u32*)0x4002388C))
 
     /*Bits*/
         /*RCC_CR*/
-#define RCC_CR_HSION		    (0u)
-#define RCC_CR_HSEON		    (16u)
-#define RCC_CR_PLLON		    (24u)
-#define RCC_CR_HSIRDY		    (1u)
-#define RCC_CR_HSERDY		    (17u)
-#define RCC_CR_PLLRDY		    (25u)
+#define RCC_CR_HSION		(0u)
+#define RCC_CR_HSEON		(16u)
+#define RCC_CR_PLLON		(24u)
+#define RCC_CR_HSIRDY		(1u)
+#define RCC_CR_HSERDY		(17u)
+#define RCC_CR_PLLRDY		(25u)
         /*RCC_PLLCFGR*/
-#define RCC_PLLCFGR_PLLM0		(0u)
-#define RCC_PLLCFGR_PLLN0		(6u)
-#define RCC_PLLCFGR_PLLP0		(16u)
-#define RCC_PLLCFGR_PLLQ0		(24u)
-#define RCC_PLLCFGR_PLLSRC		(22u)
+#define RCC_PLLCFGR_PLLM0	(0u)
+#define RCC_PLLCFGR_PLLN0	(6u)
+#define RCC_PLLCFGR_PLLP0	(16u)
+#define RCC_PLLCFGR_PLLQ0	(24u)
+#define RCC_PLLCFGR_PLLSRC	(22u)
         /*RCC_CFGR*/
-#define RCC_CFGR_SW0			(0u)
-#define RCC_CFGR_SW1			(1u)
+#define RCC_CFGR_SW0		(0u)
+#define RCC_CFGR_SW1		(1u)
         /*RCC_AHB1ENR*/
 #define RCC_AHB1ENR_GPIOAEN     (0u)
 #define RCC_AHB1ENR_GPIOBEN     (1u)

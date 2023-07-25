@@ -1,8 +1,6 @@
 /************************************************************************/
 /* SWC  	    : RCC Driver                                            */
 /* Author	    : Ali Azmy                                              */
-/* Version	    : V0.0                                                  */
-/* Date 	    : 21 Jul 2023                                           */
 /* Description  : SWC for Reset and Clock Control                       */
 /************************************************************************/
 
@@ -55,11 +53,20 @@
 /*Public Functions Declarations*/
 /* 
  * Func. Name   : RCC_errInitSysClk
- * Description  : This function allows initiates the system clk
+ * Description  : This function allows the user to initiate the system clk
  * I/p Argument : No Inputs
  * Return 	    : Error status of function
  */
 ErrorStatus RCC_errInitSysClk(void);
+
+/* 
+ * Func. Name   : RCC_errSwitchSysClk
+ * Description  : This function allows change the system clk
+ * I/p Argument : Copy_u8ClkSrcId   Options: HSI, HSE, PLL
+ * I/p Argument : Inptr_vdCallback	Options: Pointer to a callback function
+ * Return 	    : Error status of function
+ */
+ErrorStatus RCC_errSwitchSysClk(Copy_u8ClkSrcId, Inptr_vdCallback);
 
 /* 
  * Func. Name   : RCC_voidEnablePeripheralClk
