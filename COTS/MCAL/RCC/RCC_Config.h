@@ -10,8 +10,10 @@
 
 
 /*Choose RCC Preferences*/
-    /*RCC Initial CLK Src*/
-#define RCC_INIT_CLK_SRC     PLL     /*Options: HSI, HSE, PLL*/
+    /*Initial CLK Src*/
+#define RCC_INIT_CLK_SRC	PLL				/*Options: HSI, HSE, PLL*/
+    /*Whether to Enable Clk Security System*/
+#define RCC_CSS_ENABLE		DISABLE_CSS		/*Options: ENABLE_CSS, DISABLE_CSS*/  
 
     /*PLL Configuration*/
         /*Choosing PLL Multiplier Parametes*/

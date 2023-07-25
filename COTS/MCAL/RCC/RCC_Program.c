@@ -27,6 +27,15 @@
  */
 ErrorStatus RCC_errInitSysClk(void)
 {
+	#if (ENABLE_CSS	== RCC_CSS_ENABLE)
+		SET_BIT(RCC_CR, RCC_CR_CSSON);
+		#error ISR not implemented yet and NMI not reset
+	#elif (DISABLE_CSS == RCC_CSS_ENABLE)
+		CLR_BIT(RCC_CR, RCC_CR_CSSON);
+	#else
+		#error Error: Invalid RCC_CSS_ENABLE Configuration
+	#endif
+
     #if (HSI == RCC_INIT_CLK_SRC)
         /*1- Turn On HSI*/
         SET_BIT(RCC_CR, RCC_CR_HSION);
