@@ -5,7 +5,7 @@
 /* Description  : SWC for Reset and Clock Control						*/
 /************************************************************************/
 
-
+#warning Add Prescaller adjustments
 /*Include Needed Library Files*/
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
