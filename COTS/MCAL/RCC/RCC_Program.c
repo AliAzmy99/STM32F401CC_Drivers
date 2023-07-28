@@ -1,7 +1,8 @@
 /************************************************************************/
-/* SWC  	    : RCC Driver                                            */
-/* Author	    : Ali Azmy                                              */
-/* Description  : SWC for Reset and Clock Control                       */
+/* SWC  	    : RCC Driver											*/
+/* Author	    : Ali Azmy												*/
+/* Version	    : V0.1													*/
+/* Description  : SWC for Reset and Clock Control						*/
 /************************************************************************/
 
 
