@@ -25,13 +25,10 @@ typedef enum
 {
 	NO_ERROR,
 	INVALID_PARAMETERS,
-	INVALID_FUNCTION,
-	NULL_POINTER_PASSED,
-	POSITION_OUT_OF_RANGE,
 	INVALID_CONFIGS,
+	INVALID_BIT_VALUE,
+	NULL_POINTER_PASSED,
 	FEATURE_NOT_ENABLED,
-	INVALID_MODE,
-	INVALID_PRESCALER
 }ErrorStatus;
 /*__________________________________________________________________________________________________________________________________________*/
 
