@@ -12,60 +12,61 @@
 
 /*Public Macros*/
     /*Peripheral ID Options*/
-#define PREI_USBFS		(0u)
-#define PREI_DMA1		(1u)
-#define PREI_DMA2		(2u)
-#define PREI_CRC		(3u)
-#define PREI_GPIOA		(4u)
-#define PREI_GPIOB		(5u)
-#define PREI_GPIOC		(6u)
-#define PREI_TIM1		(7u)
-#define PREI_TIM2		(8u)
-#define PREI_TIM3		(9u)
-#define PREI_TIM4		(10u)
-#define PREI_TIM5		(11u)
-#define PREI_TIM9		(12u)
-#define PREI_TIM10		(13u)
-#define PREI_TIM11		(14u)
-#define PREI_SYSCFG		(15u)
-#define PREI_SPI1		(16u)
-#define PREI_SPI2		(17u)
-#define PREI_SPI3		(18u)
-#define PREI_SPI4		(19u)
-#define PREI_SDIO		(20u)
-#define PREI_ADC1		(21u)
-#define PREI_USART1		(22u)
-#define PREI_USART2		(23u)
-#define PREI_USART6		(24u)
-#define PREI_PWR		(25u)
-#define PREI_I2C1		(26u)
-#define PREI_I2C2		(27u)
-#define PREI_I2C3		(28u)
-#define PREI_WWDG		(29u)
+#define PERIPHERAL_USBFS	(0u)
+#define PERIPHERAL_DMA1		(1u)
+#define PERIPHERAL_DMA2		(2u)
+#define PERIPHERAL_CRC		(3u)
+#define PERIPHERAL_GPIOA	(4u)
+#define PERIPHERAL_GPIOB	(5u)
+#define PERIPHERAL_GPIOC	(6u)
+#define PERIPHERAL_TIM1		(7u)
+#define PERIPHERAL_TIM2		(8u)
+#define PERIPHERAL_TIM3		(9u)
+#define PERIPHERAL_TIM4		(10u)
+#define PERIPHERAL_TIM5		(11u)
+#define PERIPHERAL_TIM9		(12u)
+#define PERIPHERAL_TIM10	(13u)
+#define PERIPHERAL_TIM11	(14u)
+#define PERIPHERAL_SYSCFG	(15u)
+#define PERIPHERAL_SPI1		(16u)
+#define PERIPHERAL_SPI2		(17u)
+#define PERIPHERAL_SPI3		(18u)
+#define PERIPHERAL_SPI4		(19u)
+#define PERIPHERAL_SDIO		(20u)
+#define PERIPHERAL_ADC1		(21u)
+#define PERIPHERAL_USART1	(22u)
+#define PERIPHERAL_USART2	(23u)
+#define PERIPHERAL_USART6	(24u)
+#define PERIPHERAL_PWR		(25u)
+#define PERIPHERAL_I2C1		(26u)
+#define PERIPHERAL_I2C2		(27u)
+#define PERIPHERAL_I2C3		(28u)
+#define PERIPHERAL_WWDG		(29u)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name   : RCC_errInitSysClk
- * Description  : This function allows the user to initiate the system clk
- * I/p Argument : No Inputs
- * Return 	    : Error status of function
+ * Func. Name	: RCC_errInitSysClk
+ * Description	: This function allows the user to initiate the system clk
+ * I/p Argument	: No Inputs
+ * Return		: Error status of function
  */
 ErrorStatus RCC_errInitSysClk(void);
 
 /* 
- * Func. Name   : RCC_voidEnablePeripheralClk
- * Description  : This function allows the user to enable the clk of a certian peripheral
- * I/p Argument : Copy_u8PeripheralId   Options: PREI_USBFS -> PREI_WWDG
- * Return 	    : Error status of function
+ * Func. Name	: RCC_voidEnablePeripheralClk
+ * Description	: This function allows the user to enable the clk of a certian peripheral
+ * I/p Argument	: Copy_u8PeripheralId	Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * Return		: Error status of function
  */
 ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8PeripheralId);
 
 /* 
- * Func. Name   : RCC_voidDisanablePeripheralClk
- * Input2 	    : Copy_u8PeripheralId   Options: PREI_USBFS -> PREI_WWDG
- * Return 	    : Error status of function
+ * Func. Name	: RCC_errDisanablePeripheralClk
+ * Description	: This function allows the user to disable the clk of a certian peripheral
+ * I/p Argument	: Copy_u8PeripheralId	Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * Return		: Error status of function
  */
 ErrorStatus RCC_errDisanablePeripheralClk(u8 Copy_u8PeripheralId);
 /*__________________________________________________________________________________________________________________________________________*/
