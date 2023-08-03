@@ -9,6 +9,7 @@
 /*Include Needed Library Files*/
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
+#include "../../LIB/MACROS.h"
 
 /*Include Needed Library Files*/
 #include "RCC_Interface.h"
@@ -106,6 +107,7 @@ ErrorStatus RCC_errInitSysClk(void)
     #else
         #error Error: Invalid RCC_CLK_SRC Configuration
     #endif
+	return NO_ERROR;
 }
 
 /* 
