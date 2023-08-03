@@ -11,7 +11,7 @@
 #include "../../LIB/BIT_MATH.h"
 #include "../../LIB/MACROS.h"
 
-/*Include Needed Library Files*/
+/*Include Needed GPIO Files*/
 #include "GPIO_Interface.h"
 #include "GPIO_Private.h"
 #include "GPIO_Config.h"

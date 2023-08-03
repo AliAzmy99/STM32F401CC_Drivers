@@ -12,7 +12,7 @@
 #include "../../LIB/BIT_MATH.h"
 #include "../../LIB/MACROS.h"
 
-/*Include Needed Library Files*/
+/*Include Needed RCC Files*/
 #include "RCC_Interface.h"
 #include "RCC_Private.h"
 #include "RCC_Config.h"
