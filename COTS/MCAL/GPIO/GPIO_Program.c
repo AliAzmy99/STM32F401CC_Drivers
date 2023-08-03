@@ -48,19 +48,19 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinM
 	{
 	case GPIO_Mode_INPUT:
 		CLR_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1);
-		CLR_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1 + 1);
+		CLR_BIT(*Locptr_u32MODERxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	case GPIO_Mode_OUTPUT:
 		SET_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1);
-		CLR_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1 + 1);
+		CLR_BIT(*Locptr_u32MODERxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	case GPIO_Mode_ALT_FUN:
 		CLR_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1);
-		SET_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1 + 1);
+		SET_BIT(*Locptr_u32MODERxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	case GPIO_MODE_ANALOG:
 		SET_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1);
-		SET_BIT(*Locptr_u32MODERxAddress, Copy_u8PinId << 1 + 1);
+		SET_BIT(*Locptr_u32MODERxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	default:
 		return INVALID_PARAMETERS;
@@ -140,19 +140,66 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy
 	{
 	case GPIO_OUTPUT_SPEED_L:
 		CLR_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1);
-		CLR_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1 + 1);
+		CLR_BIT(*Locptr_u32OSPEEDRxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	case GPIO_OUTPUT_SPEED_M:
 		SET_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1);
-		CLR_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1 + 1);
+		CLR_BIT(*Locptr_u32OSPEEDRxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	case GPIO_OUTPUT_SPEED_H:
 		CLR_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1);
-		SET_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1 + 1);
+		SET_BIT(*Locptr_u32OSPEEDRxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	case GPIO_OUTPUT_SPEED_VH:
 		SET_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1);
-		SET_BIT(*Locptr_u32OSPEEDRxAddress, Copy_u8PinId << 1 + 1);
+		SET_BIT(*Locptr_u32OSPEEDRxAddress, (Copy_u8PinId << 1) + 1);
+		break;
+	default:
+		return INVALID_PARAMETERS;
+		break;
+	}
+	
+	return NO_ERROR;	
+}
+
+ErrorStatus GPIO_errSetPinPull(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullType)
+{
+	volatile u32* Locptr_u32PUPDRxAddress = NULL;
+
+	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
+	{
+		return INVALID_PARAMETERS;
+	}
+
+	switch (Copy_u8PortId)
+	{
+	case GPIO_PORT_A:
+		Locptr_u32PUPDRxAddress = ((u32*) GPIOA_FIRST_ADDRESS) + GPIO_PUPDR_NO;
+		break;
+	case GPIO_PORT_B:
+		Locptr_u32PUPDRxAddress = ((u32*) GPIOB_FIRST_ADDRESS) + GPIO_PUPDR_NO;
+		break;
+	case GPIO_PORT_C:
+		Locptr_u32PUPDRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_PUPDR_NO;
+		break;
+	default:
+		return INVALID_PARAMETERS;
+		break;
+	}
+
+	switch (Copy_u8PinPullType)
+	{
+	case GPIO_NO_PULL:
+		CLR_BIT(*Locptr_u32PUPDRxAddress, Copy_u8PinId << 1);
+		CLR_BIT(*Locptr_u32PUPDRxAddress, (Copy_u8PinId << 1) + 1);
+		break;
+	case GPIO_PULL_UP:
+		SET_BIT(*Locptr_u32PUPDRxAddress, Copy_u8PinId << 1);
+		CLR_BIT(*Locptr_u32PUPDRxAddress, (Copy_u8PinId << 1) + 1);
+		break;
+	case GPIO_PULL_DOWN:
+		CLR_BIT(*Locptr_u32PUPDRxAddress, Copy_u8PinId << 1);
+		SET_BIT(*Locptr_u32PUPDRxAddress, (Copy_u8PinId << 1) + 1);
 		break;
 	default:
 		return INVALID_PARAMETERS;
@@ -189,10 +236,10 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Pin
 
 	switch(Copy_u8PinValue)
 	{
-		case GPIO_PIN_VALUE_L:
+		case GPIO_VALUE_L:
 			CLR_BIT(*Locptr_u32ODRxAddress, Copy_u8PinId);
 			break;
-		case GPIO_PIN_VALUE_H:
+		case GPIO_VALUE_H:
 			SET_BIT(*Locptr_u32ODRxAddress, Copy_u8PinId);
 			break;
 		default:
@@ -230,16 +277,46 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u
 
 	switch(Copy_u8PinAction)
 	{
-		case GPIO_PIN_SET:
+		case GPIO_SET:
 			SET_BIT(*Locptr_u32BSRRxAddress, Copy_u8PinId);
 			break;
-		case GPIO_PIN_RST:
+		case GPIO_RST:
 			SET_BIT(*Locptr_u32BSRRxAddress, Copy_u8PinId + 16);
 			break;
 		default:
 			return INVALID_PARAMETERS;
 			break;
 	}
+
+	return NO_ERROR;
+}
+
+ErrorStatus GPIO_errGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8* Outptr_u8PinValue)
+{
+	volatile u32* Locptr_u32IDRxAddress = NULL;
+
+	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
+	{
+		return INVALID_PARAMETERS;
+	}
+
+	switch (Copy_u8PortId)
+	{
+	case GPIO_PORT_A:
+		Locptr_u32IDRxAddress = ((u32*) GPIOA_FIRST_ADDRESS) + GPIO_IDR_NO;
+		break;
+	case GPIO_PORT_B:
+		Locptr_u32IDRxAddress = ((u32*) GPIOB_FIRST_ADDRESS) + GPIO_IDR_NO;
+		break;
+	case GPIO_PORT_C:
+		Locptr_u32IDRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_IDR_NO;
+		break;
+	default:
+		return INVALID_PARAMETERS;
+		break;
+	}
+
+	*Outptr_u8PinValue = GET_BIT(*Locptr_u32IDRxAddress, Copy_u8PinId);
 
 	return NO_ERROR;
 }

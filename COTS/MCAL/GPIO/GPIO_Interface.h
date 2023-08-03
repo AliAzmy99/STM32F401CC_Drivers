@@ -40,10 +40,6 @@
 #define GPIO_Mode_ALT_FUN	(2u)
 #define GPIO_MODE_ANALOG	(3u)
 
-	/*Pin Value ID Options*/
-#define GPIO_PIN_VALUE_L		(0u)	/*Pin low*/
-#define GPIO_PIN_VALUE_H		(1u)	/*Pin high*/
-
 	/*Output Type ID Options*/
 #define GPIO_OUTPUT_TYPE_PP		(0u)	/*Output push-pull*/
 #define GPIO_OUTPUT_TYPE_OD		(1u)	/*Output open-drain*/
@@ -54,9 +50,18 @@
 #define GPIO_OUTPUT_SPEED_H		(2u)	/*High speed*/
 #define GPIO_OUTPUT_SPEED_VH	(3u)	/*Very High speed*/
 
-	/*Pin Action ID Options*/
-#define GPIO_PIN_SET		(0u)	/*Set pin*/
-#define GPIO_PIN_RST		(1u)	/*Reset pin*/
+	/*Pull Type ID Options*/
+#define GPIO_NO_PULL		(0u)	/*No pull (floating)*/
+#define GPIO_PULL_UP		(1u)	/*Pull-up*/
+#define GPIO_PULL_DOWN		(2u)	/*Pull-down*/
+
+	/*Value ID Options*/
+#define GPIO_VALUE_L		(0u)	/*Low*/
+#define GPIO_VALUE_H		(1u)	/*High*/
+
+	/*Action ID Options*/
+#define GPIO_SET		(0u)	/*Set*/
+#define GPIO_RST		(1u)	/*Reset*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 
