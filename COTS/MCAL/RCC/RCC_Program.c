@@ -21,10 +21,10 @@
 
 /*Public Functions Definitions*/
 /* 
- * Func. Name   : RCC_errInitSysClk
- * Description  : This function allows the user to initiate the system clk
- * I/p Argument : No Inputs
- * Return 	    : Error status of function
+ * Func. Name	: RCC_errInitSysClk
+ * Description	: This function allows the user to initiate the system clk
+ * I/p Argument	: No Inputs
+ * Return		: Error status of function
  */
 ErrorStatus RCC_errInitSysClk(void)
 {
@@ -112,10 +112,10 @@ ErrorStatus RCC_errInitSysClk(void)
 }
 
 /* 
- * Func. Name   : RCC_voidEnablePeripheralClk
- * Description  : This function allows the user to enable the clk of a certian peripheral
- * I/p Argument : Copy_u8PeripheralId   Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
- * Return 	    : Error status of function
+ * Func. Name	: RCC_voidEnablePeripheralClk
+ * Description	: This function allows the user to enable the clk of a certian peripheral
+ * I/p Argument	: Copy_u8PeripheralId	Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * Return		: Error status of function
  */
 ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8PeripheralId)
 {
@@ -157,9 +157,10 @@ ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8PeripheralId)
 }
 
 /* 
- * Func. Name   : RCC_voidDisanablePeripheralClk
- * Input2 	    : Copy_u8PeripheralId   Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
- * Return 	    : Error status of function
+ * Func. Name	: RCC_errDisanablePeripheralClk
+ * Description	: This function allows the user to disable the clk of a certian peripheral
+ * I/p Argument	: Copy_u8PeripheralId	Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * Return		: Error status of function
  */
 ErrorStatus RCC_errDisanablePeripheralClk(u8 Copy_u8PeripheralId)
 {
