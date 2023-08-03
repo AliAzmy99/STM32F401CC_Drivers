@@ -6,12 +6,13 @@
 /************************************************************************/
 
 
-/*Include Needed Library Files*/
+/*Include Needed Files*/
+	/*Include Needed Library Files*/
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
 #include "../../LIB/MACROS.h"
 
-/*Include Needed GPIO Files*/
+	/*Include Needed GPIO Files*/
 #include "GPIO_Interface.h"
 #include "GPIO_Private.h"
 #include "GPIO_Config.h"
