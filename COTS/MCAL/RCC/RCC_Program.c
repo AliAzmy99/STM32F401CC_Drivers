@@ -46,7 +46,7 @@ ErrorStatus RCC_errInitSysClk(void)
 		#error Error: Invalid RCC_CSS_ENABLE Configuration
 	#endif
 
-    #if (HSI == RCC_INIT_CLK_SRC)
+    #if (HSI == RCC_CLK_SRC)
         /*1- Turn On HSI*/
         SET_BIT(RCC_CR, RCC_CR_HSION);
         /*2- Select the HSI as the System CLK Src When Ready*/
@@ -57,7 +57,7 @@ ErrorStatus RCC_errInitSysClk(void)
         CLR_BIT(RCC_CFGR, RCC_CFGR_SW0);
         CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
-    #elif (HSE == RCC_INIT_CLK_SRC)
+    #elif (HSE == RCC_CLK_SRC)
         /*1- Turn On HSE*/
         SET_BIT(RCC_CR, RCC_CR_HSEON);
         /*2- Select the HSE as the System CLK Src When Ready*/
@@ -68,7 +68,7 @@ ErrorStatus RCC_errInitSysClk(void)
         SET_BIT(RCC_CFGR, RCC_CFGR_SW0);
         CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
-    #elif (PLL == RCC_INIT_CLK_SRC)
+    #elif (PLL == RCC_CLK_SRC)
         /*1- Turn Off PLL*/
         CLR_BIT(RCC_CR, RCC_CR_PLLON);
         /*2- Choosing PLL Multiplier Parameters*/
