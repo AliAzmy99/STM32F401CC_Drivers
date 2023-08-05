@@ -15,10 +15,10 @@
 #define HSI (1u)
 #define HSE (2u)
 #define PLL (3u)
-	/*HSE Bypass HSE Options*/
+	/*RCC_OSCILLATOR_BYPASS Options*/
 #define EN_OSC_BYPASS	(1u)
 #define DIS_OSC_BYPASS	(2u)
-    /*CSS Enable Options*/
+    /*RCC_CSS_ENABLE Options*/
 #define EN_CSS	(1u)
 #define DIS_CSS	(2u)
 
