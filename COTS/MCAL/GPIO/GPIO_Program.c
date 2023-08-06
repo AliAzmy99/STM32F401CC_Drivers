@@ -30,13 +30,16 @@
  */
 ErrorStatus GPIO_errSetPinMode(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinMode)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32MODERxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
 
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -53,6 +56,7 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinM
 		break;
 	}
 
+	/*Setting Mode*/
 	switch (Copy_u8PinMode)
 	{
 	case GPIO_MODE_INPUT:
@@ -89,13 +93,16 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinM
  */
 ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinOutputType)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32OTYPERxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
 
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -112,6 +119,7 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_
 		break;
 	}
 
+	/*Setting Output Type*/
 	switch(Copy_u8PinOutputType)
 	{
 		case GPIO_OUTPUT_TYPE_PP:
@@ -138,13 +146,16 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_
  */
 ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinOutputSpeed)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32OSPEEDRxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
 
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -161,6 +172,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy
 		break;
 	}
 
+	/*Setting Output Speed*/
 	switch (Copy_u8PinOutputSpeed)
 	{
 	case GPIO_OUTPUT_SPEED_L:
@@ -188,22 +200,25 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy
 }
 
 /* 
- * Func. Name   : GPIO_errSetPinPull
+ * Func. Name   : GPIO_errSetPinPullState
  * Description  : This function allows the user to select the pull state of any pin
  * I/p Argument : Copy_u8PortId			Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument : Copy_u8PinId			Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument : Copy_u8PinPullState	Options: GPIO_NO_PULL, GPIO_PULL_UP, GPIO_PULL_DOWN
  * Return 	    : Error status of function
  */
-ErrorStatus GPIO_errSetPinPull(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState)
+ErrorStatus GPIO_errSetPinPullStateState(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32PUPDRxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
 
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -220,6 +235,7 @@ ErrorStatus GPIO_errSetPinPull(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinP
 		break;
 	}
 
+	/*Setting Pull State*/
 	switch (Copy_u8PinPullState)
 	{
 	case GPIO_NO_PULL:
@@ -252,13 +268,16 @@ ErrorStatus GPIO_errSetPinPull(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinP
  */
 ErrorStatus GPIO_errSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinValue)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32ODRxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
 
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -275,6 +294,7 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Pin
 		break;
 	}
 
+	/*Setting Value*/
 	switch(Copy_u8PinValue)
 	{
 		case GPIO_VALUE_L:
@@ -301,13 +321,16 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Pin
  */
 ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinAction)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32BSRRxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
 
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -324,6 +347,7 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u
 		break;
 	}
 
+	/*Taking Action*/
 	switch(Copy_u8PinAction)
 	{
 		case GPIO_SET:
@@ -350,13 +374,20 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u
  */
 ErrorStatus GPIO_errGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8* Outptr_u8PinValue)
 {
+	/*Variables Defenitions*/
 	volatile u32* Locptr_u32IDRxAddress = NULL;
 
+	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8PortId && GPIO_PIN_13 > Copy_u8PinId) || GPIO_PIN_15 < Copy_u8PinId)
 	{
 		return INVALID_PARAMETERS;
 	}
-
+	if (!Outptr_u8PinValue)
+	{
+		return NULL_POINTER_PASSED;
+	}
+	
+	/*Choosing Correct Register Address*/
 	switch (Copy_u8PortId)
 	{
 	case GPIO_PORT_A:
@@ -373,6 +404,7 @@ ErrorStatus GPIO_errGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8* Outptr_u8
 		break;
 	}
 
+	/*Outputting Value*/
 	*Outptr_u8PinValue = GET_BIT(*Locptr_u32IDRxAddress, Copy_u8PinId);
 
 	return NO_ERROR;

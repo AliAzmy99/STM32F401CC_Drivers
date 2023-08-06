@@ -97,14 +97,14 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_
 ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinOutputSpeed);
 
 /* 
- * Func. Name   : GPIO_errSetPinPull
+ * Func. Name   : GPIO_errSetPinPullState
  * Description  : This function allows the user to select the pull state of any pin
  * I/p Argument : Copy_u8PortId			Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument : Copy_u8PinId			Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument : Copy_u8PinPullState	Options: GPIO_NO_PULL, GPIO_PULL_UP, GPIO_PULL_DOWN
  * Return 	    : Error status of function
  */
-ErrorStatus GPIO_errSetPinPull(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState);
+ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState);
 
 /* 
  * Func. Name   : GPIO_errSetPinValue
