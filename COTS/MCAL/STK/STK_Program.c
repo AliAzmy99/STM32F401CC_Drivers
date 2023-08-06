@@ -6,7 +6,6 @@
 /************************************************************************/
 
 
-#warning Add Prescaller adjustments
 /*Include Needed Files*/
 	/*Include Needed Library Files*/
 #include "../../LIB/STD_TYPES.h"
