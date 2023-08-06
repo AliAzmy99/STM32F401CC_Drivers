@@ -49,7 +49,6 @@
 /* 
  * Func. Name	: RCC_errInitSysClk
  * Description	: This function allows the user to initiate the system clk
- * I/p Argument	: No Inputs
  * Return		: Error status of function
  */
 ErrorStatus RCC_errInitSysClk(void);
