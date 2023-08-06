@@ -207,7 +207,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy
  * I/p Argument : Copy_u8PinPullState	Options: GPIO_NO_PULL, GPIO_PULL_UP, GPIO_PULL_DOWN
  * Return 	    : Error status of function
  */
-ErrorStatus GPIO_errSetPinPullStateState(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState)
+ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32PUPDRxAddress = NULL;
