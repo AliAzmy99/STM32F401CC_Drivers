@@ -172,7 +172,7 @@ ErrorStatus STK_errStop(void)
 /*Interrupt Service Routines Defenitions*/
 void SysTick_Handler(void)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	u8 Loc_u8Temp = 0;
 
 	/*1-Stopping Timer if Single Mode */

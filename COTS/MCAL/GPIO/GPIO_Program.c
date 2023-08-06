@@ -30,7 +30,7 @@
  */
 ErrorStatus GPIO_errSetPinMode(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinMode)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32MODERxAddress = NULL;
 
 	/*I/p Validation*/
@@ -93,7 +93,7 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinM
  */
 ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinOutputType)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32OTYPERxAddress = NULL;
 
 	/*I/p Validation*/
@@ -146,7 +146,7 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_
  */
 ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinOutputSpeed)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32OSPEEDRxAddress = NULL;
 
 	/*I/p Validation*/
@@ -209,7 +209,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy
  */
 ErrorStatus GPIO_errSetPinPullStateState(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinPullState)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32PUPDRxAddress = NULL;
 
 	/*I/p Validation*/
@@ -268,7 +268,7 @@ ErrorStatus GPIO_errSetPinPullStateState(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 C
  */
 ErrorStatus GPIO_errSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinValue)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32ODRxAddress = NULL;
 
 	/*I/p Validation*/
@@ -321,7 +321,7 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Pin
  */
 ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinAction)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32BSRRxAddress = NULL;
 
 	/*I/p Validation*/
@@ -374,7 +374,7 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u
  */
 ErrorStatus GPIO_errGetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8* Outptr_u8PinValue)
 {
-	/*Variables Defenitions*/
+	/*Variables Definitions*/
 	volatile u32* Locptr_u32IDRxAddress = NULL;
 
 	/*I/p Validation*/
