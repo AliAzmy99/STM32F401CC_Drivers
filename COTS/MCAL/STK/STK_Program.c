@@ -2,7 +2,7 @@
 /* SWC  	    : STK Driver											*/
 /* Author	    : Ali Azmy												*/
 /* Version	    : V0.0													*/
-/* Description  : SWC for System Timer						*/
+/* Description  : SWC for System Timer									*/
 /************************************************************************/
 
 
