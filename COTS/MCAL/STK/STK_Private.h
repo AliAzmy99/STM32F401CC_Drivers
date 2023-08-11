@@ -1,8 +1,8 @@
 /************************************************************************/
-/* SWC  	    : STK Driver											*/
-/* Author	    : Ali Azmy												*/
-/* Version	    : V0.0													*/
-/* Description  : SWC for System Timer									*/
+/* SWC			: STK Driver											*/
+/* Author		: Ali Azmy												*/
+/* Version		: V0.0													*/
+/* Description	: SWC for System Timer									*/
 /************************************************************************/
 
 
@@ -20,13 +20,13 @@
 #define INTERVAL_FLAG_PERIODIC_MODE (1u)
 
 	/*Registers, STK First Address: 0xE000E010*/
-#define STK_CTRL 			(*((volatile u32*)0xE000E010))
-#define STK_LOAD 			(*((volatile u32*)0xE000E014))
-#define STK_VAL 			(*((volatile u32*)0xE000E018))
-#define STK_CALIB 			(*((volatile u32*)0xE000E01C))
+#define STK_CTRL			(*((volatile u32*)0xE000E010))
+#define STK_LOAD			(*((volatile u32*)0xE000E014))
+#define STK_VAL				(*((volatile u32*)0xE000E018))
+#define STK_CALIB			(*((volatile u32*)0xE000E01C))
 
-    /*Bits*/
-        /*STK_CTRL*/
+	/*Bits*/
+		/*STK_CTRL*/
 #define STK_CTRL_ENABLE		(0u)
 #define STK_CTRL_TICKINT	(1u)
 #define STK_CTRL_CLKSOURCE	(2u)

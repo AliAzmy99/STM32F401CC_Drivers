@@ -1,8 +1,8 @@
 /************************************************************************/
-/* SWC  	    : RCC Driver											*/
-/* Author	    : Ali Azmy												*/
-/* Version	    : V0.1													*/
-/* Description  : SWC for Reset and Clock Control						*/
+/* SWC			: RCC Driver											*/
+/* Author		: Ali Azmy												*/
+/* Version		: V0.1													*/
+/* Description	: SWC for Reset and Clock Control						*/
 /************************************************************************/
 
 
@@ -11,7 +11,7 @@
 
 
 /*Public Macros*/
-    /*Peripheral ID Options*/
+	/*Peripheral ID Options*/
 #define PERIPHERAL_USBFS	(0u)
 #define PERIPHERAL_DMA1		(1u)
 #define PERIPHERAL_DMA2		(2u)

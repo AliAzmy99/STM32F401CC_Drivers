@@ -1,8 +1,8 @@
 /************************************************************************/
-/* SWC  	    : GPIO Driver											*/
-/* Author	    : Ali Azmy												*/
-/* Version	    : V0.0													*/
-/* Description  : SWC for General-Purpose I/Os 							*/
+/* SWC			: GPIO Driver											*/
+/* Author		: Ali Azmy												*/
+/* Version		: V0.0													*/
+/* Description	: SWC for General-Purpose I/Os							*/
 /************************************************************************/
 
 
