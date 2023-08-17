@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"sseg_private.h": "c",
-		"gpio_interface.h": "c"
+		"gpio_interface.h": "c",
+		"sseg_interface.h": "c"
 	}
 }

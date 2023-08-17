@@ -5,15 +5,38 @@
 /* Description	: SWC for Seven Segment Display							*/
 /************************************************************************/
 
+/*Include Needed Files*/
+	/*Include Needed Library Files*/
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+#include "../../LIB/MACROS.h"
 
-#include "_7SEG_Private.h"
+	/*Include Needed MCAL Files*/
+#include "RCC_Interface.h"
+#include "GPIO_Interface.h"
 
+	/*Include Needed SSEG Files*/
+#include "SSEG_Interface.h"
+#include "SSEG_Private.h"
+#include "SSEG_Config.h"
+/*__________________________________________________________________________________________________________________________________________*/
+
+
+/*Public Functions Definitions*/
+/* 
+ * Func. Name   : SSEG_errInit
+ * Description  : This function allows the user to select the mode of the mode of any pin
+ * I/p Argument : Copy_u8PortId		Options: GPIO_PORT_A -> GPIO_PORT_C
+ * I/p Argument : Copy_u8PinId		Options: GPIO_PIN_0 -> GPIO_PIN_15
+ * I/p Argument : Copy_u8PinMode	Options: GPIO_MODE_INPUT, GPIO_MODE_OUTPUT, GPIO_MODE_ALT_FUN, GPIO_MODE_ANALOG
+ * Return 	    : Error status of function
+ */
 /* 
  * Function	: _7SEG_esInit_7SEG			: Initialize the Seven Segment Display
  * Input1 	: copy__7SEGConfig_Input   : Configuration Structure of the Seven Segment to control
  * Return 	: 					        : Error Status of function
  */
-ErrorStatus _7SEG_esInit_7SEG(_7SEG_Config copy__7SEGConfig_Input)
+ErrorStatus SSEG_errInit(SSEG_ConfigStruct Copy_SSEG_ConfigStruct)
 {
 	ErrorStatus Loc_esReturn = NO_ERROR;
 
