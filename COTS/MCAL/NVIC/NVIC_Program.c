@@ -22,7 +22,7 @@
 /*Public Functions Definitions*/
 /* 
  * Func. Name	: NVIC_errInit
- * Description	: This function allows the user to initiate the nested vectored interrupt controller
+ * Description	: This function allows the user to initialize the nested vectored interrupt controller
  * Return		: Error status of function
  */
 ErrorStatus NVIC_errInit(void)
