@@ -1,12 +1,13 @@
 /************************************************************************/
 /* SWC			: RCC Driver											*/
 /* Author		: Ali Azmy												*/
-/* Version		: V0.1													*/
+/* Version		: V0.2													*/
 /* Description	: SWC for Reset and Clock Control						*/
 /************************************************************************/
 
 
 #warning Add Prescaller adjustments
+#warning Fix PLL
 /*Include Needed Files*/
 	/*Include Needed Library Files*/
 #include "../../LIB/STD_TYPES.h"
@@ -28,6 +29,15 @@
  */
 ErrorStatus RCC_errInitSysClk(void)
 {
+	/*1- AMBA Buses Prescaler Selection*/
+	#if ((AHB_PRE_1 <= AHB_PRESCALER && AHB_PRE_512 >= AHB_PRESCALER) && (APB_PRE_1 <= APB1_PRESCALER && APB_PRE_16 >= APB1_PRESCALER) && (APB_PRE_1 <= APB2_PRESCALER && APB_PRE_16 >= APB2_PRESCALER))
+		RCC_CFGR = RCC_CFGR_EMPTY | (AHB_PRESCALER << RCC_CFGR_HPRE0) | (APB1_PRESCALER << RCC_CFGR_PPRE10) || (APB2_PRESCALER << RCC_CFGR_PPRE20);
+	#else
+		#error Error: Invalid AMBA Buses Configuration
+	#endif
+
+	/*2- HSE Options*/
+		/*HSE Oscillator Bypass*/
 	#if (EN_OSC_BYPASS == RCC_OSCILLATOR_BYPASS)
 		#error Check the conditions for enabling the bypass again
 		SET_BIT(RCC_CR, RCC_CR_HSEBYP);
@@ -36,7 +46,7 @@ ErrorStatus RCC_errInitSysClk(void)
 	#else
 		#error Error: Invalid RCC_CSS_ENABLE Configuration
 	#endif
-
+		/*Clock Security System*/
 	#if (EN_CSS	== RCC_CSS_ENABLE)
 		SET_BIT(RCC_CR, RCC_CR_CSSON);
 		#error ISR not implemented yet and NMI not reset
@@ -46,6 +56,8 @@ ErrorStatus RCC_errInitSysClk(void)
 		#error Error: Invalid RCC_CSS_ENABLE Configuration
 	#endif
 
+	/*3- Clk Src Configuration*/
+		/*Choosing HSI*/
 	#if (HSI == RCC_CLK_SRC)
 		/*1- Turn On HSI*/
 		SET_BIT(RCC_CR, RCC_CR_HSION);
@@ -57,6 +69,7 @@ ErrorStatus RCC_errInitSysClk(void)
 		CLR_BIT(RCC_CFGR, RCC_CFGR_SW0);
 		CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
+		/*Choosing HSE*/
 	#elif (HSE == RCC_CLK_SRC)
 		/*1- Turn On HSE*/
 		SET_BIT(RCC_CR, RCC_CR_HSEON);
@@ -68,14 +81,15 @@ ErrorStatus RCC_errInitSysClk(void)
 		SET_BIT(RCC_CFGR, RCC_CFGR_SW0);
 		CLR_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
+		/*Choosing PLL*/
 	#elif (PLL == RCC_CLK_SRC)
 		/*1- Turn Off PLL*/
 		CLR_BIT(RCC_CR, RCC_CR_PLLON);
 		/*2- Choosing PLL Multiplier Parameters*/
 		#if ((2 <= PLLM && 63 >= PLLM) && (192 <= PLLN && 432 >= PLLN) && (2 == PLLP || 4 == PLLP || 6 == PLLP || 8 == PLLP) && (2 <= PLLQ && 15 >= PLLQ))
-			RCC_PLLCFGR = RCC_PLLCFGR_EMPTY | (PLLM<<RCC_PLLCFGR_PLLM0) | (PLLN<<RCC_PLLCFGR_PLLN0) | (((PLLP-2)>>1)<<RCC_PLLCFGR_PLLP0) | (PLLQ<<RCC_PLLCFGR_PLLQ0);
+			RCC_PLLCFGR = RCC_PLLCFGR_EMPTY | (PLLM<<RCC_PLLCFGR_PLLM0) | (PLLN<<RCC_PLLCFGR_PLLN0) | (((PLLP>>1)-1)<<RCC_PLLCFGR_PLLP0) | (PLLQ<<RCC_PLLCFGR_PLLQ0);
 		#else
-			#error Error: Invalid PLL Multiplier Parametes Configuration
+			#error Error: Invalid PLL Multiplier Parameters Configuration
 		#endif
 		/*3- Selecting PLL CLK Src*/
 		#if (HSI == PLL_CLK_SRC)
@@ -86,12 +100,12 @@ ErrorStatus RCC_errInitSysClk(void)
 			}
 			CLR_BIT(RCC_PLLCFGR, RCC_PLLCFGR_PLLSRC);	/*Select HSI as PLL Src When Ready*/
 		#elif (HSE == PLL_CLK_SRC)
-			SET_BIT(RCC_CR, HSEON);		/*Turn On HSE*/
-			while (!GET_BIT(RCC_CR, HSERDY))
+			SET_BIT(RCC_CR, RCC_CR_HSEON);		/*Turn On HSE*/
+			while (!GET_BIT(RCC_CR, RCC_CR_HSERDY))
 			{
 				/*Wait for HSE to Turn On*/
 			}
-			SET_BIT(RCC_PLLCFGR, PLLSRC);	/*Select HSE as PLL Src When Ready*/
+			SET_BIT(RCC_PLLCFGR, RCC_PLLCFGR_PLLSRC);	/*Select HSE as PLL Src When Ready*/
 		#else
 			#error Error: Invalid PLL_CLK_SRC Configuration
 		#endif
@@ -105,9 +119,11 @@ ErrorStatus RCC_errInitSysClk(void)
 		CLR_BIT(RCC_CFGR, RCC_CFGR_SW0);
 		SET_BIT(RCC_CFGR, RCC_CFGR_SW1);
 
+		/*Defaulting to Error*/
 	#else
 		#error Error: Invalid RCC_CLK_SRC Configuration
 	#endif
+
 	return NO_ERROR;
 }
 

@@ -1,7 +1,7 @@
 /************************************************************************/
 /* SWC			: RCC Driver											*/
 /* Author		: Ali Azmy												*/
-/* Version		: V0.1													*/
+/* Version		: V0.2													*/
 /* Description	: SWC for Reset and Clock Control						*/
 /************************************************************************/
 
@@ -21,6 +21,24 @@
 	/*RCC_CSS_ENABLE Options*/
 #define EN_CSS	(1u)
 #define DIS_CSS	(2u)
+
+/*Prescalar options*/
+	/*AHB*/
+#define AHB_PRE_1		(7u)
+#define AHB_PRE_2		(8u)
+#define AHB_PRE_4		(9u)
+#define AHB_PRE_8		(10u)
+#define AHB_PRE_16		(11u)
+#define AHB_PRE_64		(12u)
+#define AHB_PRE_128		(13u)
+#define AHB_PRE_256		(14u)
+#define AHB_PRE_512		(15u)
+	/*APB*/
+#define APB_PRE_1		(3u)
+#define APB_PRE_2		(4u)
+#define APB_PRE_4		(5u)
+#define APB_PRE_8		(6u)
+#define APB_PRE_16		(7u)
 
 	/*Registers, RCC First Address: 0x40023800*/
 #define RCC_CR			(*((volatile u32*)0x40023800))
@@ -64,6 +82,9 @@
 		/*RCC_CFGR*/
 #define RCC_CFGR_SW0			(0u)
 #define RCC_CFGR_SW1			(1u)
+#define RCC_CFGR_HPRE0			(4u)
+#define RCC_CFGR_PPRE10			(10u)
+#define RCC_CFGR_PPRE20			(13u)
 		/*RCC_AHB1ENR*/
 #define RCC_AHB1ENR_GPIOAEN		(0u)
 #define RCC_AHB1ENR_GPIOBEN		(1u)
@@ -101,7 +122,12 @@
 
 	/*Reset Values*/
 #define RCC_PLLCFGR_RESET	(0x24003010)
+#define RCC_CFGR_RESET      (0x00000000)
+
+	/*Empty Values*/
+		/*Values of registers when a certain part is cleared while the rest is at the reset value*/
 #define RCC_PLLCFGR_EMPTY	(0x24000000)
+#define RCC_CFGR_EMPTY      (0x00000000)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
