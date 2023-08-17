@@ -13,7 +13,7 @@
 /*Public Functions Declarations*/
 /* 
  * Func. Name	: STK_errInit
- * Description	: This function allows the user to initiate the system timer
+ * Description	: This function allows the user to initialize the system timer
  * Return		: Error status of function
  */
 ErrorStatus STK_errInit(void);

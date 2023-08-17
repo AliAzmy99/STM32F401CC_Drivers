@@ -24,7 +24,7 @@
 /*Public Functions Definitions*/
 /* 
  * Func. Name	: RCC_errInitSysClk
- * Description	: This function allows the user to initiate the system clk
+ * Description	: This function allows the user to initialize the system clk
  * Return		: Error status of function
  */
 ErrorStatus RCC_errInitSysClk(void)
