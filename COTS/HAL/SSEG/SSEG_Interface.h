@@ -69,4 +69,33 @@ typedef struct{
 /*__________________________________________________________________________________________________________________________________________*/
 
 
+/*Public Functions Declarations*/
+/* 
+ * Func. Name	: SSEG_errInit
+ * Description	: This function allows the user to initialize the seven segment display
+ * I/p Argument	: Inptr_SSEG_ConfigStruct
+ * Return		: Error status of function
+ */
+ErrorStatus SSEG_errInit(const SSEG_ConfigStruct* Inptr_SSEG_ConfigStruct);
+
+/* 
+ * Func. Name	: SSEG_errDisplayNumber
+ * Description	: This function allows the user to display a number on the seven segment display
+ * I/p Argument	: Inptr_SSEG_ConfigStruct
+ * I/p Argument	: Copy_u8Number				Options: 0 -> 9
+ * I/p Argument	: Copy_u8DotState			Options: DOT_OFF, DOT_ON
+ * Return		: Error status of function
+ */
+ErrorStatus SSEG_errDisplayNumber(const SSEG_ConfigStruct* Inptr_SSEG_ConfigStruct, u8 Copy_u8Number, u8 Copy_u8DotState);
+
+/* 
+ * Func. Name	: SSEG_errClear
+ * Description	: This function allows the user to clear the seven segment display
+ * I/p Argument	: Inptr_SSEG_ConfigStruct
+ * Return		: Error status of function
+ */
+ErrorStatus SSEG_errClear(const SSEG_ConfigStruct* Inptr_SSEG_ConfigStruct);
+/*__________________________________________________________________________________________________________________________________________*/
+
+
 #endif /*SSEG_INTERFACE_H*/
