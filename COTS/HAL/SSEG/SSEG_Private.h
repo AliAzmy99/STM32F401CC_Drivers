@@ -6,8 +6,8 @@
 /************************************************************************/
 
 
-#ifndef SSEG_PRIVATE_H_
-#define SSEG_PRIVATE_
+#ifndef SSEG_PRIVATE_H
+#define SSEG_PRIVATE_H
 
 
 /*Private Macros*/
@@ -42,8 +42,8 @@
 /*Private Global Variables Definitions*/
 	/*Arrays of Seven Segment Output Numbers*/
 static u8 Glob_u8Num[10] = {ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
-static u8 Glob_u8NumwDOT[10] = {ZERO_DOT, ONE_DOT, TWO_DOT, THREE_DOT, FOUR_DOT, FIVE_DOT, SIX_DOT, SEVEN_DOT, EIGHT_DOT, NINE_DOT};
-static u8 Glob_u8Prei[3]={PERIPHERAL_GPIOA, PERIPHERAL_GPIOB, PERIPHERAL_GPIOC};
+static u8 Glob_u8NumwDot[10] = {ZERO_DOT, ONE_DOT, TWO_DOT, THREE_DOT, FOUR_DOT, FIVE_DOT, SIX_DOT, SEVEN_DOT, EIGHT_DOT, NINE_DOT};
+static u8 Glob_u8Peripheral[3]={PERIPHERAL_GPIOA, PERIPHERAL_GPIOB, PERIPHERAL_GPIOC};
 /*__________________________________________________________________________________________________________________________________________*/
 
 
