@@ -6,8 +6,8 @@
 /************************************************************************/
 
 
-#ifndef SSEG_CONFIG_H_
-#define SSEG_CONFIG_H_
+#ifndef SSEG_CONFIG_H
+#define SSEG_CONFIG_H
 
 
-#endif /*SSEG_CONFIG_H_*/
+#endif /*SSEG_CONFIG_H*/

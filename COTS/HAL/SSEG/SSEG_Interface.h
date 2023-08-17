@@ -12,18 +12,18 @@
 
 /*Public Macros*/
 	/*Dot Options*/
-#define DOT_OFF	(0u)
-#define DOT_ON	(1u)
+#define DOT_OFF		(0u)
+#define DOT_ON		(1u)
 
 	/*Types of Seven Segment*/
-#define SSEG_COMM_CATHODE 		0
-#define SSEG_COMM_ANODE      	1
+#define SSEG_COMM_CATHODE		(0u)
+#define SSEG_COMM_ANODE			(1u)
 
 	/*Ports*/
-#define GPIO_PORT_A			GPIO_PORT_A
-#define GPIO_PORT_B			GPIO_PORT_B
-#define GPIO_PORT_C			GPIO_PORT_C
-#define COMM_NOT_CONNECTED	GPIO_NOT_A_PORT
+#define GPIO_PORT_A						GPIO_PORT_A
+#define GPIO_PORT_B						GPIO_PORT_B
+#define GPIO_PORT_C						GPIO_PORT_C
+#define COMM_CONNECTED_EXTERNALLY		GPIO_NOT_A_PORT
 
 	/*Pins*/
 #define SSEG_PIN_0			GPIO_PIN_0
@@ -48,8 +48,8 @@
 /*Seven Segment Configuration Structure*/
 typedef struct{
 	u8 Loc_u8SEGPort;	/*The port the seven segment is connected to.			Options: GPIO_PORT_A -> GPIO_PORT_C*/
-	u8 Loc_u8CommType;	/*Type of seven segment common.							Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE*/
-	u8 Loc_u8CommPort;	/*The port the seven segment common is connected to.	Options: GPIO_PORT_A -> GPIO_PORT_C, COMM_NOT_CONNECTED*/
+	u8 Loc_u8Type;		/*Type of seven segment.								Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, COMM_CONNECTED_EXTERNALLY*/
+	u8 Loc_u8CommPort;	/*The port the seven segment common is connected to.	Options: GPIO_PORT_A -> GPIO_PORT_C*/
 	u8 Loc_u8CommPin;	/*The pin the seven segment common is connected to.		Options: SSEG_PIN_0 -> SSEG_PIN_15*/
 }SSEG_ConfigStruct;
 /*__________________________________________________________________________________________________________________________________________*/

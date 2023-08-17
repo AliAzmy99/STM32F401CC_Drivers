@@ -7,16 +7,11 @@
 
 
 #ifndef SSEG_PRIVATE_H_
-#define SSEG_PRIVATE_H_
+#define SSEG_PRIVATE_
 
-#include "RCC_Interface.h"
-#include "GPIO_Interface.h"
 
-#include "SSEG_Config.h"
-#include "SSEG_Interface.h"
-
-/*Macros*/
-/*Numbers as output for the Seven segment Display*/
+/*Private Macros*/
+	/*Numbers as Output for the Seven Segment Display*/
 #define ZERO		        0b00111111
 #define ONE			        0b00000110
 #define TWO			        0b01011011
@@ -41,18 +36,15 @@
 #define NINE_DOT		    0b11101111
 
 #define CLEAR               0x00
+/*__________________________________________________________________________________________________________________________________________*/
 
-/*Arrays of Seven Segment Output Numbers*/
-static u8 Loc_u8Num[10] = {ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
-static u8 Loc_u8NumwDOT[10] = {ZERO_DOT, ONE_DOT, TWO_DOT, THREE_DOT, FOUR_DOT, FIVE_DOT, SIX_DOT, SEVEN_DOT, EIGHT_DOT, NINE_DOT};
-static u8 Loc_u8Prei[3]={PERIPHERAL_GPIOA, PERIPHERAL_GPIOB, PERIPHERAL_GPIOC};
 
-/* 
- * Function	: SSEG_errWriteNum	: Turns on/off The appropriate LEDs in the SSEG based on the required number
- * Input1 	: Copy_u8Port		: Port where the Seven Segment is connected 
- * Input2 	: Copy_u8Number		: The number to display on the Seven Segment 
- * Return 	: 				    : Error Status of function
- */
-ErrorStatus SSEG_errWriteNum(u8 Copy_u8Port, u8 Copy_u8Number);
+/*Private Global Variables Definitions*/
+	/*Arrays of Seven Segment Output Numbers*/
+static u8 Glob_u8Num[10] = {ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
+static u8 Glob_u8NumwDOT[10] = {ZERO_DOT, ONE_DOT, TWO_DOT, THREE_DOT, FOUR_DOT, FIVE_DOT, SIX_DOT, SEVEN_DOT, EIGHT_DOT, NINE_DOT};
+static u8 Glob_u8Prei[3]={PERIPHERAL_GPIOA, PERIPHERAL_GPIOB, PERIPHERAL_GPIOC};
+/*__________________________________________________________________________________________________________________________________________*/
 
-#endif /*SSEG_PRIVATE_H_*/
+
+#endif /*SSEG_PRIVATE_H*/

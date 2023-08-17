@@ -15,6 +15,7 @@
 #define GPIO_PORT_A		(0u)
 #define GPIO_PORT_B		(1u)
 #define GPIO_PORT_C		(2u)
+#define GPIO_NOT_A_PORT (3u)
 
 	/*Pin ID Options*/
 #define GPIO_PIN_0		(0u)
