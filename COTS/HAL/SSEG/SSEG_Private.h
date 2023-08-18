@@ -11,7 +11,9 @@
 
 
 /*Private Macros*/
-	/*Numbers as Output for the Seven Segment Display*/
+	/*Mapped Outputs for the Seven Segment Display LEDs*/
+		/*No Dots*/
+#define CLEAR               0b00000000
 #define ZERO		        0b00111111
 #define ONE			        0b00000110
 #define TWO			        0b01011011
@@ -19,11 +21,12 @@
 #define FOUR		        0b01100110
 #define FIVE		        0b01101101
 #define SIX			        0b01111101
-#define SEVEN		        0b01000111
+#define SEVEN		        0b00000111
 #define EIGHT		        0b01111111
 #define NINE		        0b01101111
-#define DOT					0b10000000
 
+		/*Dots*/
+#define DOT					0b10000000
 #define ZERO_DOT		    0b10111111
 #define ONE_DOT			    0b10000110
 #define TWO_DOT		        0b11011011
@@ -31,11 +34,9 @@
 #define FOUR_DOT		    0b11100110
 #define FIVE_DOT	        0b11101101
 #define SIX_DOT		        0b11111101
-#define SEVEN_DOT		    0b11000111
+#define SEVEN_DOT		    0b10000111
 #define EIGHT_DOT		    0b11111111
 #define NINE_DOT		    0b11101111
-
-#define CLEAR               0x00
 /*__________________________________________________________________________________________________________________________________________*/
 
 
