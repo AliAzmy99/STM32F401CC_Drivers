@@ -6,7 +6,7 @@
 /************************************************************************/
 
 
-#warning Add Prescaller adjustments
+#warning stop using empty registers. Instead, & the part you want to change with 00 then use that instead of the empty register.
 #warning Fix PLL
 /*Include Needed Files*/
 	/*Include Needed Library Files*/
@@ -31,7 +31,7 @@ ErrorStatus RCC_errInitSysClk(void)
 {
 	/*1- AMBA Buses Prescaler Selection*/
 	#if ((AHB_PRE_1 <= AHB_PRESCALER && AHB_PRE_512 >= AHB_PRESCALER) && (APB_PRE_1 <= APB1_PRESCALER && APB_PRE_16 >= APB1_PRESCALER) && (APB_PRE_1 <= APB2_PRESCALER && APB_PRE_16 >= APB2_PRESCALER))
-		RCC_CFGR = RCC_CFGR_EMPTY | (AHB_PRESCALER << RCC_CFGR_HPRE0) | (APB1_PRESCALER << RCC_CFGR_PPRE10) || (APB2_PRESCALER << RCC_CFGR_PPRE20);
+		RCC_CFGR = RCC_CFGR_EMPTY | (AHB_PRESCALER << RCC_CFGR_HPRE0) | (APB1_PRESCALER << RCC_CFGR_PPRE10) | (APB2_PRESCALER << RCC_CFGR_PPRE20);
 	#else
 		#error Error: Invalid AMBA Buses Configuration
 	#endif
