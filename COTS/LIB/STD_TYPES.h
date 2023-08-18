@@ -1,3 +1,11 @@
+/************************************************************************/
+/* SWC  	    : Standard Types Library								*/
+/* Author	    : Ali Azmy												*/
+/* Version	    : V0.0													*/
+/* Description  : SWC for defining standard types						*/
+/************************************************************************/
+
+
 #ifndef STD_TYPES_H
 #define STD_TYPES_H
 

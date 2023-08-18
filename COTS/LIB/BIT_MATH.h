@@ -1,3 +1,11 @@
+/************************************************************************/
+/* SWC  	    : Bit Math Library										*/
+/* Author	    : Ali Azmy												*/
+/* Version	    : V0.1													*/
+/* Description  : SWC for bit manipulation								*/
+/************************************************************************/
+
+
 #ifndef BIT_MATH_H
 #define BIT_MATH_H
 
