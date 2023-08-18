@@ -10,6 +10,9 @@
 #define NVIC_CONFIG_H
 
 
+/*Choose Priority Structure*/
+	/*Choose the Number of Priority Groups and Subgroups*/
+#define PRIORITY_STRUCTURE		G16_SG01							/*Options: G16_SG01, G08_SG02, G04_SG04, G02_SG08, G01_SG16*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 
