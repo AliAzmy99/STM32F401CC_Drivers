@@ -351,10 +351,10 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8PortId, u8 Copy_u8PinId, u
 	switch(Copy_u8PinAction)
 	{
 		case GPIO_SET:
-			SET_BIT(*Locptr_u32BSRRxAddress, Copy_u8PinId);
+			*Locptr_u32BSRRxAddress = 1 << Copy_u8PinId;
 			break;
 		case GPIO_RST:
-			SET_BIT(*Locptr_u32BSRRxAddress, Copy_u8PinId + 16);
+			*Locptr_u32BSRRxAddress = 1 << (Copy_u8PinId + 16);
 			break;
 		default:
 			return INVALID_PARAMETERS;
