@@ -30,7 +30,7 @@
  * I/p Argument	: Inprt_strctDisplayConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errInit(const SSEGConfig_type* Inprt_strctDisplayConfig)
+ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctDisplayConfig)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
@@ -83,7 +83,7 @@ ErrorStatus SSEG_errInit(const SSEGConfig_type* Inprt_strctDisplayConfig)
  * I/p Argument	: Copy_u8DotState			Options: DOT_OFF, DOT_ON
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errDisplayNumber(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Number, u8 Copy_u8DotState)
+ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Number, u8 Copy_u8DotState)
 {
 	switch (Inprt_strctDisplayConfig->Loc_u8Type)
 	{
@@ -131,7 +131,7 @@ ErrorStatus SSEG_errDisplayNumber(const SSEGConfig_type* Inprt_strctDisplayConfi
  * I/p Argument	: Inprt_strctDisplayConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errClear(const SSEGConfig_type* Inprt_strctDisplayConfig)
+ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctDisplayConfig)
 {
 	switch (Inprt_strctDisplayConfig->Loc_u8CommPort)
 	{
@@ -157,7 +157,7 @@ ErrorStatus SSEG_errClear(const SSEGConfig_type* Inprt_strctDisplayConfig)
  * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errEnable(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Enable)
+ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Enable)
 {
 	/*Enable the Seven Segment from the Common*/
 	switch (Inprt_strctDisplayConfig->Loc_u8Type)
@@ -210,7 +210,7 @@ ErrorStatus SSEG_errEnable(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 C
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errWriteLeds(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray)
+static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
@@ -249,7 +249,7 @@ static ErrorStatus SSEG_errWriteLeds(const SSEGConfig_type* Inprt_strctDisplayCo
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errInitCommon(const SSEGConfig_type* Inprt_strctDisplayConfig)
+static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayConfig)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;

@@ -56,7 +56,7 @@ static u8 Glob_u8Peripheral[3]={PERIPHERAL_GPIOA, PERIPHERAL_GPIOB, PERIPHERAL_G
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errWriteLeds(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray);
+static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray);
 
 /* 
  * Func. Name	: SSEG_errInitHelper
@@ -65,7 +65,7 @@ static ErrorStatus SSEG_errWriteLeds(const SSEGConfig_type* Inprt_strctDisplayCo
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errInitCommon(const SSEGConfig_type* Inprt_strctDisplayConfig);
+static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayConfig);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

@@ -66,7 +66,7 @@ typedef struct{
 		/*The port the seven segment common is connected to.			Options: SSEG_PORT_A -> SSEG_PORT_C*/
 	u8 Loc_u8CommPin;
 		/*The pin the seven segment common is connected to.				Options: SSEG_PIN_0 -> SSEG_PIN_15*/
-}SSEGConfig_type;
+}SsegConfig_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 
@@ -78,7 +78,7 @@ typedef struct{
  * I/p Argument	: Inprt_strctDisplayConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errInit(const SSEGConfig_type* Inprt_strctDisplayConfig);
+ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctDisplayConfig);
 
 /* 
  * Func. Name	: SSEG_errDisplayNumber
@@ -88,7 +88,7 @@ ErrorStatus SSEG_errInit(const SSEGConfig_type* Inprt_strctDisplayConfig);
  * I/p Argument	: Copy_u8DotState			Options: DOT_OFF, DOT_ON
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errDisplayNumber(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Number, u8 Copy_u8DotState);
+ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Number, u8 Copy_u8DotState);
 
 /* 
  * Func. Name	: SSEG_errClear
@@ -96,7 +96,7 @@ ErrorStatus SSEG_errDisplayNumber(const SSEGConfig_type* Inprt_strctDisplayConfi
  * I/p Argument	: Inprt_strctDisplayConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errClear(const SSEGConfig_type* Inprt_strctDisplayConfig);
+ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctDisplayConfig);
 
 /* 
  * Func. Name	: SSEG_errEnable
@@ -105,7 +105,7 @@ ErrorStatus SSEG_errClear(const SSEGConfig_type* Inprt_strctDisplayConfig);
  * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errEnable(const SSEGConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Enable);
+ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Enable);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
