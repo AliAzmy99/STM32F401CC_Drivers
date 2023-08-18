@@ -96,6 +96,15 @@ ErrorStatus SSEG_errDisplayNumber(const SSEG_ConfigStruct* Inptr_SSEG_ConfigStru
  * Return		: Error status of function
  */
 ErrorStatus SSEG_errClear(const SSEG_ConfigStruct* Inptr_SSEG_ConfigStruct);
+
+/* 
+ * Func. Name	: SSEG_errEnable
+ * Description	: This function allows the user to enable or disable the seven segment display
+ * I/p Argument	: Inptr_SSEG_ConfigStruct
+ * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
+ * Return		: Error status of function
+ */
+ErrorStatus SSEG_errEnable(const SSEG_ConfigStruct* Inptr_SSEG_ConfigStruct, u8 Copy_u8Enable);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
