@@ -26,7 +26,7 @@
 /* 
  * Func. Name	: SSEG_errInit
  * Description	: This function allows the user to initialize the seven segment display
- * Note			: Connect the display pins A -> G to the MCU oins 0 -> 7 (FIRST_HALF) or 8 -> 15 (SECOND_HALF) respectivly
+ * Note			: Connect the display pins A -> G,Dot to the MCU pins 0 -> 6,7 (FIRST_HALF) or 8 -> 14,15 (SECOND_HALF) respectivly
  * I/p Argument	: Inptr_SSEG_ConfigStruct
  * Return		: Error status of function
  */
