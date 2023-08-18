@@ -6,7 +6,6 @@
 /************************************************************************/
 
 
-#warning stop using empty registers. Instead, & the part you want to change with 00 then use that instead of the empty register.
 #warning Fix PLL
 /*Include Needed Files*/
 	/*Include Needed Library Files*/
@@ -31,7 +30,7 @@ ErrorStatus RCC_errInitSysClk(void)
 {
 	/*1- AMBA Buses Prescaler Selection*/
 	#if ((AHB_PRE_1 <= AHB_PRESCALER && AHB_PRE_512 >= AHB_PRESCALER) && (APB_PRE_1 <= APB1_PRESCALER && APB_PRE_16 >= APB1_PRESCALER) && (APB_PRE_1 <= APB2_PRESCALER && APB_PRE_16 >= APB2_PRESCALER))
-		RCC_CFGR = RCC_CFGR_EMPTY | (AHB_PRESCALER << RCC_CFGR_HPRE0) | (APB1_PRESCALER << RCC_CFGR_PPRE10) | (APB2_PRESCALER << RCC_CFGR_PPRE20);
+		RCC_CFGR = (RCC_CFGR & RCC_CFGR_AMBA_PRE_RESET) | (AHB_PRESCALER << RCC_CFGR_HPRE0) | (APB1_PRESCALER << RCC_CFGR_PPRE10) | (APB2_PRESCALER << RCC_CFGR_PPRE20);
 	#else
 		#error Error: Invalid AMBA Buses Configuration
 	#endif
@@ -87,7 +86,7 @@ ErrorStatus RCC_errInitSysClk(void)
 		CLR_BIT(RCC_CR, RCC_CR_PLLON);
 		/*2- Choosing PLL Multiplier Parameters*/
 		#if ((2 <= PLLM && 63 >= PLLM) && (192 <= PLLN && 432 >= PLLN) && (2 == PLLP || 4 == PLLP || 6 == PLLP || 8 == PLLP) && (2 <= PLLQ && 15 >= PLLQ))
-			RCC_PLLCFGR = RCC_PLLCFGR_EMPTY | (PLLM<<RCC_PLLCFGR_PLLM0) | (PLLN<<RCC_PLLCFGR_PLLN0) | (((PLLP>>1)-1)<<RCC_PLLCFGR_PLLP0) | (PLLQ<<RCC_PLLCFGR_PLLQ0);
+			RCC_PLLCFGR = (RCC_PLLCFGR & RCC_PLLCFGR_MUL_PAR_RESET) | (PLLM<<RCC_PLLCFGR_PLLM0) | (PLLN<<RCC_PLLCFGR_PLLN0) | (((PLLP>>1)-1)<<RCC_PLLCFGR_PLLP0) | (PLLQ<<RCC_PLLCFGR_PLLQ0);
 		#else
 			#error Error: Invalid PLL Multiplier Parameters Configuration
 		#endif

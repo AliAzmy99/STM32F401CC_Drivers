@@ -122,12 +122,12 @@
 
 	/*Reset Values*/
 #define RCC_PLLCFGR_RESET	(0x24003010)
-#define RCC_CFGR_RESET      (0x00000000)
+#define RCC_CFGR_RESET		(0x00000000)
 
 	/*Empty Values*/
 		/*Values of registers when a certain part is cleared while the rest is at the reset value*/
-#define RCC_PLLCFGR_EMPTY	(0x24000000)
-#define RCC_CFGR_EMPTY      (0x00000000)
+#define RCC_PLLCFGR_MUL_PAR_RESET	(0xF0FC8000)
+#define RCC_CFGR_AMBA_PRE_RESET		(0xFFFF030F)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
