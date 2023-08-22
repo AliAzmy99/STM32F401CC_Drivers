@@ -255,7 +255,7 @@ static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayC
 	ErrorStatus Loc_errReturn = NO_ERROR;
 
 	/*Initialize the Common if it is Connected to the MCU*/
-	if (COMM_CONNECTED_EXTERNALLY > Inprt_strctDisplayConfig->Loc_u8CommPort)
+	if (SSEG_EXTERNAL_COMM > Inprt_strctDisplayConfig->Loc_u8CommPort)
 	{
 		/*Enable Peripheral for the Port that the Common is Connected to*/
 		Loc_errReturn = RCC_errEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctDisplayConfig->Loc_u8CommPort]);
@@ -284,7 +284,7 @@ static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayC
 		}
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
-	else if (COMM_CONNECTED_EXTERNALLY == Inprt_strctDisplayConfig->Loc_u8CommPort)
+	else if (SSEG_EXTERNAL_COMM == Inprt_strctDisplayConfig->Loc_u8CommPort)
 	{
 		/*Do nothing*/
 	}

@@ -27,7 +27,7 @@
 #define SSEG_PORT_A						GPIO_PORT_A
 #define SSEG_PORT_B						GPIO_PORT_B
 #define SSEG_PORT_C						GPIO_PORT_C
-#define COMM_CONNECTED_EXTERNALLY		GPIO_NOT_A_PORT
+#define SSEG_EXTERNAL_COMM				GPIO_NOT_A_PORT
 
 	/*Pin Options*/
 #define SSEG_PIN_0			GPIO_PIN_0
@@ -61,7 +61,7 @@ typedef struct{
 	u8 Loc_u8SegHalf;
 		/*The half of the port that the seven segment is connected to.	Options: SSEG_FIRST_HALF -> SSEG_SECOND_HALF*/
 	u8 Loc_u8Type;
-		/*Type of seven segment.										Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, COMM_CONNECTED_EXTERNALLY*/
+		/*Type of seven segment.										Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, SSEG_EXTERNAL_COMM*/
 	u8 Loc_u8CommPort;
 		/*The port the seven segment common is connected to.			Options: SSEG_PORT_A -> SSEG_PORT_C*/
 	u8 Loc_u8CommPin;
