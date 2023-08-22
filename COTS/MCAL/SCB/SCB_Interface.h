@@ -23,7 +23,7 @@
 /*Public Functions Declarations*/
 /* 
  * Func. Name	: SCB_errSetNvicPriorityStructure
- * Description	: This function allows the user to choose the number of priority groups and subgroups the for the NVIC
+ * Description	: This function allows the user to choose the number of priority groups and subgroups the for the NVIC.
  * I/p Argument	: Copy_u8PriorityStructure		Options: SCB_G16_SG01, SCB_G08_SG02, SCB_G04_SG04, SCB_G02_SG08, SCB_G01_SG16
  * Return		: Error status of function
  */
