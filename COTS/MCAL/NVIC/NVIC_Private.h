@@ -12,11 +12,11 @@
 
 /*Private Macros*/
 	/*Group and Subgroup Options*/
-#define G16_SG01	(0u)		/*16 Group(s) and 01 Subgroup(s) in each*/
-#define G08_SG02	(1u)		/*08 Group(s) and 02 Subgroup(s) in each*/
-#define G04_SG04	(2u)		/*04 Group(s) and 04 Subgroup(s) in each*/
-#define G02_SG08	(3u)		/*02 Group(s) and 08 Subgroup(s) in each*/
-#define G01_SG16	(4u)		/*01 Group(s) and 16 Subgroup(s) in each*/
+#define G16_SG01		SCB_G16_SG01		/*16 Group(s) and 01 Subgroup(s) in each*/
+#define G08_SG02		SCB_G08_SG02		/*08 Group(s) and 02 Subgroup(s) in each*/
+#define G04_SG04		SCB_G04_SG04		/*04 Group(s) and 04 Subgroup(s) in each*/
+#define G02_SG08		SCB_G02_SG08		/*02 Group(s) and 08 Subgroup(s) in each*/
+#define G01_SG16		SCB_G01_SG16		/*01 Group(s) and 16 Subgroup(s) in each*/
 
 	/*Registers*/
 		/*First Addresses*/

@@ -12,6 +12,9 @@
 #include "../../LIB/BIT_MATH.h"
 #include "../../LIB/MACROS.h"
 
+	/*Include Needed MCAL Files*/
+#include "SCB_Interface.h"
+
 	/*Include Needed NVIC Files*/
 #include "NVIC_Interface.h"
 #include "NVIC_Private.h"
@@ -27,7 +30,7 @@
  */
 ErrorStatus NVIC_errInit(void)
 {
-	SCB_AIRCR = VECTKEY | ((PRIORITY_STRUCTURE + 3) << SCB_AIRCR_PRIGROUP);
+	SCB_errSetNvicPriorityStructure(SCB_G16_SG01);
 }
 
 /* 
