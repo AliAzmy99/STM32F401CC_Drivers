@@ -123,6 +123,7 @@ ErrorStatus RCC_errInitSysClk(void)
 		#error Error: Invalid RCC_CLK_SRC Configuration
 	#endif
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -168,6 +169,7 @@ ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8Peripheral)
 	case PERIPHERAL_WWDG:	SET_BIT(RCC_APB1ENR, RCC_APB1ENR_WWDGEN);	break;
 	default:				return INVALID_PARAMETERS;					break;
 	}
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -213,5 +215,6 @@ ErrorStatus RCC_errDisanablePeripheralClk(u8 Copy_u8Peripheral)
 	case PERIPHERAL_WWDG:	CLR_BIT(RCC_APB1ENR, RCC_APB1ENR_WWDGEN);	break;
 	default:				return INVALID_PARAMETERS;					break;
 	}
+	/*Returning Error Status*/
 	return NO_ERROR;
 }

@@ -42,6 +42,7 @@ ErrorStatus STK_errInit(void)
 		#error Error: Invalid STK_CLK_SRC Configuration
 	#endif
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -78,6 +79,7 @@ ErrorStatus STK_errSetWait(u32 Copy_u32TickCount)
 	/*5- Stop Timer*/
 	CLR_BIT(STK_CTRL, STK_CTRL_ENABLE);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -113,6 +115,7 @@ ErrorStatus STK_errSetIntervalSingle(u32 Copy_u32TickCount, void (* Inptr_vdCall
 	/*6- Start Timer*/
 	SET_BIT(STK_CTRL, STK_CTRL_ENABLE);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -148,6 +151,7 @@ ErrorStatus STK_errSetIntervalPeriodic(u32 Copy_u32TickCount, void (* Inptr_vdCa
 	/*6- Start Timer*/
 	SET_BIT(STK_CTRL, STK_CTRL_ENABLE);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -168,6 +172,7 @@ ErrorStatus STK_errGetElapsedTicks(u32* Outptr_u32ElapsedTicks)
 	/*Outputting Elapsed Ticks*/
 	*Outptr_u32ElapsedTicks = STK_LOAD - STK_VAL;
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -188,6 +193,7 @@ ErrorStatus STK_errGetRemainingTicks(u32* Outptr_u32RemainingTicks)
 	/*Outputting Remaining Ticks*/
 	*Outptr_u32RemainingTicks = STK_VAL;
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -204,6 +210,7 @@ ErrorStatus STK_errStop(void)
 	/*Stop Interrupts*/
 	CLR_BIT(STK_CTRL, STK_CTRL_TICKINT);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 /*__________________________________________________________________________________________________________________________________________*/

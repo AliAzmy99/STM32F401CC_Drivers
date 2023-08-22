@@ -80,6 +80,7 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
 		break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;	
 }
 
@@ -133,6 +134,7 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pi
 			break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -196,6 +198,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8P
 		break;
 	}
 	
+	/*Returning Error Status*/
 	return NO_ERROR;	
 }
 
@@ -255,6 +258,7 @@ ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pin
 		break;
 	}
 	
+	/*Returning Error Status*/
 	return NO_ERROR;	
 }
 
@@ -308,6 +312,7 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValu
 			break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -361,6 +366,7 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Co
 			break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -407,5 +413,6 @@ ErrorStatus GPIO_errGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinV
 	/*Outputting Value*/
 	*Outptr_u8PinValue = GET_BIT(*Locptr_u32IDRxAddress, Copy_u8Pin);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }

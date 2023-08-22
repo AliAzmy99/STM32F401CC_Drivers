@@ -40,6 +40,7 @@ ErrorStatus EXTI_errEnableInterrupt(u8 Copy_u8InterruptLine)
 	/*Unmask Interrupt*/
 	SET_BIT(EXTI_IMR, Copy_u8InterruptLine);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -60,6 +61,7 @@ ErrorStatus EXTI_errDisableInterrupt(u8 Copy_u8InterruptLine)
 	/*Mask Interrupt*/
 	CLR_BIT(EXTI_IMR, Copy_u8InterruptLine);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -115,6 +117,7 @@ ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_v
 		break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -135,6 +138,7 @@ ErrorStatus EXTI_errEnableEvent(u8 Copy_u8EventLine)
 	/*Unmask Event*/
 	SET_BIT(EXTI_EMR, Copy_u8EventLine);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -155,6 +159,7 @@ ErrorStatus EXTI_errDisableEvent(u8 Copy_u8EventLine)
 	/*Mask Event*/
 	CLR_BIT(EXTI_EMR, Copy_u8EventLine);
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -197,6 +202,7 @@ ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 		break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 /*__________________________________________________________________________________________________________________________________________*/

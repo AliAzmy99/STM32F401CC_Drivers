@@ -122,6 +122,7 @@ ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfi
 		break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -147,6 +148,7 @@ ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctDisplayConfig)
 		break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -197,6 +199,7 @@ ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 C
 		break;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 /*__________________________________________________________________________________________________________________________________________*/
@@ -239,6 +242,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayCo
 		Loc_errReturn = GPIO_errSetPinValue(Inprt_strctDisplayConfig->Loc_u8SegPort, Loc_u8PinCounter, GET_BIT(Copy_u8LedArray, Loc_u8PinCounter));
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -293,5 +297,6 @@ static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayC
 		return INVALID_PARAMETERS;
 	}
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }

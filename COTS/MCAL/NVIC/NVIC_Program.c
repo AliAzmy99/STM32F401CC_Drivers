@@ -41,11 +41,16 @@ ErrorStatus NVIC_errInit(void)
  */
 ErrorStatus NVIC_errEnableInterrupt(IrqId_type Copy_enmIrqId)
 {
+	/*I/p Validation*/
 	if(NOT_A_PERIPHERAL <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
+
+	/*Enabling Interrupt*/
 	NVIC_ISER_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
+
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -57,11 +62,16 @@ ErrorStatus NVIC_errEnableInterrupt(IrqId_type Copy_enmIrqId)
  */
 ErrorStatus NVIC_errDisableInterrupt(IrqId_type Copy_enmIrqId)
 {
+	/*I/p Validation*/
 	if(NOT_A_PERIPHERAL <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
+
+	/*Disabling Interrupt*/
 	NVIC_ICER_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
+
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -73,11 +83,16 @@ ErrorStatus NVIC_errDisableInterrupt(IrqId_type Copy_enmIrqId)
  */
 ErrorStatus NVIC_errSetPending(IrqId_type Copy_enmIrqId)
 {
+	/*I/p Validation*/
 	if(NOT_A_PERIPHERAL <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
+
+	/*Setting Pending*/
 	NVIC_ISPR_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
+
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -89,11 +104,16 @@ ErrorStatus NVIC_errSetPending(IrqId_type Copy_enmIrqId)
  */
 ErrorStatus NVIC_errClearPending(IrqId_type Copy_enmIrqId)
 {
+	/*I/p Validation*/
 	if(NOT_A_PERIPHERAL <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
+
+	/*Clearing Pending*/
 	NVIC_ICPR_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
+
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
 
@@ -152,5 +172,6 @@ ErrorStatus NVIC_errSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 co
 	CLR_NIBBLE(NVIC_IPR_FIRST_ADDRESS[Copy_enmIrqId >> 2], Loc_u8PriorityFirstBit);
 	NVIC_IPR_FIRST_ADDRESS[Copy_enmIrqId >> 2] |= Loc_u8Priority << Loc_u8PriorityFirstBit;
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }

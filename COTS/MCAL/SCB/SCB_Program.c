@@ -37,5 +37,6 @@ ErrorStatus SCB_errSetNvicPriorityStructure(u8 Copy_u8PriorityStructure)
 	/*Setting Priority Structure*/
 	SCB_AIRCR = VECTKEY | ((Copy_u8PriorityStructure + 3) << SCB_AIRCR_PRIGROUP);	/*Adding the register key to the choosen structure writing to register*/
 
+	/*Returning Error Status*/
 	return NO_ERROR;
 }
