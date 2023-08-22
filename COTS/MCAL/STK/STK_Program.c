@@ -212,7 +212,7 @@ ErrorStatus STK_errStop(void)
 /*Interrupt Service Routines Definitions*/
 /*
  * Func. Name	: SysTick_Handler
- * Description	: This function calls the callback function and stops the timer if in single mode.
+ * Description	: This function calls the callback function, stops the timer if in single mode, and clears the interrupt flag.
  */
 void SysTick_Handler(void)
 {
