@@ -11,13 +11,13 @@
 
 
 /*Public Macros*/
-	/*Edge Options*/
+	/*Edge ID Options*/
 #define EXTI_RISING_EDGE		(0u)
 #define EXTI_FALLING_EDGE		(1u)
 #define EXTI_DUAL_EDGE			(2u)
 #define EXTI_NO_EDGE			(3u)
 
-	/*Pin ID Options*/
+	/*Line ID Options*/
 #define EXTI_LINE_0			GPIO_PIN_0
 #define EXTI_LINE_1			GPIO_PIN_1
 #define EXTI_LINE_2			GPIO_PIN_2

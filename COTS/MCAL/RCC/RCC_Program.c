@@ -129,12 +129,12 @@ ErrorStatus RCC_errInitSysClk(void)
 /* 
  * Func. Name	: RCC_voidEnablePeripheralClk
  * Description	: This function allows the user to enable the clk of a certian peripheral
- * I/p Argument	: Copy_u8PeripheralId	Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * I/p Argument	: Copy_u8Peripheral		Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
  * Return		: Error status of function
  */
-ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8PeripheralId)
+ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8Peripheral)
 {
-	switch (Copy_u8PeripheralId)
+	switch (Copy_u8Peripheral)
 	{
 	case PERIPHERAL_USBFS:	SET_BIT(RCC_AHB2ENR, RCC_AHB2ENR_OTGFSEN);	break;
 	case PERIPHERAL_DMA1:	SET_BIT(RCC_AHB1ENR, RCC_AHB1ENR_DMA1EN);	break;
@@ -174,12 +174,12 @@ ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8PeripheralId)
 /* 
  * Func. Name	: RCC_errDisanablePeripheralClk
  * Description	: This function allows the user to disable the clk of a certian peripheral
- * I/p Argument	: Copy_u8PeripheralId	Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * I/p Argument	: Copy_u8Peripheral		Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
  * Return		: Error status of function
  */
-ErrorStatus RCC_errDisanablePeripheralClk(u8 Copy_u8PeripheralId)
+ErrorStatus RCC_errDisanablePeripheralClk(u8 Copy_u8Peripheral)
 {
-	switch (Copy_u8PeripheralId)
+	switch (Copy_u8Peripheral)
 	{
 	case PERIPHERAL_USBFS:	CLR_BIT(RCC_AHB2ENR, RCC_AHB2ENR_OTGFSEN);	break;
 	case PERIPHERAL_DMA1:	CLR_BIT(RCC_AHB1ENR, RCC_AHB1ENR_DMA1EN);	break;

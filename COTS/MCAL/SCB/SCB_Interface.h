@@ -11,7 +11,7 @@
 
 
 /*Public Macros*/
-	/*Group and Subgroup Options*/
+	/*Group and Subgroup ID Options*/
 #define SCB_G16_SG01	(0u)		/*16 Group(s) and 01 Subgroup(s) in each*/
 #define SCB_G08_SG02	(1u)		/*08 Group(s) and 02 Subgroup(s) in each*/
 #define SCB_G04_SG04	(2u)		/*04 Group(s) and 04 Subgroup(s) in each*/
