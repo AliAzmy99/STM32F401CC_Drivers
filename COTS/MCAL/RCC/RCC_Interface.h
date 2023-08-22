@@ -62,12 +62,12 @@ ErrorStatus RCC_errInitSysClk(void);
 ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8Peripheral);
 
 /* 
- * Func. Name	: RCC_errDisanablePeripheralClk
+ * Func. Name	: RCC_errDisablePeripheralClk
  * Description	: This function allows the user to disable the clk of a certian peripheral
  * I/p Argument	: Copy_u8Peripheral		Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
  * Return		: Error status of function
  */
-ErrorStatus RCC_errDisanablePeripheralClk(u8 Copy_u8Peripheral);
+ErrorStatus RCC_errDisablePeripheralClk(u8 Copy_u8Peripheral);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
