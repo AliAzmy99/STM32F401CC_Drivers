@@ -35,8 +35,8 @@
 
 
 /*Private Global Variables Definitions*/
-static void (* Globptr_vdCallbackFunction)(void) = NULL;
-static u8 Glob_u8IntervalFlag = INTERVAL_FLAG_SINGLE_MODE;
+static void (* Globptr_vdCallbackFunction)(void) = NULL;	/*The callback function called by the ISR*/
+static u8 Glob_u8IntervalFlag = INTERVAL_FLAG_SINGLE_MODE;	/*The flag the indicates whether the callback function will be called once or periodically*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 
