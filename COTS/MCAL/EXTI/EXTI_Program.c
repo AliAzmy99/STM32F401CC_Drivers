@@ -162,3 +162,134 @@ ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 
 	return NO_ERROR;
 }
+
+
+/*__________________________________________________________________________________________________________________________________________*/
+
+
+/*Interrupt Service Routines Definitions*/
+/*
+ * Func. Name	: EXTI0_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI0_IRQHandler(void)
+{
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI0)
+	{
+		Globptr_vdCallbackFunction_EXTI0();
+	}
+
+	/*2- Clear Pending Flag*/
+	SET_BIT(EXTI_PR, EXTI_PR_PR0);
+}
+
+/*
+ * Func. Name	: EXTI1_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI1_IRQHandler(void)
+{
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI1)
+	{
+		Globptr_vdCallbackFunction_EXTI1();
+	}
+
+	/*2- Clear Pending Flag*/
+	SET_BIT(EXTI_PR, EXTI_PR_PR1);
+}
+
+/*
+ * Func. Name	: EXTI2_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI2_IRQHandler(void)
+{
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI2)
+	{
+		Globptr_vdCallbackFunction_EXTI2();
+	}
+
+	/*2- Clear Pending Flag*/
+	SET_BIT(EXTI_PR, EXTI_PR_PR2);
+}
+
+/*
+ * Func. Name	: EXTI3_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI3_IRQHandler(void)
+{
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI3)
+	{
+		Globptr_vdCallbackFunction_EXTI3();
+	}
+
+	/*2- Clear Pending Flag*/
+	SET_BIT(EXTI_PR, EXTI_PR_PR3);
+}
+
+/*
+ * Func. Name	: EXTI4_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI4_IRQHandler(void)
+{
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI4)
+	{
+		Globptr_vdCallbackFunction_EXTI4();
+	}
+
+	/*2- Clear Pending Flag*/
+	SET_BIT(EXTI_PR, EXTI_PR_PR4);
+}
+
+/*
+ * Func. Name	: EXTI9_5_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI9_5_IRQHandler(void)
+{
+	/*Variables Definitions*/
+	u8 Loc_u8PendingFlag = EXTI_PR_PR5;
+
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI9_5)
+	{
+		Globptr_vdCallbackFunction_EXTI9_5();
+	}
+
+	/*2- Clear the First Set Pending Flag*/
+	while (!GET_BIT(EXTI_PR, Loc_u8PendingFlag) && EXTI_PR_PR9 >= Loc_u8PendingFlag)
+	{
+		++Loc_u8PendingFlag;
+	}
+	SET_BIT(EXTI_PR, Loc_u8PendingFlag);
+}
+
+/*
+ * Func. Name	: EXTI15_10_IRQHandler
+ * Description	: This function calls the callback function and clears the interrupt flag.
+ */
+void EXTI15_10_IRQHandler(void)
+{
+	/*Variables Definitions*/
+	u8 Loc_u8PendingFlag = EXTI_PR_PR10;
+
+	/*1- Call Callback Function*/
+	if (Globptr_vdCallbackFunction_EXTI15_10)
+	{
+		Globptr_vdCallbackFunction_EXTI15_10();
+	}
+
+	/*2- Clear the First Set Pending Flag*/
+	while (!GET_BIT(EXTI_PR, Loc_u8PendingFlag) && EXTI_PR_PR15 >= Loc_u8PendingFlag)
+	{
+		++Loc_u8PendingFlag;
+	}
+	SET_BIT(EXTI_PR, Loc_u8PendingFlag);
+}
