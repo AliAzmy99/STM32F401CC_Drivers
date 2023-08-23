@@ -36,19 +36,11 @@
 #define EXTI_PR_PR13	(13u)
 #define EXTI_PR_PR14	(14u)
 #define EXTI_PR_PR15	(15u)
-
-
 /*__________________________________________________________________________________________________________________________________________*/
 
 
 /*Private Global Variables Definitions*/
-static void (* Globptr_vdCallbackFunction_EXTI0)(void) = NULL;			/*The callback function called by EXTI0's ISR*/
-static void (* Globptr_vdCallbackFunction_EXTI1)(void) = NULL;			/*The callback function called by EXTI1's ISR*/
-static void (* Globptr_vdCallbackFunction_EXTI2)(void) = NULL;			/*The callback function called by EXTI2's ISR*/
-static void (* Globptr_vdCallbackFunction_EXTI3)(void) = NULL;			/*The callback function called by EXTI3's ISR*/
-static void (* Globptr_vdCallbackFunction_EXTI4)(void) = NULL;			/*The callback function called by EXTI4's ISR*/
-static void (* Globptr_vdCallbackFunction_EXTI9_5)(void) = NULL;		/*The callback function called by EXTI5 to EXTI9's ISR*/
-static void (* Globptr_vdCallbackFunction_EXTI15_10)(void) = NULL;		/*The callback function called by EXTI10 to EXTI15's ISR*/
+static void (* Globptr_vdCallbackFunctions[16])(void) = NULL;		/*The callback functions called by EXTI's ISRs*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 

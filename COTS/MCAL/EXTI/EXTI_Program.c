@@ -78,44 +78,13 @@ ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_v
 	{
 		return INVALID_PARAMETERS;
 	}
-
-	/*Set Callback Function*/
-	switch (Copy_u8InterruptLine)
+	if (!Inptr_vdCallbackFunction)
 	{
-	case EXTI_LINE_0:
-		Globptr_vdCallbackFunction_EXTI0 = Inptr_vdCallbackFunction;
-		break;
-	case EXTI_LINE_1:
-		Globptr_vdCallbackFunction_EXTI1 = Inptr_vdCallbackFunction;
-		break;
-	case EXTI_LINE_2:
-		Globptr_vdCallbackFunction_EXTI2 = Inptr_vdCallbackFunction;
-		break;
-	case EXTI_LINE_3:
-		Globptr_vdCallbackFunction_EXTI3 = Inptr_vdCallbackFunction;
-		break;
-	case EXTI_LINE_4:
-		Globptr_vdCallbackFunction_EXTI4 = Inptr_vdCallbackFunction;
-		break;
-	case EXTI_LINE_5:
-	case EXTI_LINE_6:
-	case EXTI_LINE_7:
-	case EXTI_LINE_8:
-	case EXTI_LINE_9:
-		Globptr_vdCallbackFunction_EXTI9_5 = Inptr_vdCallbackFunction;
-		break;
-	case EXTI_LINE_10:
-	case EXTI_LINE_11:
-	case EXTI_LINE_12:
-	case EXTI_LINE_13:
-	case EXTI_LINE_14:
-	case EXTI_LINE_15:
-		Globptr_vdCallbackFunction_EXTI15_10 = Inptr_vdCallbackFunction;
-		break;
-	default:
-		return INVALID_PARAMETERS;
-		break;
+		return NULL_POINTER_PASSED;
 	}
+	
+	/*Set Callback Function*/
+	Globptr_vdCallbackFunctions[Copy_u8InterruptLine] = Inptr_vdCallbackFunction;
 
 	/*Returning Error Status*/
 	return NO_ERROR;
@@ -295,21 +264,28 @@ void EXTI4_IRQHandler(void)
  */
 void EXTI9_5_IRQHandler(void)
 {
-	/*Variables Definitions*/
-	u8 Loc_u8PendingFlag = EXTI_PR_PR5;
-
-	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI9_5)
+	/*Loop on Interrupts 5 to 9*/
+	for (u8 Loc_u8IrqCounter = 5; 9 >= Loc_u8IrqCounter; ++Loc_u8IrqCounter)
 	{
-		Globptr_vdCallbackFunction_EXTI9_5();
-	}
+		/*Check if Interrupt is Pending and Enabled*/
+		if (!GET_BIT(EXTI_PR, Loc_u8IrqCounter))
+		{
+			continue;
+		}
+		if (!GET_BIT(EXTI_IMR, Loc_u8IrqCounter))
+		{
+			continue;
+		}
 
-	/*2- Clear the First Set Pending Flag*/
-	while (!GET_BIT(EXTI_PR, Loc_u8PendingFlag) && EXTI_PR_PR9 >= Loc_u8PendingFlag)
-	{
-		++Loc_u8PendingFlag;
+		/*Clear Pending Flag*/
+		SET_BIT(EXTI_PR, Loc_u8IrqCounter);
+
+		/*Call Callback Function*/
+		if (Globptr_vdCallbackFunctions[Loc_u8IrqCounter])
+		{
+			Globptr_vdCallbackFunctions[Loc_u8IrqCounter]();
+		}
 	}
-	SET_BIT(EXTI_PR, Loc_u8PendingFlag);
 }
 
 /*
@@ -318,19 +294,26 @@ void EXTI9_5_IRQHandler(void)
  */
 void EXTI15_10_IRQHandler(void)
 {
-	/*Variables Definitions*/
-	u8 Loc_u8PendingFlag = EXTI_PR_PR10;
-
-	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI15_10)
+	/*Loop on Interrupts 10 to 15*/
+	for (u8 Loc_u8IrqCounter = 10; 15 >= Loc_u8IrqCounter; ++Loc_u8IrqCounter)
 	{
-		Globptr_vdCallbackFunction_EXTI15_10();
-	}
+		/*Check if Interrupt is Pending and Enabled*/
+		if (!GET_BIT(EXTI_PR, Loc_u8IrqCounter))
+		{
+			continue;
+		}
+		if (!GET_BIT(EXTI_IMR, Loc_u8IrqCounter))
+		{
+			continue;
+		}
 
-	/*2- Clear the First Set Pending Flag*/
-	while (!GET_BIT(EXTI_PR, Loc_u8PendingFlag) && EXTI_PR_PR15 >= Loc_u8PendingFlag)
-	{
-		++Loc_u8PendingFlag;
+		/*Clear Pending Flag*/
+		SET_BIT(EXTI_PR, Loc_u8IrqCounter);
+
+		/*Call Callback Function*/
+		if (Globptr_vdCallbackFunctions[Loc_u8IrqCounter])
+		{
+			Globptr_vdCallbackFunctions[Loc_u8IrqCounter]();
+		}
 	}
-	SET_BIT(EXTI_PR, Loc_u8PendingFlag);
 }
