@@ -235,12 +235,12 @@ void SysTick_Handler(void)
 		CLR_BIT(STK_CTRL, STK_CTRL_TICKINT);
 	}
 
-	/*2- Call Callback Function*/
+	/*2- Clear Interrupt Flag*/
+	Loc_u8Temp = GET_BIT(STK_CTRL, STK_CTRL_COUNTFLAG);
+
+	/*3- Call Callback Function*/
 	if (Globptr_vdCallbackFunction)
 	{
 		Globptr_vdCallbackFunction();
 	}
-
-	/*3- Clear Interrupt Flag*/
-	Loc_u8Temp = GET_BIT(STK_CTRL, STK_CTRL_COUNTFLAG);
 }
