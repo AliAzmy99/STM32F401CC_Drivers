@@ -185,9 +185,9 @@ ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 void EXTI0_IRQHandler(void)
 {
 	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI0)
+	if (Globptr_vdCallbackFunctions[0])
 	{
-		Globptr_vdCallbackFunction_EXTI0();
+		Globptr_vdCallbackFunctions[0]();
 	}
 
 	/*2- Clear Pending Flag*/
@@ -201,9 +201,9 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
 	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI1)
+	if (Globptr_vdCallbackFunctions[1])
 	{
-		Globptr_vdCallbackFunction_EXTI1();
+		Globptr_vdCallbackFunctions[1]();
 	}
 
 	/*2- Clear Pending Flag*/
@@ -217,9 +217,9 @@ void EXTI1_IRQHandler(void)
 void EXTI2_IRQHandler(void)
 {
 	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI2)
+	if (Globptr_vdCallbackFunctions[2])
 	{
-		Globptr_vdCallbackFunction_EXTI2();
+		Globptr_vdCallbackFunctions[2]();
 	}
 
 	/*2- Clear Pending Flag*/
@@ -233,9 +233,9 @@ void EXTI2_IRQHandler(void)
 void EXTI3_IRQHandler(void)
 {
 	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI3)
+	if (Globptr_vdCallbackFunctions[3])
 	{
-		Globptr_vdCallbackFunction_EXTI3();
+		Globptr_vdCallbackFunctions[3]();
 	}
 
 	/*2- Clear Pending Flag*/
@@ -249,9 +249,9 @@ void EXTI3_IRQHandler(void)
 void EXTI4_IRQHandler(void)
 {
 	/*1- Call Callback Function*/
-	if (Globptr_vdCallbackFunction_EXTI4)
+	if (Globptr_vdCallbackFunctions[4])
 	{
-		Globptr_vdCallbackFunction_EXTI4();
+		Globptr_vdCallbackFunctions[4]();
 	}
 
 	/*2- Clear Pending Flag*/
