@@ -27,10 +27,10 @@
  * Func. Name	: SSEG_errInit
  * Description	: This function allows the user to initialize the seven segment display
  * Note			: Connect the display pins A -> G,Dot to the MCU pins 0 -> 6,7 (FIRST_HALF) or 8 -> 14,15 (SECOND_HALF) respectivly
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctDisplayConfig)
+ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
@@ -38,15 +38,15 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctDisplayConfig)
 	u8 Loc_u8LastPin = 0;
 
 	/*Initialize the Common of the Display*/
-	Loc_errReturn = SSEG_errInitCommon(Inprt_strctDisplayConfig);
+	Loc_errReturn = SSEG_errInitCommon(Inprt_strctSsegConfig);
 	RETURN_IF_ERROR(Loc_errReturn);
 	
 	/*Enable Peripheral for the Port that the Display is connected to*/
-	Loc_errReturn = RCC_errEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctDisplayConfig->Loc_u8SegPort]);
+	Loc_errReturn = RCC_errEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->Loc_u8SegPort]);
 	RETURN_IF_ERROR(Loc_errReturn);
 
 	/*Choosing Pin Range*/
-	switch (Inprt_strctDisplayConfig->Loc_u8SegHalf)
+	switch (Inprt_strctSsegConfig->Loc_u8SegHalf)
 	{
 	case SSEG_FIRST_HALF:
 		Loc_u8PinCounter = 0;
@@ -64,37 +64,37 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctDisplayConfig)
 	/*Configure the Pins that the Display is connected to*/
 	for (; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 		{
-			Loc_errReturn = GPIO_errSetPinMode(Inprt_strctDisplayConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
+			Loc_errReturn = GPIO_errSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
 			RETURN_IF_ERROR(Loc_errReturn);
-			Loc_errReturn = GPIO_errSetPinOutputType(Inprt_strctDisplayConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
+			Loc_errReturn = GPIO_errSetPinOutputType(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
 			RETURN_IF_ERROR(Loc_errReturn);
-			Loc_errReturn = GPIO_errSetPinOutputSpeed(Inprt_strctDisplayConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_L);
+			Loc_errReturn = GPIO_errSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_L);
 			RETURN_IF_ERROR(Loc_errReturn);
 		}
 	
-	return SSEG_errClear(Inprt_strctDisplayConfig);
+	return SSEG_errClear(Inprt_strctSsegConfig);
 }
 
 /* 
  * Func. Name	: SSEG_errDisplayNumber
  * Description	: This function allows the user to display a number on the seven segment display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8Number				Options: 0 -> 9
  * I/p Argument	: Copy_u8DotState			Options: DOT_OFF, DOT_ON
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Number, u8 Copy_u8DotState)
+ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Number, u8 Copy_u8DotState)
 {
-	switch (Inprt_strctDisplayConfig->Loc_u8Type)
+	switch (Inprt_strctSsegConfig->Loc_u8Type)
 	{
 	case SSEG_COMM_CATHODE:
 		switch (Copy_u8DotState)
 		{
 		case SSEG_DOT_OFF:
-			return SSEG_errWriteLeds(Inprt_strctDisplayConfig, Glob_u8Num[Copy_u8Number]);
+			return SSEG_errWriteLeds(Inprt_strctSsegConfig, Glob_u8Num[Copy_u8Number]);
 			break;
 		case SSEG_DOT_ON:
-			return SSEG_errWriteLeds(Inprt_strctDisplayConfig, Glob_u8NumwDot[Copy_u8Number]);
+			return SSEG_errWriteLeds(Inprt_strctSsegConfig, Glob_u8NumwDot[Copy_u8Number]);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -106,10 +106,10 @@ ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfi
 		switch (Copy_u8DotState)
 		{
 		case SSEG_DOT_OFF:
-			return SSEG_errWriteLeds(Inprt_strctDisplayConfig, ~Glob_u8Num[Copy_u8Number]);
+			return SSEG_errWriteLeds(Inprt_strctSsegConfig, ~Glob_u8Num[Copy_u8Number]);
 			break;
 		case SSEG_DOT_ON:
-			return SSEG_errWriteLeds(Inprt_strctDisplayConfig, ~Glob_u8NumwDot[Copy_u8Number]);
+			return SSEG_errWriteLeds(Inprt_strctSsegConfig, ~Glob_u8NumwDot[Copy_u8Number]);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -129,19 +129,19 @@ ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfi
 /* 
  * Func. Name	: SSEG_errClear
  * Description	: This function allows the user to clear the seven segment display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctDisplayConfig)
+ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctSsegConfig)
 {
-	switch (Inprt_strctDisplayConfig->Loc_u8CommPort)
+	switch (Inprt_strctSsegConfig->Loc_u8CommPort)
 	{
 	case SSEG_COMM_CATHODE:
-		return SSEG_errWriteLeds(Inprt_strctDisplayConfig, CLEAR);
+		return SSEG_errWriteLeds(Inprt_strctSsegConfig, CLEAR);
 		break;
 
 	case SSEG_COMM_ANODE:
-		return SSEG_errWriteLeds(Inprt_strctDisplayConfig, ~CLEAR);
+		return SSEG_errWriteLeds(Inprt_strctSsegConfig, ~CLEAR);
 		break;
 	default:
 		return INVALID_PARAMETERS;
@@ -155,23 +155,23 @@ ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctDisplayConfig)
 /* 
  * Func. Name	: SSEG_errEnable
  * Description	: This function allows the user to enable or disable the seven segment display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Enable)
+ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enable)
 {
 	/*Enable the Seven Segment from the Common*/
-	switch (Inprt_strctDisplayConfig->Loc_u8Type)
+	switch (Inprt_strctSsegConfig->Loc_u8Type)
 	{
 	case SSEG_COMM_CATHODE:
 		switch (Copy_u8Enable)
 		{
 		case SSEG_DISABLE:
-			return GPIO_errSetPinValueDirectAccess(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_SET);
+			return GPIO_errSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_SET);
 			break;
 		case SSEG_ENABLE:
-			return GPIO_errSetPinValueDirectAccess(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_RST);
+			return GPIO_errSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_RST);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -183,10 +183,10 @@ ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 C
 		switch (Copy_u8Enable)
 		{
 		case SSEG_DISABLE:
-			return GPIO_errSetPinValueDirectAccess(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_RST);
+			return GPIO_errSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_RST);
 			break;
 		case SSEG_ENABLE:
-			return GPIO_errSetPinValueDirectAccess(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_SET);
+			return GPIO_errSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_SET);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -209,11 +209,11 @@ ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 C
 /* 
  * Func. Name	: SSEG_errWriteLeds
  * Description	: This function is used by the module to write set/rst LEDs in the display as needed
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray)
+static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8LedArray)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
@@ -221,7 +221,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayCo
 	u8 Loc_u8LastPin = 0;
 	
 	/*Choosing Pin Range*/
-	switch (Inprt_strctDisplayConfig->Loc_u8SegHalf)
+	switch (Inprt_strctSsegConfig->Loc_u8SegHalf)
 	{
 	case SSEG_FIRST_HALF:
 		Loc_u8PinCounter = 0;
@@ -239,7 +239,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayCo
 	/*Writing LEDs*/
 	for (; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
-		Loc_errReturn = GPIO_errSetPinValue(Inprt_strctDisplayConfig->Loc_u8SegPort, Loc_u8PinCounter, GET_BIT(Copy_u8LedArray, Loc_u8PinCounter));
+		Loc_errReturn = GPIO_errSetPinValue(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GET_BIT(Copy_u8LedArray, Loc_u8PinCounter));
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
 	/*Returning Error Status*/
@@ -249,38 +249,38 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayCo
 /* 
  * Func. Name	: SSEG_errInitHelper
  * Description	: This function is used by the module to initialize the common of the display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayConfig)
+static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctSsegConfig)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
 
 	/*Initialize the Common if it is Connected to the MCU*/
-	if (SSEG_EXTERNAL_COMM > Inprt_strctDisplayConfig->Loc_u8CommPort)
+	if (SSEG_EXTERNAL_COMM > Inprt_strctSsegConfig->Loc_u8CommPort)
 	{
 		/*Enable Peripheral for the Port that the Common is Connected to*/
-		Loc_errReturn = RCC_errEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctDisplayConfig->Loc_u8CommPort]);
+		Loc_errReturn = RCC_errEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->Loc_u8CommPort]);
 		RETURN_IF_ERROR(Loc_errReturn);
 
 		/*Configure the Pin that the Common is Connected to*/
-		Loc_errReturn = GPIO_errSetPinMode(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_MODE_OUTPUT);
+		Loc_errReturn = GPIO_errSetPinMode(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_MODE_OUTPUT);
 		RETURN_IF_ERROR(Loc_errReturn);
-		Loc_errReturn = GPIO_errSetPinOutputType(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_OUTPUT_TYPE_PP);
+		Loc_errReturn = GPIO_errSetPinOutputType(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_OUTPUT_TYPE_PP);
 		RETURN_IF_ERROR(Loc_errReturn);
-		Loc_errReturn = GPIO_errSetPinOutputSpeed(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_OUTPUT_SPEED_L);
+		Loc_errReturn = GPIO_errSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_OUTPUT_SPEED_L);
 		RETURN_IF_ERROR(Loc_errReturn);
 
 		/*Enable the Seven Segment from the Common*/
-		switch (Inprt_strctDisplayConfig->Loc_u8Type)
+		switch (Inprt_strctSsegConfig->Loc_u8Type)
 		{
 		case SSEG_COMM_CATHODE:
-			Loc_errReturn = GPIO_errSetPinValueDirectAccess(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_RST);
+			Loc_errReturn = GPIO_errSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_RST);
 			break;
 		case SSEG_COMM_ANODE:
-			Loc_errReturn = GPIO_errSetPinValueDirectAccess(Inprt_strctDisplayConfig->Loc_u8CommPort, Inprt_strctDisplayConfig->Loc_u8CommPin, GPIO_SET);
+			Loc_errReturn = GPIO_errSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_SET);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -288,7 +288,7 @@ static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctDisplayC
 		}
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
-	else if (SSEG_EXTERNAL_COMM == Inprt_strctDisplayConfig->Loc_u8CommPort)
+	else if (SSEG_EXTERNAL_COMM == Inprt_strctSsegConfig->Loc_u8CommPort)
 	{
 		/*Do nothing*/
 	}

@@ -75,37 +75,37 @@ typedef struct{
  * Func. Name	: SSEG_errInit
  * Description	: This function allows the user to initialize the seven segment display
  * Note			: Connect the display pins A -> G,Dot to the MCU pins 0 -> 6,7 (FIRST_HALF) or 8 -> 14,15 (SECOND_HALF) respectivly
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctDisplayConfig);
+ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig);
 
 /* 
  * Func. Name	: SSEG_errDisplayNumber
  * Description	: This function allows the user to display a number on the seven segment display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8Number				Options: 0 -> 9
  * I/p Argument	: Copy_u8DotState			Options: DOT_OFF, DOT_ON
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Number, u8 Copy_u8DotState);
+ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Number, u8 Copy_u8DotState);
 
 /* 
  * Func. Name	: SSEG_errClear
  * Description	: This function allows the user to clear the seven segment display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctDisplayConfig);
+ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctSsegConfig);
 
 /* 
  * Func. Name	: SSEG_errEnable
  * Description	: This function allows the user to enable or disable the seven segment display
- * I/p Argument	: Inprt_strctDisplayConfig
+ * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
  * Return		: Error status of function
  */
-ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8Enable);
+ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enable);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
