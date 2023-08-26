@@ -27,15 +27,6 @@
 #define NVIC_IABR_FIRST_ADDRESS		((volatile u32*)0xE000F100)
 #define NVIC_IPR_FIRST_ADDRESS		((volatile u32*)0xE000F200)
 #define NVIC_STIR_FIRST_ADDRESS		((volatile u32*)0xE000FC00)
-
-	/*SCB*/
-		/*Registers*/
-#define SCB_AIRCR				(*(volatile u32*)0xE000ED0C)
-		/*Bits*/
-			/*AIRCR*/
-#define SCB_AIRCR_PRIGROUP		(8u)
-		/*Keys*/
-#define VECTKEY					(0x5FA0000)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
