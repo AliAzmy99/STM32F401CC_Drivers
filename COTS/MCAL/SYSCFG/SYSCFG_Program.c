@@ -33,37 +33,23 @@
  */
 ErrorStatus SYSCFG_errSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port)
 {
+	/*Variables Definitions*/
+	u8 Loc_u8RegisterNum = 0;
+	u8 Loc_u8BitNum = 0;
+
 	/*I/p Validation*/
-	if ((SYSCFG_PORT_C == Copy_u8Port && SYSCFG_LINE_13 > Copy_u8Line) || SYSCFG_NOT_A_PORT <= Copy_u8Line)
+	if ((SYSCFG_PORT_C == Copy_u8Port && SYSCFG_LINE_13 > Copy_u8Line) || 15 < Copy_u8Line || SYSCFG_NOT_A_PORT <= Copy_u8Port)
 	{
 		return INVALID_PARAMETERS;
 	}
 
-	/*Choosing Port*/
-	if (SYSCFG_LINE_3 >= Copy_u8Line)
-	{
-		CLR_NIBBLE(SYSCFG_EXTICR1, Copy_u8Line << 2);
-		SYSCFG_EXTICR1 |= Copy_u8Port << (Copy_u8Line << 2);
-	}
-	else if (SYSCFG_LINE_7 >= Copy_u8Line)
-	{
-		CLR_NIBBLE(SYSCFG_EXTICR2, (Copy_u8Line - 4) << 2);
-		SYSCFG_EXTICR2 |= Copy_u8Port << ((Copy_u8Line - 4) << 2);
-	}
-	else if (SYSCFG_LINE_11 >= Copy_u8Line)
-	{
-		CLR_NIBBLE(SYSCFG_EXTICR3, (Copy_u8Line - 8) << 2);
-		SYSCFG_EXTICR3 |= Copy_u8Port << ((Copy_u8Line - 8) << 2);
-	}
-	else if (SYSCFG_LINE_15 >= Copy_u8Line)
-	{
-		CLR_NIBBLE(SYSCFG_EXTICR4, (Copy_u8Line - 12) << 2);
-		SYSCFG_EXTICR4 |= Copy_u8Port << ((Copy_u8Line - 12) << 2);
-	}
-	else
-	{
-		return INVALID_PARAMETERS;
-	}
+	/*Choosing Register and Bit*/
+	Loc_u8RegisterNum = Copy_u8Line >> 2;
+	Loc_u8BitNum = (Copy_u8Line - (Loc_u8RegisterNum << 2)) << 2;
+
+	/*Setting Port*/
+	CLR_NIBBLE(SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum], Loc_u8BitNum);
+	SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum] |= Copy_u8Port << Loc_u8BitNum;
 
 	/*Returning Error Status*/
 	return NO_ERROR;

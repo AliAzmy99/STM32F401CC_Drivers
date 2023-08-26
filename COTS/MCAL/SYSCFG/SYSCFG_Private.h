@@ -12,10 +12,8 @@
 
 /*Private Macros*/
 	/*Registers*/
-#define SYSCFG_EXTICR1				(*(volatile u32*)0x40013808)
-#define SYSCFG_EXTICR2				(*(volatile u32*)0x4001380C)
-#define SYSCFG_EXTICR3				(*(volatile u32*)0x40013810)
-#define SYSCFG_EXTICR4				(*(volatile u32*)0x40013814)
+		/*First Addresses*/
+#define SYSCFG_EXTICR_FIRST_ADDRESS	((volatile u32*)0x40013808)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
