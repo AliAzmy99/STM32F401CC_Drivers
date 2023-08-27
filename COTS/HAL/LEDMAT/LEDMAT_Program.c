@@ -18,8 +18,8 @@
 
 	/*Include Needed LEDMAT Files*/
 #include "LEDMAT_Interface.h"
-#include "LEDMAT_Private.h"
 #include "LEDMAT_Config.h"
+#include "LEDMAT_Private.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 
@@ -35,27 +35,6 @@ ErrorStatus LEDMAT_errInit(void)
 	ErrorStatus Loc_errReturn = NO_ERROR;
 	u8 Loc_u8ColumnLastPin = COLUMN_FIRST_PIN + 7;
 	u8 Loc_u8RowLastPin = ROW_FIRST_PIN + 7;
-
-	/*Configurations Validation*/
-	if (GPIO_PORT_A != COLUMN_PORT && GPIO_PORT_B != COLUMN_PORT)
-	{
-		return INVALID_CONFIGS;
-	}
-	if (GPIO_PORT_A != ROW_PORT && GPIO_PORT_B != ROW_PORT)
-	{
-		return INVALID_CONFIGS;
-	}
-	if (GPIO_PIN_8 < COLUMN_FIRST_PIN || GPIO_PIN_8 < ROW_FIRST_PIN)
-	{
-		return INVALID_CONFIGS;
-	}
-	if (COLUMN_PORT == ROW_PORT)
-	{
-		if (!((0 == COLUMN_FIRST_PIN && 8 == ROW_FIRST_PIN) || (8 == COLUMN_FIRST_PIN && 0 == ROW_FIRST_PIN)))
-		{
-			return INVALID_CONFIGS;
-		}
-	}
 
 	/*Enable Peripheral for the Ports that the Matrix is connected to*/
 	if (GPIO_PORT_A == COLUMN_PORT || GPIO_PORT_A == ROW_PORT)
