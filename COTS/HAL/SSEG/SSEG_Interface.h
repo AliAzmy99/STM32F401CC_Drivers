@@ -58,8 +58,8 @@
 typedef struct{
 	u8 Loc_u8SegPort;
 		/*The port the seven segment is connected to.					Options: SSEG_PORT_A -> SSEG_PORT_B*/
-	u8 Loc_u8SegHalf;
-		/*The half of the port that the seven segment is connected to.	Options: SSEG_FIRST_HALF -> SSEG_SECOND_HALF*/
+	u8 Loc_u8SegFirstPin;
+		/*The first pin that the seven segment is connected to.			Options: SSEG_PIN_0 -> SSEG_PIN_8*/
 	u8 Loc_u8Type;
 		/*Type of seven segment.										Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, SSEG_EXTERNAL_COMM*/
 	u8 Loc_u8CommPort;
@@ -74,7 +74,6 @@ typedef struct{
 /* 
  * Func. Name	: SSEG_errInit
  * Description	: This function allows the user to initialize the seven segment display
- * Note			: Connect the display pins A -> G,Dot to the MCU pins 0 -> 6,7 (FIRST_HALF) or 8 -> 14,15 (SECOND_HALF) respectivly
  * I/p Argument	: Inprt_strctSsegConfig
  * Return		: Error status of function
  */

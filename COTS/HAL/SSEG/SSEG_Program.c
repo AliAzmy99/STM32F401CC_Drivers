@@ -26,7 +26,6 @@
 /* 
  * Func. Name	: SSEG_errInit
  * Description	: This function allows the user to initialize the seven segment display
- * Note			: Connect the display pins A -> G,Dot to the MCU pins 0 -> 6,7 (FIRST_HALF) or 8 -> 14,15 (SECOND_HALF) respectivly
  * I/p Argument	: Inprt_strctSsegConfig
  * Return		: Error status of function
  */
@@ -34,8 +33,13 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
-	u8 Loc_u8PinCounter = 0;
-	u8 Loc_u8LastPin = 0;
+	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
+
+	/*I/p Validation*/
+	if (SSEG_PIN_15 < Loc_u8LastPin)
+	{
+		return INVALID_PARAMETERS;
+	}
 
 	/*Initialize the Common of the Display*/
 	Loc_errReturn = SSEG_errInitCommon(Inprt_strctSsegConfig);
@@ -45,24 +49,8 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig)
 	Loc_errReturn = RCC_errEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->Loc_u8SegPort]);
 	RETURN_IF_ERROR(Loc_errReturn);
 
-	/*Choosing Pin Range*/
-	switch (Inprt_strctSsegConfig->Loc_u8SegHalf)
-	{
-	case SSEG_FIRST_HALF:
-		Loc_u8PinCounter = 0;
-		Loc_u8LastPin = 7;
-		break;
-	case SSEG_SECOND_HALF:
-		Loc_u8PinCounter = 8;
-		Loc_u8LastPin = 15;
-		break;
-	default:
-		return INVALID_PARAMETERS;
-		break;
-	}
-
 	/*Configure the Pins that the Display is connected to*/
-	for (; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
+	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->Loc_u8SegFirstPin; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
 		Loc_errReturn = GPIO_errSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
 		RETURN_IF_ERROR(Loc_errReturn);
@@ -219,30 +207,21 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfi
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
 	u8 Loc_u8PinCounter = 0;
-	u8 Loc_u8LastPin = 0;
-	
-	/*Choosing Pin Range*/
-	switch (Inprt_strctSsegConfig->Loc_u8SegHalf)
-	{
-	case SSEG_FIRST_HALF:
-		Loc_u8PinCounter = 0;
-		Loc_u8LastPin = 7;
-		break;
-	case SSEG_SECOND_HALF:
-		Loc_u8PinCounter = 8;
-		Loc_u8LastPin = 15;
-		break;
-	default:
-		return INVALID_PARAMETERS;
-		break;
-	}
+	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
 
+	/*I/p Validation*/
+	if (SSEG_PIN_15 < Loc_u8LastPin)
+	{
+		return INVALID_PARAMETERS;
+	}
+	
 	/*Writing LEDs*/
-	for (; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
+	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->Loc_u8SegFirstPin; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
 		Loc_errReturn = GPIO_errSetPinValue(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GET_BIT(Copy_u8LedArray, Loc_u8PinCounter));
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
+	
 	/*Returning Error Status*/
 	return NO_ERROR;
 }
