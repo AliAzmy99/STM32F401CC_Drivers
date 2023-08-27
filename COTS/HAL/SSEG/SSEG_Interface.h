@@ -46,6 +46,7 @@
 #define SSEG_PIN_13			GPIO_PIN_13
 #define SSEG_PIN_14			GPIO_PIN_14
 #define SSEG_PIN_15			GPIO_PIN_15
+#define SSEG_NOT_A_PIN		GPIO_NOT_A_PIN
 
 	/*Port Half Options*/
 #define SSEG_FIRST_HALF		(0u)

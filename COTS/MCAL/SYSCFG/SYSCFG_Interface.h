@@ -34,6 +34,7 @@
 #define SYSCFG_LINE_13			EXTI_LINE_13
 #define SYSCFG_LINE_14			EXTI_LINE_14
 #define SYSCFG_LINE_15			EXTI_LINE_15
+#define SYSCFG_NOT_A_LINE		EXTI_NOT_A_LINE
 /*__________________________________________________________________________________________________________________________________________*/
 
 

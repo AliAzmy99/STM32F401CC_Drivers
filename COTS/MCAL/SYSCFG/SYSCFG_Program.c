@@ -38,7 +38,7 @@ ErrorStatus SYSCFG_errSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port)
 	u8 Loc_u8BitNum = 0;
 
 	/*I/p Validation*/
-	if ((SYSCFG_PORT_C == Copy_u8Port && SYSCFG_LINE_13 > Copy_u8Line) || 15 < Copy_u8Line || SYSCFG_NOT_A_PORT <= Copy_u8Port)
+	if ((SYSCFG_PORT_C == Copy_u8Port && SYSCFG_LINE_13 > Copy_u8Line) || SYSCFG_NOT_A_LINE <= Copy_u8Line || SYSCFG_NOT_A_PORT <= Copy_u8Port)
 	{
 		return INVALID_PARAMETERS;
 	}

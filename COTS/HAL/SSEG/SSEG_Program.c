@@ -36,7 +36,7 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig)
 	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
 
 	/*I/p Validation*/
-	if (SSEG_PIN_15 < Loc_u8LastPin)
+	if (SSEG_NOT_A_PIN <= Loc_u8LastPin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -210,7 +210,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfi
 	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
 
 	/*I/p Validation*/
-	if (SSEG_PIN_15 < Loc_u8LastPin)
+	if (SSEG_NOT_A_PIN <= Loc_u8LastPin)
 	{
 		return INVALID_PARAMETERS;
 	}

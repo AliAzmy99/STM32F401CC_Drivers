@@ -32,7 +32,7 @@
 ErrorStatus EXTI_errEnableInterrupt(u8 Copy_u8InterruptLine)
 {
 	/*I/p validation*/
-	if (15 < Copy_u8InterruptLine)
+	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -53,7 +53,7 @@ ErrorStatus EXTI_errEnableInterrupt(u8 Copy_u8InterruptLine)
 ErrorStatus EXTI_errDisableInterrupt(u8 Copy_u8InterruptLine)
 {
 	/*I/p validation*/
-	if (15 < Copy_u8InterruptLine)
+	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -74,7 +74,7 @@ ErrorStatus EXTI_errDisableInterrupt(u8 Copy_u8InterruptLine)
 ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_vdCallbackFunction)(void))
 {
 	/*I/p validation*/
-	if (15 < Copy_u8InterruptLine)
+	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -99,7 +99,7 @@ ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_v
 ErrorStatus EXTI_errEnableEvent(u8 Copy_u8EventLine)
 {
 	/*I/p validation*/
-	if (15 < Copy_u8EventLine)
+	if (EXTI_NOT_A_LINE <= Copy_u8EventLine)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -120,7 +120,7 @@ ErrorStatus EXTI_errEnableEvent(u8 Copy_u8EventLine)
 ErrorStatus EXTI_errDisableEvent(u8 Copy_u8EventLine)
 {
 	/*I/p validation*/
-	if (15 < Copy_u8EventLine)
+	if (EXTI_NOT_A_LINE <= Copy_u8EventLine)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -142,7 +142,7 @@ ErrorStatus EXTI_errDisableEvent(u8 Copy_u8EventLine)
 ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 {
 	/*I/p validation*/
-	if (15 < Copy_u8Line)
+	if (EXTI_NOT_A_LINE <= Copy_u8Line)
 	{
 		return INVALID_PARAMETERS;
 	}

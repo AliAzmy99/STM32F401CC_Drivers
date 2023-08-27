@@ -34,6 +34,7 @@
 #define EXTI_LINE_13		GPIO_PIN_13
 #define EXTI_LINE_14		GPIO_PIN_14
 #define EXTI_LINE_15		GPIO_PIN_15
+#define EXTI_NOT_A_LINE		GPIO_NOT_A_PIN
 /*__________________________________________________________________________________________________________________________________________*/
 
 

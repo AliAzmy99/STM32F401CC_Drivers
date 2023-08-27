@@ -34,7 +34,7 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
 	volatile u32* Locptr_u32MODERxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -98,7 +98,7 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pi
 	volatile u32* Locptr_u32OTYPERxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -152,7 +152,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8P
 	volatile u32* Locptr_u32OSPEEDRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -216,7 +216,7 @@ ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pin
 	volatile u32* Locptr_u32PUPDRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -276,7 +276,7 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValu
 	volatile u32* Locptr_u32ODRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -330,7 +330,7 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Co
 	volatile u32* Locptr_u32BSRRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -384,7 +384,7 @@ ErrorStatus GPIO_errGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinV
 	volatile u32* Locptr_u32IDRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_PIN_15 < Copy_u8Pin)
+	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
 		return INVALID_PARAMETERS;
 	}
