@@ -10,41 +10,6 @@
 #define RCC_INTERFACE_H
 
 
-/*Public Macros*/
-	/*Peripheral ID Options*/
-#define PERIPHERAL_USBFS	(0u)
-#define PERIPHERAL_DMA1		(1u)
-#define PERIPHERAL_DMA2		(2u)
-#define PERIPHERAL_CRC		(3u)
-#define PERIPHERAL_GPIOA	(4u)
-#define PERIPHERAL_GPIOB	(5u)
-#define PERIPHERAL_GPIOC	(6u)
-#define PERIPHERAL_TIM1		(7u)
-#define PERIPHERAL_TIM2		(8u)
-#define PERIPHERAL_TIM3		(9u)
-#define PERIPHERAL_TIM4		(10u)
-#define PERIPHERAL_TIM5		(11u)
-#define PERIPHERAL_TIM9		(12u)
-#define PERIPHERAL_TIM10	(13u)
-#define PERIPHERAL_TIM11	(14u)
-#define PERIPHERAL_SYSCFG	(15u)
-#define PERIPHERAL_SPI1		(16u)
-#define PERIPHERAL_SPI2		(17u)
-#define PERIPHERAL_SPI3		(18u)
-#define PERIPHERAL_SPI4		(19u)
-#define PERIPHERAL_SDIO		(20u)
-#define PERIPHERAL_ADC1		(21u)
-#define PERIPHERAL_USART1	(22u)
-#define PERIPHERAL_USART2	(23u)
-#define PERIPHERAL_USART6	(24u)
-#define PERIPHERAL_PWR		(25u)
-#define PERIPHERAL_I2C1		(26u)
-#define PERIPHERAL_I2C2		(27u)
-#define PERIPHERAL_I2C3		(28u)
-#define PERIPHERAL_WWDG		(29u)
-/*__________________________________________________________________________________________________________________________________________*/
-
-
 /*Types Definitions*/
 	/*Peripheral ID Type*/
 typedef enum
