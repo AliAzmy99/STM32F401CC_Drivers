@@ -25,7 +25,7 @@
 /*Public Functions Definitions*/
 /* 
  * Func. Name	: EXTI_errEnableInterrupt
- * Description	: This function allows the user to enable a certain interrupt.
+ * Description	: This function allows the user to enable a certain interrupt
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
  * Return		: Error status of function
  */
@@ -46,7 +46,7 @@ ErrorStatus EXTI_errEnableInterrupt(u8 Copy_u8InterruptLine)
 
 /* 
  * Func. Name	: EXTI_errDisableInterrupt
- * Description	: This function allows the user to disable a certain interrupt.
+ * Description	: This function allows the user to disable a certain interrupt
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
  * Return		: Error status of function
  */
@@ -67,7 +67,7 @@ ErrorStatus EXTI_errDisableInterrupt(u8 Copy_u8InterruptLine)
 
 /* 
  * Func. Name	: EXTI_errSetCallbackFunction
- * Description	: This function allows the user set the callback function that will be called when a certain interrupt line triggers its ISR.
+ * Description	: This function allows the user set the callback function that will be called when a certain interrupt line triggers its ISR
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
  * Return		: Error status of function
  */
@@ -92,7 +92,7 @@ ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_v
 
 /* 
  * Func. Name	: EXTI_errEnableEvent
- * Description	: This function allows the user to enable a certain event.
+ * Description	: This function allows the user to enable a certain event
  * I/p Argument	: Copy_u8EventLine					Options: EXTI_LINE_0 -> EXTI_LINE_15
  * Return		: Error status of function
  */
@@ -113,7 +113,7 @@ ErrorStatus EXTI_errEnableEvent(u8 Copy_u8EventLine)
 
 /* 
  * Func. Name	: EXTI_errDisableEvent
- * Description	: This function allows the user to disable a certain event.
+ * Description	: This function allows the user to disable a certain event
  * I/p Argument	: Copy_u8EventLine					Options: EXTI_LINE_0 -> EXTI_LINE_15
  * Return		: Error status of function
  */
@@ -134,7 +134,7 @@ ErrorStatus EXTI_errDisableEvent(u8 Copy_u8EventLine)
 
 /* 
  * Func. Name	: EXTI_errSelectEdgeTriggers
- * Description	: This function allows the user to choose which edges trigger a certain interrupt/event line.
+ * Description	: This function allows the user to choose which edges trigger a certain interrupt/event line
  * I/p Argument	: Copy_u8Line						Options: EXTI_LINE_0 -> EXTI_LINE_15
  * I/p Argument	: Copy_u8EdgeTrigger				Options: EXTI_RISING_EDGE, EXTI_FALLING_EDGE, EXTI_DUAL_EDGE, EXTI_NO_EDGE
  * Return		: Error status of function
@@ -180,7 +180,7 @@ ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 /*Interrupt Service Routines Definitions*/
 /*
  * Func. Name	: EXTI0_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI0_IRQHandler(void)
 {
@@ -196,7 +196,7 @@ void EXTI0_IRQHandler(void)
 
 /*
  * Func. Name	: EXTI1_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI1_IRQHandler(void)
 {
@@ -212,7 +212,7 @@ void EXTI1_IRQHandler(void)
 
 /*
  * Func. Name	: EXTI2_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI2_IRQHandler(void)
 {
@@ -228,7 +228,7 @@ void EXTI2_IRQHandler(void)
 
 /*
  * Func. Name	: EXTI3_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI3_IRQHandler(void)
 {
@@ -244,7 +244,7 @@ void EXTI3_IRQHandler(void)
 
 /*
  * Func. Name	: EXTI4_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI4_IRQHandler(void)
 {
@@ -260,7 +260,7 @@ void EXTI4_IRQHandler(void)
 
 /*
  * Func. Name	: EXTI9_5_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI9_5_IRQHandler(void)
 {
@@ -286,7 +286,7 @@ void EXTI9_5_IRQHandler(void)
 
 /*
  * Func. Name	: EXTI15_10_IRQHandler
- * Description	: This function calls the callback function and clears the interrupt flag.
+ * Description	: This function calls the callback function and clears the interrupt flag
  */
 void EXTI15_10_IRQHandler(void)
 {

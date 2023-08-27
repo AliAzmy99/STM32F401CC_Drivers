@@ -57,15 +57,15 @@
 	/*Seven Segment Configuration Structure*/
 typedef struct{
 	u8 Loc_u8SegPort;
-		/*The port the seven segment is connected to.					Options: SSEG_PORT_A -> SSEG_PORT_B*/
+		/*The port the seven segment is connected to					Options: SSEG_PORT_A -> SSEG_PORT_B*/
 	u8 Loc_u8SegFirstPin;
-		/*The first pin that the seven segment is connected to.			Options: SSEG_PIN_0 -> SSEG_PIN_8*/
+		/*The first pin that the seven segment is connected to			Options: SSEG_PIN_0 -> SSEG_PIN_8*/
 	u8 Loc_u8Type;
-		/*Type of seven segment.										Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, SSEG_EXTERNAL_COMM*/
+		/*Type of seven segment											Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, SSEG_EXTERNAL_COMM*/
 	u8 Loc_u8CommPort;
-		/*The port the seven segment common is connected to.			Options: SSEG_PORT_A -> SSEG_PORT_C*/
+		/*The port the seven segment common is connected to				Options: SSEG_PORT_A -> SSEG_PORT_C*/
 	u8 Loc_u8CommPin;
-		/*The pin the seven segment common is connected to.				Options: SSEG_PIN_0 -> SSEG_PIN_15*/
+		/*The pin the seven segment common is connected to				Options: SSEG_PIN_0 -> SSEG_PIN_15*/
 }SsegConfig_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
