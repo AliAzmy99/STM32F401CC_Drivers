@@ -39,12 +39,12 @@ ErrorStatus LEDMAT_errInit(void)
 	/*Enable Peripheral for the Ports that the Matrix is connected to*/
 	if (GPIO_PORT_A == COLUMN_PORT || GPIO_PORT_A == ROW_PORT)
 	{
-		Loc_errReturn = RCC_errEnablePeripheralClk(GPIOA);
+		Loc_errReturn = RCC_errEnablePeripheralClk(RCC_PERIPHERAL_GPIOA);
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
 	if (GPIO_PORT_B == COLUMN_PORT || GPIO_PORT_B == ROW_PORT)
 	{
-		Loc_errReturn = RCC_errEnablePeripheralClk(GPIOB);
+		Loc_errReturn = RCC_errEnablePeripheralClk(RCC_PERIPHERAL_GPIOB);
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
 
