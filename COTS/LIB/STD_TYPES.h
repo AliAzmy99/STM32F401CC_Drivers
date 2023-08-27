@@ -31,7 +31,7 @@ typedef long double				f128;
 	/*Defining Different Error Types*/
 typedef enum
 {
-	NO_ERROR,
+	NO_ERROR,		/*Must remain the first element*/
 	INVALID_PARAMETERS,
 	INVALID_CONFIGS,
 	NULL_POINTER_PASSED,
