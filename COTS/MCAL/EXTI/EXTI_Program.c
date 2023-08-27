@@ -14,15 +14,36 @@
 
 	/*Include Needed MCAL Files*/
 #include "../GPIO/GPIO_Interface.h"
+#include "../SYSCFG/SYSCFG_Interface.h"
 
 	/*Include Needed EXTI Files*/
 #include "EXTI_Interface.h"
-#include "EXTI_Private.h"
 #include "EXTI_Config.h"
+#include "EXTI_Private.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 
 /*Public Functions Definitions*/
+/* 
+ * Func. Name	: EXTI_errInit
+ * Description	: This function allows the user to initialize the external interrupts/events controller
+ * Return		: Error status of function
+ */
+ErrorStatus EXTI_errInit(void)
+{
+	/*Variables Definitions*/
+	ErrorStatus Loc_errReturn = NO_ERROR;
+
+	for (u8 Loc_u8LineCounter = 0; EXTI_NOT_A_LINE > Loc_u8LineCounter; ++Loc_u8LineCounter)
+	{
+		Loc_errReturn = SYSCFG_errSetExtiLinePort(Loc_u8LineCounter, Glob_u8LinePorts[Loc_u8LineCounter]);
+		RETURN_IF_ERROR(Loc_errReturn);
+	}
+	
+	/*Returning Error Status*/
+	return NO_ERROR;
+}
+
 /* 
  * Func. Name	: EXTI_errEnableInterrupt
  * Description	: This function allows the user to enable a certain interrupt

@@ -40,7 +40,8 @@
 
 
 /*Private Global Variables Definitions*/
-static void (* Globptr_vdCallbackFunctions[16])(void) = NULL;		/*The callback functions called by EXTI's ISRs*/
+static void (* Globptr_vdCallbackFunctions[16])(void) = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};		/*The callback functions called by EXTI's ISRs*/
+static u8 Glob_u8LinePorts[EXTI_NOT_A_LINE] = {LINE_0_PORT, LINE_1_PORT, LINE_2_PORT, LINE_3_PORT, LINE_4_PORT, LINE_5_PORT, LINE_6_PORT, LINE_7_PORT, LINE_8_PORT, LINE_9_PORT, LINE_10_PORT, LINE_11_PORT, LINE_12_PORT, LINE_13_PORT, LINE_14_PORT, LINE_15_PORT};	/*The ports of the EXTI lines*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 

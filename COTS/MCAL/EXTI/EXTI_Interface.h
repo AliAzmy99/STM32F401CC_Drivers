@@ -40,6 +40,13 @@
 
 /*Public Functions Declarations*/
 /* 
+ * Func. Name	: EXTI_errInit
+ * Description	: This function allows the user to initialize the external interrupts/events controller
+ * Return		: Error status of function
+ */
+ErrorStatus EXTI_errInit(void);
+
+/* 
  * Func. Name	: EXTI_errEnableInterrupt
  * Description	: This function allows the user to enable a certain interrupt
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
