@@ -51,7 +51,7 @@ static u8 Glob_u8Peripheral[3]={PERIPHERAL_GPIOA, PERIPHERAL_GPIOB, PERIPHERAL_G
 /*Private Functions Declarations*/
 /* 
  * Func. Name	: SSEG_errWriteLeds
- * Description	: This function is used by the module to write set/rst LEDs in the display as needed
+ * Description	: This function is used by the driver to write set/rst LEDs in the display as needed
  * I/p Argument	: Inprt_strctDisplayConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
@@ -60,7 +60,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayCo
 
 /* 
  * Func. Name	: SSEG_errInitHelper
- * Description	: This function is used by the module to initialize the common of the display
+ * Description	: This function is used by the driver to initialize the common of the display
  * I/p Argument	: Inprt_strctDisplayConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function

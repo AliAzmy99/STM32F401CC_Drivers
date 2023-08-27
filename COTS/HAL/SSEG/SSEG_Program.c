@@ -197,7 +197,7 @@ ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy
 /*Private Functions Definitions*/
 /* 
  * Func. Name	: SSEG_errWriteLeds
- * Description	: This function is used by the module to write set/rst LEDs in the display as needed
+ * Description	: This function is used by the driver to write set/rst LEDs in the display as needed
  * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
@@ -228,7 +228,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfi
 
 /* 
  * Func. Name	: SSEG_errInitHelper
- * Description	: This function is used by the module to initialize the common of the display
+ * Description	: This function is used by the driver to initialize the common of the display
  * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
