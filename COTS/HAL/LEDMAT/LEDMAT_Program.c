@@ -12,9 +12,9 @@
 #include "../../LIB/MACROS.h"
 
 	/*Include Needed MCAL Files*/
-#include "RCC_Interface.h"
-#include "GPIO_Interface.h"
-#include "STK_Interface.h"
+#include "../../MCAL/RCC/RCC_Interface.h"
+#include "../../MCAL/GPIO/GPIO_Interface.h"
+#include "../../MCAL/STK/STK_Interface.h"
 
 	/*Include Needed LEDMAT Files*/
 #include "LEDMAT_Interface.h"
