@@ -45,6 +45,45 @@
 /*__________________________________________________________________________________________________________________________________________*/
 
 
+/*Types Definitions*/
+	/*Peripheral ID Type*/
+typedef enum
+{
+	USBFS,
+	DMA1,
+	DMA2,
+	CRC,
+	GPIOA,
+	GPIOB,
+	GPIOC,
+	TIM1,
+	TIM2,
+	TIM3,
+	TIM4,
+	TIM5,
+	TIM9,
+	TIM10,
+	TIM11,
+	SYSCFG,
+	SPI1,
+	SPI2,
+	SPI3,
+	SPI4,
+	SDIO,
+	ADC1,
+	USART1,
+	USART2,
+	USART6,
+	PWR,
+	I2C1,
+	I2C2,
+	I2C3,
+	WWDG,
+	NOT_A_PERIPHERAL	/*Must remain the last element*/
+}PeripheralId_type;
+/*__________________________________________________________________________________________________________________________________________*/
+
+
 /*Public Functions Declarations*/
 /* 
  * Func. Name	: RCC_errInitSysClk
@@ -56,18 +95,18 @@ ErrorStatus RCC_errInitSysClk(void);
 /* 
  * Func. Name	: RCC_voidEnablePeripheralClk
  * Description	: This function allows the user to enable the clk of a certian peripheral
- * I/p Argument	: Copy_u8Peripheral		Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * I/p Argument	: Copy_enmPeripheralId			Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
  * Return		: Error status of function
  */
-ErrorStatus RCC_errEnablePeripheralClk(u8 Copy_u8Peripheral);
+ErrorStatus RCC_errEnablePeripheralClk(PeripheralId_type Copy_enmPeripheralId);
 
 /* 
  * Func. Name	: RCC_errDisablePeripheralClk
  * Description	: This function allows the user to disable the clk of a certian peripheral
- * I/p Argument	: Copy_u8Peripheral		Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
+ * I/p Argument	: Copy_enmPeripheralId			Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
  * Return		: Error status of function
  */
-ErrorStatus RCC_errDisablePeripheralClk(u8 Copy_u8Peripheral);
+ErrorStatus RCC_errDisablePeripheralClk(PeripheralId_type Copy_enmPeripheralId);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
