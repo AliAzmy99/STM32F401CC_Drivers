@@ -42,7 +42,7 @@ ErrorStatus NVIC_errInit(void)
 ErrorStatus NVIC_errEnableInterrupt(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
-	if(NOT_AN_IRQ <= Copy_enmIrqId)
+	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -63,7 +63,7 @@ ErrorStatus NVIC_errEnableInterrupt(IrqId_type Copy_enmIrqId)
 ErrorStatus NVIC_errDisableInterrupt(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
-	if(NOT_AN_IRQ <= Copy_enmIrqId)
+	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -84,7 +84,7 @@ ErrorStatus NVIC_errDisableInterrupt(IrqId_type Copy_enmIrqId)
 ErrorStatus NVIC_errSetPending(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
-	if(NOT_AN_IRQ <= Copy_enmIrqId)
+	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -105,7 +105,7 @@ ErrorStatus NVIC_errSetPending(IrqId_type Copy_enmIrqId)
 ErrorStatus NVIC_errClearPending(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
-	if(NOT_AN_IRQ <= Copy_enmIrqId)
+	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
@@ -132,7 +132,7 @@ ErrorStatus NVIC_errSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 co
 	u8 Loc_u8PriorityFirstBit = 0;
 
 	/*I/p Validation*/
-	if(NOT_AN_IRQ >= Copy_enmIrqId)
+	if(NVIC_NOT_AN_IRQ >= Copy_enmIrqId)
 	{
 		return INVALID_PARAMETERS;
 	}
