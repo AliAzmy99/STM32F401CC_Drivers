@@ -206,7 +206,6 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfi
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
-	u8 Loc_u8PinCounter = 0;
 	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
 
 	/*I/p Validation*/
