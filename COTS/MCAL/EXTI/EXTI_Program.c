@@ -268,11 +268,7 @@ void EXTI9_5_IRQHandler(void)
 	for (u8 Loc_u8IrqCounter = 5; 9 >= Loc_u8IrqCounter; ++Loc_u8IrqCounter)
 	{
 		/*Check if Interrupt is Pending and Enabled*/
-		if (!GET_BIT(EXTI_PR, Loc_u8IrqCounter))
-		{
-			continue;
-		}
-		if (!GET_BIT(EXTI_IMR, Loc_u8IrqCounter))
+		if (!GET_BIT(EXTI_PR, Loc_u8IrqCounter) || !GET_BIT(EXTI_IMR, Loc_u8IrqCounter))
 		{
 			continue;
 		}
@@ -298,11 +294,7 @@ void EXTI15_10_IRQHandler(void)
 	for (u8 Loc_u8IrqCounter = 10; 15 >= Loc_u8IrqCounter; ++Loc_u8IrqCounter)
 	{
 		/*Check if Interrupt is Pending and Enabled*/
-		if (!GET_BIT(EXTI_PR, Loc_u8IrqCounter))
-		{
-			continue;
-		}
-		if (!GET_BIT(EXTI_IMR, Loc_u8IrqCounter))
+		if (!GET_BIT(EXTI_PR, Loc_u8IrqCounter) || !GET_BIT(EXTI_IMR, Loc_u8IrqCounter))
 		{
 			continue;
 		}
