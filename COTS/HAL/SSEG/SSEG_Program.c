@@ -63,15 +63,16 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig)
 
 	/*Configure the Pins that the Display is connected to*/
 	for (; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
-		{
-			Loc_errReturn = GPIO_errSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
-			RETURN_IF_ERROR(Loc_errReturn);
-			Loc_errReturn = GPIO_errSetPinOutputType(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
-			RETURN_IF_ERROR(Loc_errReturn);
-			Loc_errReturn = GPIO_errSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_L);
-			RETURN_IF_ERROR(Loc_errReturn);
-		}
+	{
+		Loc_errReturn = GPIO_errSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
+		RETURN_IF_ERROR(Loc_errReturn);
+		Loc_errReturn = GPIO_errSetPinOutputType(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
+		RETURN_IF_ERROR(Loc_errReturn);
+		Loc_errReturn = GPIO_errSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_L);
+		RETURN_IF_ERROR(Loc_errReturn);
+	}
 	
+	/*Cleating Display*/
 	return SSEG_errClear(Inprt_strctSsegConfig);
 }
 
