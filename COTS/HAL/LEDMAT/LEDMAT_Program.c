@@ -48,6 +48,10 @@ ErrorStatus LEDMAT_errInit(void)
 		RETURN_IF_ERROR(Loc_errReturn);
 	}
 
+	/*Initializing the System Timer*/
+	Loc_errReturn = STK_errInit();
+	RETURN_IF_ERROR(Loc_errReturn);
+	
 	/*Initializing Column Pins*/
 	for (u8 Loc_u8PinCounter = COLUMN_FIRST_PIN; Loc_u8ColumnLastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
