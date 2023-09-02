@@ -19,20 +19,20 @@
 
 /*Private Functions Declarations*/
 /* 
- * Func. Name	: LEDMAT_errDisableCols
+ * Func. Name	: PRIV_errDisableCols
  * Description	: This function is used by the driver to disable all columns
  * Return		: Error status of function
  */
-static ErrorStatus LEDMAT_errDisableCols(void);
+static ErrorStatus PRIV_errDisableCols(void);
 
 /* 
- * Func. Name	: LEDMAT_errDisableCols
+ * Func. Name	: PRIV_errSetColValues
  * Description	: This function is used by the driver to disable all columns
  * I/p Argument	: Copy_u8Column		Options: An variable representing a column of pixels
  * 											with each bit representing a pixel in the column
  * Return		: Error status of function
  */
-static ErrorStatus LEDMAT_errSetColValues(u8 Copy_u8Column);
+static ErrorStatus PRIV_errSetColValues(u8 Copy_u8Column);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

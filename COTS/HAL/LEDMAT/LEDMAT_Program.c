@@ -75,7 +75,7 @@ ErrorStatus LEDMAT_errInit(void)
 	}
 
 	/*Clearing Matrix*/
-	Loc_errReturn = LEDMAT_errDisableCols();
+	Loc_errReturn = PRIV_errDisableCols();
 	RETURN_IF_ERROR(Loc_errReturn);
 
 	/*Returning Error Status*/
@@ -98,11 +98,11 @@ ErrorStatus LEDMAT_errDisplay(const u8* Inptr_u8Frame)
 	for (u8 Loc_u8ColCounter = 0; 8 > Loc_u8ColCounter; ++Loc_u8ColCounter)
 	{
 		/*Disable All Columns*/
-		Loc_errReturn = LEDMAT_errDisableCols();
+		Loc_errReturn = PRIV_errDisableCols();
 		RETURN_IF_ERROR(Loc_errReturn);
 
 		/*Set Row Value*/
-		Loc_errReturn = LEDMAT_errSetColValues(Inptr_u8Frame[Loc_u8ColCounter]);
+		Loc_errReturn = PRIV_errSetColValues(Inptr_u8Frame[Loc_u8ColCounter]);
 		RETURN_IF_ERROR(Loc_errReturn);
 
 		/*Enable Column*/
@@ -122,11 +122,11 @@ ErrorStatus LEDMAT_errDisplay(const u8* Inptr_u8Frame)
 
 /*Private Functions Definitions*/
 /* 
- * Func. Name	: LEDMAT_errDisableCols
+ * Func. Name	: PRIV_errDisableCols
  * Description	: This function is used by the driver to disable all columns
  * Return		: Error status of function
  */
-static ErrorStatus LEDMAT_errDisableCols(void)
+static ErrorStatus PRIV_errDisableCols(void)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
@@ -161,13 +161,13 @@ static ErrorStatus LEDMAT_errDisableCols(void)
 }
 
 /* 
- * Func. Name	: LEDMAT_errDisableCols
+ * Func. Name	: PRIV_errSetColValues
  * Description	: This function is used by the driver to disable all columns
  * I/p Argument	: Copy_u8Column		Options: An variable representing a column of pixels
  * 											with each bit representing a pixel in the column
  * Return		: Error status of function
  */
-static ErrorStatus LEDMAT_errSetColValues(u8 Copy_u8Column)
+static ErrorStatus PRIV_errSetColValues(u8 Copy_u8Column)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;

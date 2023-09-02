@@ -42,7 +42,7 @@ ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig)
 	}
 
 	/*Initialize the Common of the Display*/
-	Loc_errReturn = SSEG_errInitCommon(Inprt_strctSsegConfig);
+	Loc_errReturn = PRIV_errInitCommon(Inprt_strctSsegConfig);
 	RETURN_IF_ERROR(Loc_errReturn);
 	
 	/*Enable Peripheral for the Port that the Display is connected to*/
@@ -80,10 +80,10 @@ ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, 
 		switch (Copy_u8DotState)
 		{
 		case SSEG_DOT_OFF:
-			return SSEG_errWriteLeds(Inprt_strctSsegConfig, Glob_u8Num[Copy_u8Number]);
+			return PRIV_errWriteLeds(Inprt_strctSsegConfig, Glob_u8Num[Copy_u8Number]);
 			break;
 		case SSEG_DOT_ON:
-			return SSEG_errWriteLeds(Inprt_strctSsegConfig, Glob_u8NumwDot[Copy_u8Number]);
+			return PRIV_errWriteLeds(Inprt_strctSsegConfig, Glob_u8NumwDot[Copy_u8Number]);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -95,10 +95,10 @@ ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, 
 		switch (Copy_u8DotState)
 		{
 		case SSEG_DOT_OFF:
-			return SSEG_errWriteLeds(Inprt_strctSsegConfig, ~Glob_u8Num[Copy_u8Number]);
+			return PRIV_errWriteLeds(Inprt_strctSsegConfig, ~Glob_u8Num[Copy_u8Number]);
 			break;
 		case SSEG_DOT_ON:
-			return SSEG_errWriteLeds(Inprt_strctSsegConfig, ~Glob_u8NumwDot[Copy_u8Number]);
+			return PRIV_errWriteLeds(Inprt_strctSsegConfig, ~Glob_u8NumwDot[Copy_u8Number]);
 			break;
 		default:
 			return INVALID_PARAMETERS;
@@ -126,11 +126,11 @@ ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctSsegConfig)
 	switch (Inprt_strctSsegConfig->Loc_u8CommPort)
 	{
 	case SSEG_COMM_CATHODE:
-		return SSEG_errWriteLeds(Inprt_strctSsegConfig, CLEAR);
+		return PRIV_errWriteLeds(Inprt_strctSsegConfig, CLEAR);
 		break;
 
 	case SSEG_COMM_ANODE:
-		return SSEG_errWriteLeds(Inprt_strctSsegConfig, ~CLEAR);
+		return PRIV_errWriteLeds(Inprt_strctSsegConfig, ~CLEAR);
 		break;
 	default:
 		return INVALID_PARAMETERS;
@@ -196,13 +196,13 @@ ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy
 
 /*Private Functions Definitions*/
 /* 
- * Func. Name	: SSEG_errWriteLeds
+ * Func. Name	: PRIV_errWriteLeds
  * Description	: This function is used by the driver to write set/rst LEDs in the display as needed
  * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8LedArray)
+static ErrorStatus PRIV_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8LedArray)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
@@ -232,7 +232,7 @@ static ErrorStatus SSEG_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfi
  * I/p Argument	: Copy_u8LedArray
  * Return		: Error status of function
  */
-static ErrorStatus SSEG_errInitCommon(const SsegConfig_type* Inprt_strctSsegConfig)
+static ErrorStatus PRIV_errInitCommon(const SsegConfig_type* Inprt_strctSsegConfig)
 {
 	/*Variables Definitions*/
 	ErrorStatus Loc_errReturn = NO_ERROR;
