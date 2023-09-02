@@ -6,7 +6,7 @@
 /************************************************************************/
 
 /*Include Needed Files*/
-	/*Include Needed Library Files*/
+	/*Include Needed LIB Files*/
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
 #include "../../LIB/MACROS.h"
