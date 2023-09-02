@@ -71,9 +71,6 @@ ErrorStatus SCH_errStartTask(void)
 /*Private Functions Definitions*/
 static ErrorStatus PRIV_errScheduler(void)
 {
-	/*Variables Definitions*/
-	static Loc_u64SchedulerTimeTracker = 0;
-
 	/*Calling Task Functions*/
 	for (u8 Loc_u8TaskCounter = 0; MAX_NO_TASKS > Loc_u8TaskCounter; ++Loc_u8TaskCounter)
 	{
@@ -81,16 +78,16 @@ static ErrorStatus PRIV_errScheduler(void)
 		{
 			continue;
 		}
-		
-		if (!(Glob_strctTaskArray[Loc_u8TaskCounter].u32Periodicity % (Loc_u64SchedulerTimeTracker - Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay)))
+		if (0 == Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay)
 		{
-			continue;
+			Glob_strctTaskArray[Loc_u8TaskCounter].vdTaskFunction();
+			Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay += Glob_strctTaskArray[Loc_u8TaskCounter].Copy_u32Periodicity - 1;
 		}
-		Glob_strctTaskArray[Loc_u8TaskCounter].vdTaskFunction();
+		else
+		{
+			--Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay;
+		}
 	}
-
-	/*Incrementing Tick Counter*/
-	Loc_u64SchedulerTimeTracker += SCH_TICK_TIME;
 
 	/*Returning ErrorStatus*/
 	return NO_ERROR;
