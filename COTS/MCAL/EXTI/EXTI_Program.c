@@ -196,6 +196,27 @@ ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 	/*Returning Error Status*/
 	return NO_ERROR;
 }
+
+/* 
+ * Func. Name	: EXTI_errTriggerSoftwareInterrupt
+ * Description	: This function allows the user to trigger a certain interrupt using software
+ * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
+ * Return		: Error status of function
+ */
+ErrorStatus EXTI_errTriggerSoftwareInterrupt(u8 Copy_u8InterruptLine)
+{
+	/*I/p validation*/
+	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
+	{
+		return INVALID_PARAMETERS;
+	}
+
+	/*Unmask Interrupt*/
+	SET_BIT(EXTI_SWIER, Copy_u8InterruptLine);
+
+	/*Returning Error Status*/
+	return NO_ERROR;
+}
 /*__________________________________________________________________________________________________________________________________________*/
 
 

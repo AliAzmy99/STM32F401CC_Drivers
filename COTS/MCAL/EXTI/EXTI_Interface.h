@@ -95,6 +95,14 @@ ErrorStatus EXTI_errDisableEvent(u8 Copy_u8EventLine);
  * Return		: Error status of function
  */
 ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger);
+
+/* 
+ * Func. Name	: EXTI_errTriggerSoftwareInterrupt
+ * Description	: This function allows the user to trigger a certain interrupt using software
+ * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
+ * Return		: Error status of function
+ */
+ErrorStatus EXTI_errTriggerSoftwareInterrupt(u8 Copy_u8InterruptLine);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
