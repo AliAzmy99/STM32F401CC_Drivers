@@ -31,6 +31,7 @@ ErrorStatus STK_errSetWait(u32 Copy_u32TickCount);
  * Func. Name	: STK_errSetIntervalSingle
  * Description	: This function allows the user to trigger a callback function after a certain amount of timer ticks
  * I/p Argument	: Copy_u32TickCount				Options: 0 -> 2^(24) - 1
+ * I/p Argument	: Inptr_vdCallbackFunction		pointer to callback function
  * Return		: Error status of function
  */
 ErrorStatus STK_errSetIntervalSingle(u32 Copy_u32TickCount, void (* Inptr_vdCallbackFunction)(void));
@@ -39,6 +40,7 @@ ErrorStatus STK_errSetIntervalSingle(u32 Copy_u32TickCount, void (* Inptr_vdCall
  * Func. Name	: STK_errSetIntervalPeriodic
  * Description	: This function allows the user to trigger a callback function every certain amount of timer ticks
  * I/p Argument	: Copy_u32TickCount				Options: 0 -> 2^(24) - 1
+ * I/p Argument	: Inptr_vdCallbackFunction		pointer to callback function
  * Return		: Error status of function
  */
 ErrorStatus STK_errSetIntervalPeriodic(u32 Copy_u32TickCount, void (* Inptr_vdCallbackFunction)(void));

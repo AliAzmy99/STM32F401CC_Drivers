@@ -66,6 +66,7 @@ ErrorStatus EXTI_errDisableInterrupt(u8 Copy_u8InterruptLine);
  * Func. Name	: EXTI_errSetCallbackFunction
  * Description	: This function allows the user set the callback function that will be called when a certain interrupt line triggers its ISR
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
+ * I/p Argument	: Inptr_vdCallbackFunction			pointer to callback function
  * Return		: Error status of function
  */
 ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_vdCallbackFunction)(void));
