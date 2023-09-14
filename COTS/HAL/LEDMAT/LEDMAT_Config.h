@@ -21,7 +21,7 @@
 
 
 /*Choosing Matrix Polarity*/
-#define MATRTIX_POLARITY		ANODE_AT_COLUMNS	/*Options: ANODE_AT_COLUMNS, CATHODE_AT_COLUMNS*/
+#define MATRTIX_POLARITY		CATHODE_AT_COLUMNS	/*Options: ANODE_AT_COLUMNS, CATHODE_AT_COLUMNS*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 
