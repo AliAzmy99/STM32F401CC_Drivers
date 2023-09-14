@@ -30,7 +30,7 @@
  */
 ErrorStatus NVIC_errInit(void)
 {
-	return SCB_errSetNvicPriorityStructure(SCB_G16_SG01);
+	return SCB_errSetNvicPriorityStructure(PRIORITY_STRUCTURE);
 }
 
 /* 

@@ -20,13 +20,13 @@
 
 	/*Registers*/
 		/*First Addresses*/
-#define NVIC_ISER_FIRST_ADDRESS		((volatile u32*)0xE000EF00)
-#define NVIC_ICER_FIRST_ADDRESS		((volatile u32*)0xE000EF80)
-#define NVIC_ISPR_FIRST_ADDRESS		((volatile u32*)0xE000F000)
-#define NVIC_ICPR_FIRST_ADDRESS		((volatile u32*)0xE000F080)
-#define NVIC_IABR_FIRST_ADDRESS		((volatile u32*)0xE000F100)
-#define NVIC_IPR_FIRST_ADDRESS		((volatile u32*)0xE000F200)
-#define NVIC_STIR_FIRST_ADDRESS		((volatile u32*)0xE000FC00)
+#define NVIC_ISER_FIRST_ADDRESS		((volatile u32*)0xE000E100)
+#define NVIC_ICER_FIRST_ADDRESS		((volatile u32*)0xE000E180)
+#define NVIC_ISPR_FIRST_ADDRESS		((volatile u32*)0xE000E200)
+#define NVIC_ICPR_FIRST_ADDRESS		((volatile u32*)0xE000E280)
+#define NVIC_IABR_FIRST_ADDRESS		((volatile u32*)0xE000E300)
+#define NVIC_IPR_FIRST_ADDRESS		((volatile u32*)0xE000E400)
+#define NVIC_STIR_FIRST_ADDRESS		((volatile u32*)0xE000EF00)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
