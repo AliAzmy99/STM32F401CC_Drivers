@@ -134,20 +134,13 @@ static ErrorStatus PRIV_errDisableCols(void)
 	u8 Loc_u8DisablingVal = 0;
 
 	/*Choosing Disabling Value*/
-	switch (MATRTIX_POLARITY)
-	{
-	case ANODE_AT_COLUMNS:
+	#if (ANODE_AT_COLUMNS == MATRTIX_POLARITY)
 		Loc_u8DisablingVal = GPIO_VALUE_L;
-		break;
-
-	case CATHODE_AT_COLUMNS:
+	#elif (CATHODE_AT_COLUMNS == MATRTIX_POLARITY)
 		Loc_u8DisablingVal = GPIO_VALUE_H;
-		break;
-	
-	default:
-		return INVALID_CONFIGS;
-		break;
-	}
+	#else
+		#error Error: Invalid MATRTIX_POLARITY Configuration
+	#endif
 
 	/*Disabling Columns*/
 	for (u8 Loc_u8PinCounter = COLUMN_FIRST_PIN; Loc_u8ColumnLastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
@@ -174,28 +167,21 @@ static ErrorStatus PRIV_errSetColValues(u8 Copy_u8Column)
 	u8 Loc_u8RowLastPin = ROW_FIRST_PIN + 7;
 
 	/*Setting the Rows in the given Column*/
-	switch (MATRTIX_POLARITY)
-	{
-	case ANODE_AT_COLUMNS:
+	#if (ANODE_AT_COLUMNS == MATRTIX_POLARITY)
 		for (u8 Loc_u8PinCounter = ROW_FIRST_PIN; Loc_u8RowLastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 		{
-			Loc_errReturn = GPIO_errSetPinValue(ROW_PORT, Loc_u8PinCounter, !GET_BIT(Copy_u8Column, 0));
+			Loc_errReturn = GPIO_errSetPinValue(ROW_PORT, Loc_u8PinCounter, !GET_BIT(Copy_u8Column, Loc_u8PinCounter));
 			RETURN_IF_ERROR(Loc_errReturn);
 		}
-		break;
-
-	case CATHODE_AT_COLUMNS:
+	#elif (CATHODE_AT_COLUMNS == MATRTIX_POLARITY)
 		for (u8 Loc_u8PinCounter = ROW_FIRST_PIN; Loc_u8RowLastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 		{
-			Loc_errReturn = GPIO_errSetPinValue(ROW_PORT, Loc_u8PinCounter, GET_BIT(Copy_u8Column, 0));
+			Loc_errReturn = GPIO_errSetPinValue(ROW_PORT, Loc_u8PinCounter, GET_BIT(Copy_u8Column, Loc_u8PinCounter));
 			RETURN_IF_ERROR(Loc_errReturn);
 		}
-		break;
-	
-	default:
-		return INVALID_CONFIGS;
-		break;
-	}
+	#else
+		#error Error: Invalid MATRTIX_POLARITY Configuration
+	#endif
 
 	/*Returning Error Status*/
 	return NO_ERROR;
