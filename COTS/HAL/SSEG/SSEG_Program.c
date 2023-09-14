@@ -226,7 +226,7 @@ static ErrorStatus PRIV_errWriteLeds(const SsegConfig_type* Inprt_strctSsegConfi
 }
 
 /* 
- * Func. Name	: SSEG_errInitHelper
+ * Func. Name	: PRIV_errInitCommon
  * Description	: This function is used by the driver to initialize the common of the display
  * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8LedArray

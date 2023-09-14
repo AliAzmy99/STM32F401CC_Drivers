@@ -59,7 +59,7 @@ static u8 Glob_u8Peripheral[3]={RCC_PERIPHERAL_GPIOA, RCC_PERIPHERAL_GPIOB, RCC_
 static ErrorStatus PRIV_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray);
 
 /* 
- * Func. Name	: SSEG_errInitHelper
+ * Func. Name	: PRIV_errInitCommon
  * Description	: This function is used by the driver to initialize the common of the display
  * I/p Argument	: Inprt_strctDisplayConfig
  * I/p Argument	: Copy_u8LedArray
