@@ -11,18 +11,18 @@
 int main(void)
 {
     /*Init System Clock*/
-    RCC_errInitSysClk();
+    RCC_vdInitSysClk();
     
     /*Enable Clock for GPIOA*/
-    RCC_errEnablePeripheralClk(RCC_PERIPHERAL_GPIOA);
+    RCC_vdEnablePeripheralClk(RCC_PERIPHERAL_GPIOA);
     
     /*Configure the Mode of the LEDS Pins as O/P*/
 
 
     /*Create Tasks*/
-    SCH_errCreateTask(0, 200, APP_LED1,  0);  //200  micro sec
-    SCH_errCreateTask(1, 500, APP_LED2,  1);  //500  micro sec
-    SCH_errCreateTask(2, 100, APP_LED3, 2);  //100   micro sec
+    SCH_vdCreateTask(0, 200, APP_LED1,  0);  //200  micro sec
+    SCH_vdCreateTask(1, 500, APP_LED2,  1);  //500  micro sec
+    SCH_vdCreateTask(2, 100, APP_LED3, 2);  //100   micro sec
 
     /*Start Scheduling*/
     SCH_StartOs();

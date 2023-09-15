@@ -19,20 +19,18 @@
 
 /*Private Functions Declarations*/
 /* 
- * Func. Name	: PRIV_errDisableCols
+ * Func. Name	: PRIV_vdDisableCols
  * Description	: This function is used by the driver to disable all columns
- * Return		: Error status of function
  */
-static ErrorStatus PRIV_errDisableCols(void);
+static void PRIV_vdDisableCols(void);
 
 /* 
- * Func. Name	: PRIV_errSetColValues
+ * Func. Name	: PRIV_vdSetColValues
  * Description	: This function is used by the driver to disable all columns
  * I/p Argument	: Copy_u8Column		Options: An variable representing a column of pixels
  * 											with each bit representing a pixel in the column
- * Return		: Error status of function
  */
-static ErrorStatus PRIV_errSetColValues(u8 Copy_u8Column);
+static void PRIV_vdSetColValues(u8 Copy_u8Column);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

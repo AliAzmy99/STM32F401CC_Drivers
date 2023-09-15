@@ -69,39 +69,35 @@ typedef struct{
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name	: SSEG_errInit
+ * Func. Name	: SSEG_vdInit
  * Description	: This function allows the user to initialize the seven segment display
  * I/p Argument	: Inprt_strctSsegConfig
- * Return		: Error status of function
  */
-ErrorStatus SSEG_errInit(const SsegConfig_type* Inprt_strctSsegConfig);
+void SSEG_vdInit(const SsegConfig_type* Inprt_strctSsegConfig);
 
 /* 
- * Func. Name	: SSEG_errDisplayNumber
+ * Func. Name	: SSEG_vdDisplayNumber
  * Description	: This function allows the user to display a number on the seven segment display
  * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8Number				Options: 0 -> 9
  * I/p Argument	: Copy_u8DotState			Options: DOT_OFF, DOT_ON
- * Return		: Error status of function
  */
-ErrorStatus SSEG_errDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Number, u8 Copy_u8DotState);
+void SSEG_vdDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Number, u8 Copy_u8DotState);
 
 /* 
- * Func. Name	: SSEG_errClear
+ * Func. Name	: SSEG_vdClear
  * Description	: This function allows the user to clear the seven segment display
  * I/p Argument	: Inprt_strctSsegConfig
- * Return		: Error status of function
  */
-ErrorStatus SSEG_errClear(const SsegConfig_type* Inprt_strctSsegConfig);
+void SSEG_vdClear(const SsegConfig_type* Inprt_strctSsegConfig);
 
 /* 
- * Func. Name	: SSEG_errEnable
+ * Func. Name	: SSEG_vdEnable
  * Description	: This function allows the user to enable or disable the seven segment display
  * I/p Argument	: Inprt_strctSsegConfig
  * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
- * Return		: Error status of function
  */
-ErrorStatus SSEG_errEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enable);
+void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enable);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

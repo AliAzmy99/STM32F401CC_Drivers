@@ -25,148 +25,120 @@
 
 /*Public Functions Definitions*/
 /* 
- * Func. Name	: EXTI_errInit
+ * Func. Name	: EXTI_vdInit
  * Description	: This function allows the user to initialize the external interrupts/events controller
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errInit(void)
+void EXTI_vdInit(void)
 {
-	/*Variables Definitions*/
-	ErrorStatus Loc_errReturn = NO_ERROR;
-
 	for (u8 Loc_u8LineCounter = 0; EXTI_NOT_A_LINE > Loc_u8LineCounter; ++Loc_u8LineCounter)
 	{
-		Loc_errReturn = SYSCFG_errSetExtiLinePort(Loc_u8LineCounter, Glob_u8LinePorts[Loc_u8LineCounter]);
-		RETURN_IF_ERROR(Loc_errReturn);
+		SYSCFG_vdSetExtiLinePort(Loc_u8LineCounter, Glob_u8LinePorts[Loc_u8LineCounter]);
+		
 	}
-	
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errEnableInterrupt
+ * Func. Name	: EXTI_vdEnableInterrupt
  * Description	: This function allows the user to enable a certain interrupt
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errEnableInterrupt(u8 Copy_u8InterruptLine)
+void EXTI_vdEnableInterrupt(u8 Copy_u8InterruptLine)
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Unmask Interrupt*/
 	SET_BIT(EXTI_IMR, Copy_u8InterruptLine);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errDisableInterrupt
+ * Func. Name	: EXTI_vdDisableInterrupt
  * Description	: This function allows the user to disable a certain interrupt
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errDisableInterrupt(u8 Copy_u8InterruptLine)
+void EXTI_vdDisableInterrupt(u8 Copy_u8InterruptLine)
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Mask Interrupt*/
 	CLR_BIT(EXTI_IMR, Copy_u8InterruptLine);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errSetCallbackFunction
+ * Func. Name	: EXTI_vdSetCallbackFunction
  * Description	: This function allows the user set the callback function that will be called when a certain interrupt line triggers its ISR
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
  * I/p Argument	: Inptr_vdCallbackFunction			pointer to callback function
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_vdCallbackFunction)(void))
+void EXTI_vdSetCallbackFunction(u8 Copy_u8InterruptLine, void (* Inptr_vdCallbackFunction)(void))
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	if (!Inptr_vdCallbackFunction)
 	{
-		return NULL_POINTER_PASSED;
+		return;
 	}
 	
 	/*Set Callback Function*/
 	Globptr_vdCallbackFunctions[Copy_u8InterruptLine] = Inptr_vdCallbackFunction;
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errEnableEvent
+ * Func. Name	: EXTI_vdEnableEvent
  * Description	: This function allows the user to enable a certain event
  * I/p Argument	: Copy_u8EventLine					Options: EXTI_LINE_0 -> EXTI_LINE_15
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errEnableEvent(u8 Copy_u8EventLine)
+void EXTI_vdEnableEvent(u8 Copy_u8EventLine)
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8EventLine)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Unmask Event*/
 	SET_BIT(EXTI_EMR, Copy_u8EventLine);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errDisableEvent
+ * Func. Name	: EXTI_vdDisableEvent
  * Description	: This function allows the user to disable a certain event
  * I/p Argument	: Copy_u8EventLine					Options: EXTI_LINE_0 -> EXTI_LINE_15
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errDisableEvent(u8 Copy_u8EventLine)
+void EXTI_vdDisableEvent(u8 Copy_u8EventLine)
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8EventLine)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Mask Event*/
 	CLR_BIT(EXTI_EMR, Copy_u8EventLine);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errSelectEdgeTriggers
+ * Func. Name	: EXTI_vdSelectEdgeTriggers
  * Description	: This function allows the user to choose which edges trigger a certain interrupt/event line
  * I/p Argument	: Copy_u8Line						Options: EXTI_LINE_0 -> EXTI_LINE_15
  * I/p Argument	: Copy_u8EdgeTrigger				Options: EXTI_RISING_EDGE, EXTI_FALLING_EDGE, EXTI_DUAL_EDGE, EXTI_NO_EDGE
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
+void EXTI_vdSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8Line)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Enable / Disable Edge Triggers*/
@@ -189,33 +161,26 @@ ErrorStatus EXTI_errSelectEdgeTriggers(u8 Copy_u8Line, u8 Copy_u8EdgeTrigger)
 		CLR_BIT(EXTI_FTSR, Copy_u8Line);
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: EXTI_errTriggerSoftwareInterrupt
+ * Func. Name	: EXTI_vdTriggerSoftwareInterrupt
  * Description	: This function allows the user to trigger a certain interrupt using software
  * I/p Argument	: Copy_u8InterruptLine				Options: EXTI_LINE_0 -> EXTI_LINE_15
- * Return		: Error status of function
  */
-ErrorStatus EXTI_errTriggerSoftwareInterrupt(u8 Copy_u8InterruptLine)
+void EXTI_vdTriggerSoftwareInterrupt(u8 Copy_u8InterruptLine)
 {
 	/*I/p validation*/
 	if (EXTI_NOT_A_LINE <= Copy_u8InterruptLine)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Unmask Interrupt*/
 	SET_BIT(EXTI_SWIER, Copy_u8InterruptLine);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 /*__________________________________________________________________________________________________________________________________________*/
 

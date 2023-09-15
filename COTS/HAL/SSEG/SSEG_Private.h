@@ -50,22 +50,20 @@ static u8 Glob_u8Peripheral[3]={RCC_PERIPHERAL_GPIOA, RCC_PERIPHERAL_GPIOB, RCC_
 
 /*Private Functions Declarations*/
 /* 
- * Func. Name	: PRIV_errWriteLeds
+ * Func. Name	: PRIV_vdWriteLeds
  * Description	: This function is used by the driver to write set/rst LEDs in the display as needed
  * I/p Argument	: Inprt_strctDisplayConfig
  * I/p Argument	: Copy_u8LedArray
- * Return		: Error status of function
  */
-static ErrorStatus PRIV_errWriteLeds(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray);
+static void PRIV_vdWriteLeds(const SsegConfig_type* Inprt_strctDisplayConfig, u8 Copy_u8LedArray);
 
 /* 
- * Func. Name	: PRIV_errInitCommon
+ * Func. Name	: PRIV_vdInitCommon
  * Description	: This function is used by the driver to initialize the common of the display
  * I/p Argument	: Inprt_strctDisplayConfig
  * I/p Argument	: Copy_u8LedArray
- * Return		: Error status of function
  */
-static ErrorStatus PRIV_errInitCommon(const SsegConfig_type* Inprt_strctDisplayConfig);
+static void PRIV_vdInitCommon(const SsegConfig_type* Inprt_strctDisplayConfig);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

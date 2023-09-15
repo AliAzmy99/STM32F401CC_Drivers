@@ -23,45 +23,34 @@
 
 
 /*Public Functions Definitions*/
-ErrorStatus SCH_errStartScheduler(void)
+void SCH_vdStartScheduler(void)
 {
-	/*Variables Definitions*/
-	ErrorStatus Loc_errReturn = NO_ERROR;
-
 	/*1- Init System Clk*/
-	Loc_errReturn = STK_errInit();
-	RETURN_IF_ERROR(Loc_errReturn);
+	STK_vdInit();
 
 	/*2- Scheduler Functionality*/
-	STK_errSetIntervalPeriodic(SCH_TICK_TIME, &PRIV_errScheduler);
+	STK_vdSetIntervalPeriodic(SCH_TICK_TIME, &PRIV_vdScheduler);
 
 	/*3- Init Task Array*/
 	for (u8 Loc_u8TaskCounter = 0; MAX_NO_TASKS > Loc_u8TaskCounter; ++Loc_u8TaskCounter)
 	{
 		Glob_strctTaskArray[Loc_u8TaskCounter].vdTaskFunction = NULL;
 	}
-	
-
-	/*Returning ErrorStatus*/
-	return NO_ERROR;
 }
 
-ErrorStatus SCH_errCreateTask(u8 Copy_u8Priority, u32 Copy_u32Periodicity, u8 Copy_u8FirstDelay, void (* Inptr_vdTaskFunction)(void))
+void SCH_vdCreateTask(u8 Copy_u8Priority, u32 Copy_u32Periodicity, u8 Copy_u8FirstDelay, void (* Inptr_vdTaskFunction)(void))
 {
 	if (MAX_NO_TASKS <= Copy_u8Priority)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	
 	Glob_strctTaskArray[Copy_u8Priority].u32Periodicity = Copy_u32Periodicity;
 	Glob_strctTaskArray[Copy_u8Priority].u8FirstDelay = Copy_u8FirstDelay;
 	Glob_strctTaskArray[Copy_u8Priority].vdTaskFunction = Inptr_vdTaskFunction;
-
-	/*Returning ErrorStatus*/
-	return NO_ERROR;
 }
 
-ErrorStatus SCH_errStartTask(void)
+void SCH_vdStartTask(void)
 {
 
 }
@@ -69,7 +58,7 @@ ErrorStatus SCH_errStartTask(void)
 
 
 /*Private Functions Definitions*/
-static ErrorStatus PRIV_errScheduler(void)
+static void PRIV_vdScheduler(void)
 {
 	/*Calling Task Functions*/
 	for (u8 Loc_u8TaskCounter = 0; MAX_NO_TASKS > Loc_u8TaskCounter; ++Loc_u8TaskCounter)
@@ -81,14 +70,11 @@ static ErrorStatus PRIV_errScheduler(void)
 		if (0 == Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay)
 		{
 			Glob_strctTaskArray[Loc_u8TaskCounter].vdTaskFunction();
-			Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay += Glob_strctTaskArray[Loc_u8TaskCounter].Copy_u32Periodicity - 1;
+			Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay += Glob_strctTaskArray[Loc_u8TaskCounter].u32Periodicity - 1;
 		}
 		else
 		{
 			--Glob_strctTaskArray[Loc_u8TaskCounter].u8FirstDelay;
 		}
 	}
-
-	/*Returning ErrorStatus*/
-	return NO_ERROR;
 }

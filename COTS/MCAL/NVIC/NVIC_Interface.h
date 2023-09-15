@@ -76,53 +76,47 @@ typedef enum
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name	: NVIC_errInit
+ * Func. Name	: NVIC_vdInit
  * Description	: This function allows the user to initialize the nested vectored interrupt controller
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errInit(void);
+void NVIC_vdInit(void);
 
 /* 
- * Func. Name	: NVIC_errEnableInterrupt
+ * Func. Name	: NVIC_vdEnableInterrupt
  * Description	: This function allows the user to enable a specific interrupt
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errEnableInterrupt(IrqId_type Copy_enmIrqId);
+void NVIC_vdEnableInterrupt(IrqId_type Copy_enmIrqId);
 
 /* 
- * Func. Name	: NVIC_errDisableInterrupt
+ * Func. Name	: NVIC_vdDisableInterrupt
  * Description	: This function allows the user to disable a specific interrupt
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errDisableInterrupt(IrqId_type Copy_enmIrqId);
+void NVIC_vdDisableInterrupt(IrqId_type Copy_enmIrqId);
 
 /* 
- * Func. Name	: NVIC_errSetPending
+ * Func. Name	: NVIC_vdSetPending
  * Description	: This function allows the user to set a specific interrupt as pending
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errSetPending(IrqId_type Copy_enmIrqId);
+void NVIC_vdSetPending(IrqId_type Copy_enmIrqId);
 
 /* 
- * Func. Name	: NVIC_errClearPending
+ * Func. Name	: NVIC_vdClearPending
  * Description	: This function allows the user to set a specific interrupt as not pending
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errClearPending(IrqId_type Copy_enmIrqId);
+void NVIC_vdClearPending(IrqId_type Copy_enmIrqId);
 
 /* 
- * Func. Name	: NVIC_errSetPriority
+ * Func. Name	: NVIC_vdSetPriority
  * Description	: This function allows the user to set the priority group and subgroup of a specific interrupt
  * I/p Argument	: Copy_enmIrqId
  * I/p Argument	: copy_u8Group
  * I/p Argument	: copy_u8SubGroup
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8SubGroup);
+void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8SubGroup);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

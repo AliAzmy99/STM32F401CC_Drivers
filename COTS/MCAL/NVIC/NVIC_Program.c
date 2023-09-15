@@ -24,108 +24,90 @@
 
 /*Public Functions Definitions*/
 /* 
- * Func. Name	: NVIC_errInit
+ * Func. Name	: NVIC_vdInit
  * Description	: This function allows the user to initialize the nested vectored interrupt controller
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errInit(void)
+void NVIC_vdInit(void)
 {
-	return SCB_errSetNvicPriorityStructure(PRIORITY_STRUCTURE);
+	return SCB_vdSetNvicPriorityStructure(PRIORITY_STRUCTURE);
 }
 
 /* 
- * Func. Name	: NVIC_errEnableInterrupt
+ * Func. Name	: NVIC_vdEnableInterrupt
  * Description	: This function allows the user to enable a specific interrupt
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errEnableInterrupt(IrqId_type Copy_enmIrqId)
+void NVIC_vdEnableInterrupt(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
 	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Enabling Interrupt*/
 	NVIC_ISER_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: NVIC_errDisableInterrupt
+ * Func. Name	: NVIC_vdDisableInterrupt
  * Description	: This function allows the user to disable a specific interrupt
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errDisableInterrupt(IrqId_type Copy_enmIrqId)
+void NVIC_vdDisableInterrupt(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
 	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Disabling Interrupt*/
 	NVIC_ICER_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: NVIC_errSetPending
+ * Func. Name	: NVIC_vdSetPending
  * Description	: This function allows the user to set a specific interrupt as pending
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errSetPending(IrqId_type Copy_enmIrqId)
+void NVIC_vdSetPending(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
 	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Setting Pending*/
 	NVIC_ISPR_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: NVIC_errClearPending
+ * Func. Name	: NVIC_vdClearPending
  * Description	: This function allows the user to set a specific interrupt as not pending
  * I/p Argument	: Copy_enmIrqId
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errClearPending(IrqId_type Copy_enmIrqId)
+void NVIC_vdClearPending(IrqId_type Copy_enmIrqId)
 {
 	/*I/p Validation*/
 	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Clearing Pending*/
 	NVIC_ICPR_FIRST_ADDRESS[Copy_enmIrqId >> 5] = 1 << (Copy_enmIrqId % 32);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: NVIC_errSetPriority
+ * Func. Name	: NVIC_vdSetPriority
  * Description	: This function allows the user to set the priority group and subgroup of a specific interrupt
  * I/p Argument	: Copy_enmIrqId
  * I/p Argument	: copy_u8Group
  * I/p Argument	: copy_u8SubGroup
- * Return		: Error status of function
  */
-ErrorStatus NVIC_errSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8SubGroup)
+void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8SubGroup)
 {
 	/*Variables Definitions*/
 	u8 Loc_u8Priority = 0;
@@ -134,32 +116,32 @@ ErrorStatus NVIC_errSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 co
 	/*I/p Validation*/
 	if(NVIC_NOT_AN_IRQ >= Copy_enmIrqId)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	#if G16_SG01 == PRIORITY_STRUCTURE
 	if((16 <= copy_u8Group) || (0 < copy_u8SubGroup))
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	#elif G08_SG02 == PRIORITY_STRUCTURE
 	if((8 <= copy_u8Group) || (2 <= copy_u8SubGroup))
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	#elif G04_SG04 == PRIORITY_STRUCTURE
 	if((4 <= copy_u8Group) || (4 <= copy_u8SubGroup))
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	#elif G02_SG08 == PRIORITY_STRUCTURE
 	if((2 <= copy_u8Group) || (8 <= copy_u8SubGroup))
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	#elif G01_SG16 == PRIORITY_STRUCTURE
 	if((0 < copy_u8Group) || (16 <= copy_u8SubGroup))
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	#else
 		#error Error: Invalid PRIORITY_STRUCTURE Configuration
@@ -171,7 +153,4 @@ ErrorStatus NVIC_errSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 co
 
 	CLR_NIBBLE(NVIC_IPR_FIRST_ADDRESS[Copy_enmIrqId >> 2], Loc_u8PriorityFirstBit);
 	NVIC_IPR_FIRST_ADDRESS[Copy_enmIrqId >> 2] |= Loc_u8Priority << Loc_u8PriorityFirstBit;
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }

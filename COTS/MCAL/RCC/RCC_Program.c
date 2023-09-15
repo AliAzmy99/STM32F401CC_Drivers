@@ -22,11 +22,10 @@
 
 /*Public Functions Definitions*/
 /* 
- * Func. Name	: RCC_errInitSysClk
+ * Func. Name	: RCC_vdInitSysClk
  * Description	: This function allows the user to initialize the system clk
- * Return		: Error status of function
  */
-ErrorStatus RCC_errInitSysClk(void)
+void RCC_vdInitSysClk(void)
 {
 	/*1- AMBA Buses Prescaler Selection*/
 	#if ((AHB_PRE_1 <= AHB_PRESCALER && AHB_PRE_512 >= AHB_PRESCALER) && (APB_PRE_1 <= APB1_PRESCALER && APB_PRE_16 >= APB1_PRESCALER) && (APB_PRE_1 <= APB2_PRESCALER && APB_PRE_16 >= APB2_PRESCALER))
@@ -121,18 +120,14 @@ ErrorStatus RCC_errInitSysClk(void)
 	#else
 		#error Error: Invalid RCC_CLK_SRC Configuration
 	#endif
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
  * Func. Name	: RCC_voidEnablePeripheralClk
  * Description	: This function allows the user to enable the clk of a certian peripheral
  * I/p Argument	: Copy_enmPeripheralId			Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
- * Return		: Error status of function
  */
-ErrorStatus RCC_errEnablePeripheralClk(PeripheralId_type Copy_enmPeripheralId)
+void RCC_vdEnablePeripheralClk(PeripheralId_type Copy_enmPeripheralId)
 {
 	switch (Copy_enmPeripheralId)
 	{
@@ -166,20 +161,16 @@ ErrorStatus RCC_errEnablePeripheralClk(PeripheralId_type Copy_enmPeripheralId)
 	case RCC_PERIPHERAL_I2C2:		SET_BIT(RCC_APB1ENR, RCC_APB1ENR_I2C2EN);	break;
 	case RCC_PERIPHERAL_I2C3:		SET_BIT(RCC_APB1ENR, RCC_APB1ENR_I2C3EN);	break;
 	case RCC_PERIPHERAL_WWDG:		SET_BIT(RCC_APB1ENR, RCC_APB1ENR_WWDGEN);	break;
-	default:						return INVALID_PARAMETERS;					break;
+	default:						return;										break;
 	}
-	
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: RCC_errDisablePeripheralClk
+ * Func. Name	: RCC_vdDisablePeripheralClk
  * Description	: This function allows the user to disable the clk of a certian peripheral
  * I/p Argument	: Copy_enmPeripheralId			Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
- * Return		: Error status of function
  */
-ErrorStatus RCC_errDisablePeripheralClk(PeripheralId_type Copy_enmPeripheralId)
+void RCC_vdDisablePeripheralClk(PeripheralId_type Copy_enmPeripheralId)
 {
 	switch (Copy_enmPeripheralId)
 	{
@@ -213,9 +204,6 @@ ErrorStatus RCC_errDisablePeripheralClk(PeripheralId_type Copy_enmPeripheralId)
 	case RCC_PERIPHERAL_I2C2:		CLR_BIT(RCC_APB1ENR, RCC_APB1ENR_I2C2EN);	break;
 	case RCC_PERIPHERAL_I2C3:		CLR_BIT(RCC_APB1ENR, RCC_APB1ENR_I2C3EN);	break;
 	case RCC_PERIPHERAL_WWDG:		CLR_BIT(RCC_APB1ENR, RCC_APB1ENR_WWDGEN);	break;
-	default:						return INVALID_PARAMETERS;					break;
+	default:						return;										break;
 	}
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }

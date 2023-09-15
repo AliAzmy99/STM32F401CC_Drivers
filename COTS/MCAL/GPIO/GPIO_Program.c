@@ -21,14 +21,13 @@
 
 /*Public Functions Definitions*/
 /* 
- * Func. Name	: GPIO_errSetPinMode
+ * Func. Name	: GPIO_vdSetPinMode
  * Description	: This function allows the user to select the mode of the mode of any pin
  * I/p Argument	: Copy_u8Port		Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin		Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument	: Copy_u8PinMode	Options: GPIO_MODE_INPUT, GPIO_MODE_OUTPUT, GPIO_MODE_ALT_FUN, GPIO_MODE_ANALOG
- * Return		: Error status of function
  */
-ErrorStatus GPIO_errSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
+void GPIO_vdSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32MODERxAddress = NULL;
@@ -36,7 +35,7 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Choosing Correct Register Address*/
@@ -52,7 +51,7 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
 		Locptr_u32MODERxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_MODER_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
@@ -76,23 +75,19 @@ ErrorStatus GPIO_errSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode)
 		SET_BIT(*Locptr_u32MODERxAddress, (Copy_u8Pin << 1) + 1);
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
-
-	/*Returning Error Status*/
-	return NO_ERROR;	
 }
 
 /* 
- * Func. Name	: GPIO_errSetPinOutputType
+ * Func. Name	: GPIO_vdSetPinOutputType
  * Description	: This function allows the user to select the output type of any pin
  * I/p Argument	: Copy_u8Port			Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin			Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument	: Copy_u8PinOutputType	Options: GPIO_OUTPUT_TYPE_PP, GPIO_OUTPUT_TYPE_OD
- * Return		: Error status of function
  */
-ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinOutputType)
+void GPIO_vdSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinOutputType)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32OTYPERxAddress = NULL;
@@ -100,7 +95,7 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pi
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Choosing Correct Register Address*/
@@ -116,7 +111,7 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pi
 		Locptr_u32OTYPERxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_OTYPER_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
@@ -130,23 +125,19 @@ ErrorStatus GPIO_errSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pi
 			SET_BIT(*Locptr_u32OTYPERxAddress, Copy_u8Pin);
 			break;
 		default:
-			return INVALID_PARAMETERS;
+			return;
 			break;
 	}
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: GPIO_errSetPinOutputSpeed
+ * Func. Name	: GPIO_vdSetPinOutputSpeed
  * Description	: This function allows the user to select the output speed of any pin
  * I/p Argument	: Copy_u8Port					Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin					Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: GPIO_errSetPinOutputSpeed		Options: GPIO_OUTPUT_SPEED_L -> GPIO_OUTPUT_SPEED_VH
- * Return		: Error status of function
+ * I/p Argument	: GPIO_vdSetPinOutputSpeed		Options: GPIO_OUTPUT_SPEED_L -> GPIO_OUTPUT_SPEED_VH
  */
-ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinOutputSpeed)
+void GPIO_vdSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinOutputSpeed)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32OSPEEDRxAddress = NULL;
@@ -154,7 +145,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8P
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Choosing Correct Register Address*/
@@ -170,7 +161,7 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8P
 		Locptr_u32OSPEEDRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_OSPEEDR_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
@@ -194,23 +185,19 @@ ErrorStatus GPIO_errSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8P
 		SET_BIT(*Locptr_u32OSPEEDRxAddress, (Copy_u8Pin << 1) + 1);
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
-	
-	/*Returning Error Status*/
-	return NO_ERROR;	
 }
 
 /* 
- * Func. Name	: GPIO_errSetPinPullState
+ * Func. Name	: GPIO_vdSetPinPullState
  * Description	: This function allows the user to select the pull state of any pin
  * I/p Argument	: Copy_u8Port			Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin			Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument	: Copy_u8PinPullState	Options: GPIO_NO_PULL, GPIO_PULL_UP, GPIO_PULL_DOWN
- * Return		: Error status of function
  */
-ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinPullState)
+void GPIO_vdSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinPullState)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32PUPDRxAddress = NULL;
@@ -218,7 +205,7 @@ ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pin
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Choosing Correct Register Address*/
@@ -234,7 +221,7 @@ ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pin
 		Locptr_u32PUPDRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_PUPDR_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
@@ -254,23 +241,19 @@ ErrorStatus GPIO_errSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Pin
 		SET_BIT(*Locptr_u32PUPDRxAddress, (Copy_u8Pin << 1) + 1);
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
-	
-	/*Returning Error Status*/
-	return NO_ERROR;	
 }
 
 /* 
- * Func. Name	: GPIO_errSetPinValue
+ * Func. Name	: GPIO_vdSetPinValue
  * Description	: This function allows the user to set the value of any pin
  * I/p Argument	: Copy_u8Port		Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin		Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument	: Copy_u8PinValue	Options: GPIO_VALUE_L, GPIO_VALUE_H
- * Return		: Error status of function
  */
-ErrorStatus GPIO_errSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValue)
+void GPIO_vdSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValue)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32ODRxAddress = NULL;
@@ -278,7 +261,7 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValu
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Choosing Correct Register Address*/
@@ -294,7 +277,7 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValu
 		Locptr_u32ODRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_ODR_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
@@ -308,23 +291,19 @@ ErrorStatus GPIO_errSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValu
 			SET_BIT(*Locptr_u32ODRxAddress, Copy_u8Pin);
 			break;
 		default:
-			return INVALID_PARAMETERS;
+			return;
 			break;
 	}
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: GPIO_errSetPinValueDirectAccess
+ * Func. Name	: GPIO_vdSetPinValueDirectAccess
  * Description	: This function allows the user to set/reset any pin using direct access
  * I/p Argument	: Copy_u8Port		Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin		Options: GPIO_PIN_0 -> GPIO_PIN_15
  * I/p Argument	: Copy_u8PinAction	Options: GPIO_SET, GPIO_RST
- * Return		: Error status of function
  */
-ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinAction)
+void GPIO_vdSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinAction)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32BSRRxAddress = NULL;
@@ -332,7 +311,7 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Co
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 
 	/*Choosing Correct Register Address*/
@@ -348,7 +327,7 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Co
 		Locptr_u32BSRRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_BSRR_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
@@ -362,23 +341,19 @@ ErrorStatus GPIO_errSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Co
 			*Locptr_u32BSRRxAddress = 1 << (Copy_u8Pin + 16);
 			break;
 		default:
-			return INVALID_PARAMETERS;
+			return;
 			break;
 	}
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }
 
 /* 
- * Func. Name	: GPIO_errGetPinValue
+ * Func. Name	: GPIO_vdGetPinValue
  * Description	: This function allows the user to get the value of any pin
  * I/p Argument	: Copy_u8Port			Options: GPIO_PORT_A -> GPIO_PORT_C
  * I/p Argument	: Copy_u8Pin			Options: GPIO_PIN_0 -> GPIO_PIN_15
  * O/p Argument : Outptr_u8PinValue		Options: GPIO_VALUE_L, GPIO_VALUE_H
- * Return		: Error status of function
  */
-ErrorStatus GPIO_errGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinValue)
+void GPIO_vdGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinValue)
 {
 	/*Variables Definitions*/
 	volatile u32* Locptr_u32IDRxAddress = NULL;
@@ -386,11 +361,11 @@ ErrorStatus GPIO_errGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinV
 	/*I/p Validation*/
 	if ((GPIO_PORT_C == Copy_u8Port && GPIO_PIN_13 > Copy_u8Pin) || GPIO_NOT_A_PIN <= Copy_u8Pin)
 	{
-		return INVALID_PARAMETERS;
+		return;
 	}
 	if (!Outptr_u8PinValue)
 	{
-		return NULL_POINTER_PASSED;
+		return;
 	}
 	
 	/*Choosing Correct Register Address*/
@@ -406,13 +381,10 @@ ErrorStatus GPIO_errGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinV
 		Locptr_u32IDRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_IDR_NO;
 		break;
 	default:
-		return INVALID_PARAMETERS;
+		return;
 		break;
 	}
 
 	/*Outputting Value*/
 	*Outptr_u8PinValue = GET_BIT(*Locptr_u32IDRxAddress, Copy_u8Pin);
-
-	/*Returning Error Status*/
-	return NO_ERROR;
 }

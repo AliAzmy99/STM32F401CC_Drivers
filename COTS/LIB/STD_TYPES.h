@@ -27,16 +27,6 @@ typedef signed long long int	s64;
 typedef float					f32;
 typedef double					f64;
 typedef long double				f128;
-
-	/*Defining Different Error Types*/
-typedef enum
-{
-	NO_ERROR,		/*Must remain the first element*/
-	INVALID_PARAMETERS,
-	INVALID_CONFIGS,
-	NULL_POINTER_PASSED,
-	FEATURE_NOT_ENABLED,
-}ErrorStatus;
 /*__________________________________________________________________________________________________________________________________________*/
 
 

@@ -51,27 +51,24 @@ typedef enum
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name	: RCC_errInitSysClk
+ * Func. Name	: RCC_vdInitSysClk
  * Description	: This function allows the user to initialize the system clk
- * Return		: Error status of function
  */
-ErrorStatus RCC_errInitSysClk(void);
+void RCC_vdInitSysClk(void);
 
 /* 
  * Func. Name	: RCC_voidEnablePeripheralClk
  * Description	: This function allows the user to enable the clk of a certian peripheral
  * I/p Argument	: Copy_enmPeripheralId			Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
- * Return		: Error status of function
  */
-ErrorStatus RCC_errEnablePeripheralClk(PeripheralId_type Copy_enmPeripheralId);
+void RCC_vdEnablePeripheralClk(PeripheralId_type Copy_enmPeripheralId);
 
 /* 
- * Func. Name	: RCC_errDisablePeripheralClk
+ * Func. Name	: RCC_vdDisablePeripheralClk
  * Description	: This function allows the user to disable the clk of a certian peripheral
  * I/p Argument	: Copy_enmPeripheralId			Options: PERIPHERAL_USBFS -> PERIPHERAL_WWDG
- * Return		: Error status of function
  */
-ErrorStatus RCC_errDisablePeripheralClk(PeripheralId_type Copy_enmPeripheralId);
+void RCC_vdDisablePeripheralClk(PeripheralId_type Copy_enmPeripheralId);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

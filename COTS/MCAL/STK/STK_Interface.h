@@ -12,61 +12,54 @@
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name	: STK_errInit
+ * Func. Name	: STK_vdInit
  * Description	: This function allows the user to initialize the system timer
- * Return		: Error status of function
  */
-ErrorStatus STK_errInit(void);
+void STK_vdInit(void);
 
 /* 
- * Func. Name	: STK_errSetWait
+ * Func. Name	: STK_vdSetWait
  * Description	: This function allows the user to stop the processor for a certain amount of timer ticks
  * Note			: Interrupts will still be able to trigger ISRs
  * I/p Argument	: Copy_u32TickCount				Options: 0 -> 2^(24) - 1
- * Return		: Error status of function
  */
-ErrorStatus STK_errSetWait(u32 Copy_u32TickCount);
+void STK_vdSetWait(u32 Copy_u32TickCount);
 
 /* 
- * Func. Name	: STK_errSetIntervalSingle
+ * Func. Name	: STK_vdSetIntervalSingle
  * Description	: This function allows the user to trigger a callback function after a certain amount of timer ticks
  * I/p Argument	: Copy_u32TickCount				Options: 0 -> 2^(24) - 1
  * I/p Argument	: Inptr_vdCallbackFunction		pointer to callback function
- * Return		: Error status of function
  */
-ErrorStatus STK_errSetIntervalSingle(u32 Copy_u32TickCount, void (* Inptr_vdCallbackFunction)(void));
+void STK_vdSetIntervalSingle(u32 Copy_u32TickCount, void (* Inptr_vdCallbackFunction)(void));
 
 /* 
- * Func. Name	: STK_errSetIntervalPeriodic
+ * Func. Name	: STK_vdSetIntervalPeriodic
  * Description	: This function allows the user to trigger a callback function every certain amount of timer ticks
  * I/p Argument	: Copy_u32TickCount				Options: 0 -> 2^(24) - 1
  * I/p Argument	: Inptr_vdCallbackFunction		pointer to callback function
- * Return		: Error status of function
  */
-ErrorStatus STK_errSetIntervalPeriodic(u32 Copy_u32TickCount, void (* Inptr_vdCallbackFunction)(void));
+void STK_vdSetIntervalPeriodic(u32 Copy_u32TickCount, void (* Inptr_vdCallbackFunction)(void));
 
 /* 
- * Func. Name	: STK_errGetElapsedTicks
+ * Func. Name	: STK_vdGetElapsedTicks
  * Description	: This function allows the user to get the elapsed timer ticks
  * O/p Argument	: Outptr_u32ElapsedTicks		Options: 0 -> 2^(24) - 1
- * Return		: Error status of function
  */
-ErrorStatus STK_errGetElapsedTicks(u32* Outptr_u32ElapsedTicks);
+void STK_vdGetElapsedTicks(u32* Outptr_u32ElapsedTicks);
 
 /* 
- * Func. Name	: STK_errGetRemainingTicks
+ * Func. Name	: STK_vdGetRemainingTicks
  * Description	: This function allows the user to get the remaining timer ticks
  * O/p Argument	: Outptr_u32RemainingTicks		Options: 0 -> 2^(24) - 1
- * Return		: Error status of function
  */
-ErrorStatus STK_errGetRemainingTicks(u32* Outptr_u32RemainingTicks);
+void STK_vdGetRemainingTicks(u32* Outptr_u32RemainingTicks);
 
 /* 
- * Func. Name	: STK_errStop
+ * Func. Name	: STK_vdStop
  * Description	: This function allows the user to stop the timer
- * Return		: Error status of function
  */
-ErrorStatus STK_errStop(void);
+void STK_vdStop(void);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

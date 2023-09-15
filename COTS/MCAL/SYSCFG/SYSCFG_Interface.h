@@ -40,13 +40,12 @@
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name	: SYSCFG_errSetExtiLinePort
+ * Func. Name	: SYSCFG_vdSetExtiLinePort
  * Description	: This function allows the user to choose the Port that a particular EXTI line is connected to
  * I/p Argument	: Copy_u8Line			Options: SYSCFG_LINE_0 -> SYSCFG_LINE_15
  * I/p Argument : Copy_u8Port			Options: SYSCFG_PORT_A -> SYSCFG_PORT_C
- * Return		: Error status of function
  */
-ErrorStatus SYSCFG_errSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port);
+void SYSCFG_vdSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
