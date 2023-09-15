@@ -13,9 +13,9 @@
 #include "../../LIB/MACROS.h"
 
 	/*Include Needed STK Files*/
+#include "STK_Config.h"
 #include "STK_Interface.h"
 #include "STK_Private.h"
-#include "STK_Config.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 

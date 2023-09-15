@@ -16,9 +16,9 @@
 #include "../SCB/SCB_Interface.h"
 
 	/*Include Needed NVIC Files*/
+#include "NVIC_Config.h"
 #include "NVIC_Interface.h"
 #include "NVIC_Private.h"
-#include "NVIC_Config.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 

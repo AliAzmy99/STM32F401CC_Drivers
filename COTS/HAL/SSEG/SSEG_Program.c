@@ -16,9 +16,9 @@
 #include "../../MCAL/GPIO/GPIO_Interface.h"
 
 	/*Include Needed SSEG Files*/
+#include "SSEG_Config.h"
 #include "SSEG_Interface.h"
 #include "SSEG_Private.h"
-#include "SSEG_Config.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 

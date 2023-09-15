@@ -17,8 +17,8 @@
 #include "../../MCAL/STK/STK_Interface.h"
 
 	/*Include Needed LEDMAT Files*/
-#include "LEDMAT_Interface.h"
 #include "LEDMAT_Config.h"
+#include "LEDMAT_Interface.h"
 #include "LEDMAT_Private.h"
 /*__________________________________________________________________________________________________________________________________________*/
 

@@ -14,9 +14,9 @@
 #include "../../LIB/MACROS.h"
 
 	/*Include Needed RCC Files*/
+#include "RCC_Config.h"
 #include "RCC_Interface.h"
 #include "RCC_Private.h"
-#include "RCC_Config.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 

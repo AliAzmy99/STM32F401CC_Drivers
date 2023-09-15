@@ -13,9 +13,9 @@
 #include "../../LIB/MACROS.h"
 
 	/*Include Needed GPIO Files*/
+#include "GPIO_Config.h"
 #include "GPIO_Interface.h"
 #include "GPIO_Private.h"
-#include "GPIO_Config.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 

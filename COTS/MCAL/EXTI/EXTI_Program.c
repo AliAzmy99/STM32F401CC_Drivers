@@ -17,8 +17,8 @@
 #include "../SYSCFG/SYSCFG_Interface.h"
 
 	/*Include Needed EXTI Files*/
-#include "EXTI_Interface.h"
 #include "EXTI_Config.h"
+#include "EXTI_Interface.h"
 #include "EXTI_Private.h"
 /*__________________________________________________________________________________________________________________________________________*/
 

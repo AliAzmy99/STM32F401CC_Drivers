@@ -16,9 +16,9 @@
 #include "../../MCAL/STK/STK_Interface.h"
 
 	/*Include Needed SCH Files*/
+#include "SCH_Config.h"
 #include "SCH_Interface.h"
 #include "SCH_Private.h"
-#include "SCH_Config.h"
 /*__________________________________________________________________________________________________________________________________________*/
 
 
