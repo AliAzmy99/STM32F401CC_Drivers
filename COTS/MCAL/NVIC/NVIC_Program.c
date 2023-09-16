@@ -101,6 +101,24 @@ void NVIC_vdClearPending(IrqId_type Copy_enmIrqId)
 }
 
 /* 
+ * Func. Name	: NVIC_vdGetPending
+ * Description	: This function allows the user to know whether a specific interrupt is pending
+ * I/p Argument	: Copy_enmIrqId
+ * O/p Argument : Outptr_u8Pending		Options: TRUE, FALSE
+ */
+void NVIC_vdGetPending(IrqId_type Copy_enmIrqId, u8* Outptr_u8Pending)
+{
+	/*I/p Validation*/
+	if(NVIC_NOT_AN_IRQ <= Copy_enmIrqId)
+	{
+		return;
+	}
+
+	/*Getting Pending*/
+	*Outptr_u8Pending = GET_BIT(NVIC_ISPR_FIRST_ADDRESS[Copy_enmIrqId >> 5], (Copy_enmIrqId % 32));
+}
+
+/* 
  * Func. Name	: NVIC_vdSetPriority
  * Description	: This function allows the user to set the priority group and subgroup of a specific interrupt
  * I/p Argument	: Copy_enmIrqId

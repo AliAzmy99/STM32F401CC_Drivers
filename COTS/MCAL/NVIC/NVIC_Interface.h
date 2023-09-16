@@ -103,6 +103,14 @@ void NVIC_vdDisableInterrupt(IrqId_type Copy_enmIrqId);
 void NVIC_vdSetPending(IrqId_type Copy_enmIrqId);
 
 /* 
+ * Func. Name	: NVIC_vdGetPending
+ * Description	: This function allows the user to know whether a specific interrupt is pending
+ * I/p Argument	: Copy_enmIrqId
+ * O/p Argument : Outptr_u8Pending		Options: TRUE, FALSE
+ */
+void NVIC_vdGetPending(IrqId_type Copy_enmIrqId, u8* Outptr_u8Pending);
+
+/* 
  * Func. Name	: NVIC_vdClearPending
  * Description	: This function allows the user to set a specific interrupt as not pending
  * I/p Argument	: Copy_enmIrqId
