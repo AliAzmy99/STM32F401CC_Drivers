@@ -34,7 +34,7 @@ void SYSCFG_vdSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port)
 {
 	/*Variables Definitions*/
 	u8 Loc_u8RegisterNum = 0;
-	u8 Loc_u8BitNum = 0;
+	u8 Loc_u8NibbleNum = 0;
 
 	/*I/p Validation*/
 	if ((SYSCFG_PORT_C == Copy_u8Port && SYSCFG_LINE_13 > Copy_u8Line) || SYSCFG_NOT_A_LINE <= Copy_u8Line || SYSCFG_NOT_A_PORT <= Copy_u8Port)
@@ -44,9 +44,8 @@ void SYSCFG_vdSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port)
 
 	/*Choosing Register and Bit*/
 	Loc_u8RegisterNum = Copy_u8Line >> 2;
-	Loc_u8BitNum = (Copy_u8Line - (Loc_u8RegisterNum << 2)) << 2;
+	Loc_u8NibbleNum = Copy_u8Line - (Loc_u8RegisterNum << 2);
 
 	/*Setting Port*/
-	CLR_NIBBLE(SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum], Loc_u8BitNum);
-	SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum] |= Copy_u8Port << Loc_u8BitNum;
+	MAKE_NIBBLE(SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum], Loc_u8NibbleNum, Copy_u8Port);
 }
