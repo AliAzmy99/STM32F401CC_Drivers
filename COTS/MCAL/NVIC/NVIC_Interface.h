@@ -125,6 +125,15 @@ void NVIC_vdClearPending(IrqId_type Copy_enmIrqId);
  * I/p Argument	: copy_u8SubGroup
  */
 void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8SubGroup);
+
+/* 
+ * Func. Name	: NVIC_vdGetPriority
+ * Description	: This function allows the user to get the priority group and subgroup of a specific interrupt
+ * I/p Argument	: Copy_enmIrqId
+ * O/p Argument	: Outptr_u8Group
+ * O/p Argument	: Outptr_u8SubGroup
+ */
+void NVIC_vdGetPriority(IrqId_type Copy_enmIrqId, u8* Outptr_u8Group, u8* Outptr_u8SubGroup);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

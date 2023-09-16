@@ -129,7 +129,7 @@ void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8Sub
 {
 	/*Variables Definitions*/
 	u8 Loc_u8Priority = 0;
-	u8 Loc_u8PriorityFirstBit = 0;
+	u8 Loc_u8PriorityNibble = 0;
 
 	/*I/p Validation*/
 	if(NVIC_NOT_AN_IRQ >= Copy_enmIrqId)
@@ -137,7 +137,7 @@ void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8Sub
 		return;
 	}
 	#if G16_SG01 == PRIORITY_STRUCTURE
-	if((16 <= copy_u8Group) || (0 < copy_u8SubGroup))
+	if((16 <= copy_u8Group) || (1 <= copy_u8SubGroup))
 	{
 		return;
 	}
@@ -166,9 +166,34 @@ void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8Sub
 	#endif
 
 	/*Setting the Group and Subgroup of the IRQ*/
-	Loc_u8Priority = copy_u8SubGroup | (copy_u8Group << (PRIORITY_STRUCTURE));
-	Loc_u8PriorityFirstBit = (((Copy_enmIrqId % 4) << 3) + 4);
+	Loc_u8Priority = copy_u8SubGroup | (copy_u8Group << PRIORITY_STRUCTURE);
+	Loc_u8PriorityNibble = BYTE_TO_NIBBLE_NUM(Copy_enmIrqId % 4) + 1;
+	MAKE_NIBBLE(NVIC_IPR_FIRST_ADDRESS[DIV4(Copy_enmIrqId)], Loc_u8PriorityNibble, Loc_u8Priority);
+}
 
-	CLR_NIBBLE(NVIC_IPR_FIRST_ADDRESS[Copy_enmIrqId >> 2], Loc_u8PriorityFirstBit);
-	NVIC_IPR_FIRST_ADDRESS[Copy_enmIrqId >> 2] |= Loc_u8Priority << Loc_u8PriorityFirstBit;
+/* 
+ * Func. Name	: NVIC_vdGetPriority
+ * Description	: This function allows the user to get the priority group and subgroup of a specific interrupt
+ * I/p Argument	: Copy_enmIrqId
+ * O/p Argument	: Outptr_u8Group
+ * O/p Argument	: Outptr_u8SubGroup
+ */
+void NVIC_vdGetPriority(IrqId_type Copy_enmIrqId, u8* Outptr_u8Group, u8* Outptr_u8SubGroup)
+{
+	/*Variables Definitions*/
+	u8 Loc_u8Priority = 0;
+	u8 Loc_u8PriorityNibble = 0;
+
+	/*I/p Validation*/
+	if(NVIC_NOT_AN_IRQ >= Copy_enmIrqId)
+	{
+		return;
+	}
+
+	/*Getting the Group and Subgroup of the IRQ*/
+	Loc_u8PriorityNibble = BYTE_TO_NIBBLE_NUM(Copy_enmIrqId % 4) + 1;
+	Loc_u8Priority = Get_NIBBLE(NVIC_IPR_FIRST_ADDRESS[DIV4(Copy_enmIrqId)], Loc_u8PriorityNibble);
+
+	*Outptr_u8Group = Loc_u8Priority >> PRIORITY_STRUCTURE;
+	*Outptr_u8SubGroup = Loc_u8Priority & ~(0xFF << PRIORITY_STRUCTURE);
 }
