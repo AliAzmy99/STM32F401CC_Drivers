@@ -31,10 +31,10 @@
 void SSEG_vdInit(const SsegConfig_type* Inprt_strctSsegConfig)
 {
 	/*Variables Definitions*/
-	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
+	u8 Loc_u8LastPin = Inprt_strctSsegConfig->enmSegFirstPinId + 7;
 
 	/*I/p Validation*/
-	if (SSEG_NOT_A_PIN <= Loc_u8LastPin)
+	if (GPIO_NOT_A_PIN <= Loc_u8LastPin)
 	{
 		return;
 	}
@@ -44,21 +44,21 @@ void SSEG_vdInit(const SsegConfig_type* Inprt_strctSsegConfig)
 	
 	
 	/*Enable Peripheral for the Port that the Display is connected to*/
-	RCC_vdEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->Loc_u8SegPort]);
+	RCC_vdEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->enmSegPortId]);
 	
 
 	/*Configure the Pins that the Display is connected to*/
-	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->Loc_u8SegFirstPin; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
+	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->enmSegFirstPinId; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
-		GPIO_vdSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT);
+		GPIO_vdSetPinMode(Inprt_strctSsegConfig->enmSegPortId, Loc_u8PinCounter, GPIO_OUTPUT);
 		
-		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_PUSH_PULL);
+		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->enmSegPortId, Loc_u8PinCounter, GPIO_PUSH_PULL);
 		
-		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_LOW_SPEED);
+		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->enmSegPortId, Loc_u8PinCounter, GPIO_LOW_SPEED);
 		
 	}
 	
-	/*Cleating Display*/
+	/*Clearing Display*/
 	return SSEG_vdClear(Inprt_strctSsegConfig);
 }
 
@@ -71,7 +71,7 @@ void SSEG_vdInit(const SsegConfig_type* Inprt_strctSsegConfig)
  */
 void SSEG_vdDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Number, u8 Copy_u8DotState)
 {
-	switch (Inprt_strctSsegConfig->Loc_u8Type)
+	switch (Inprt_strctSsegConfig->enmPolarity)
 	{
 	case SSEG_COMM_CATHODE:
 		switch (Copy_u8DotState)
@@ -116,7 +116,7 @@ void SSEG_vdDisplayNumber(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_
  */
 void SSEG_vdClear(const SsegConfig_type* Inprt_strctSsegConfig)
 {
-	switch (Inprt_strctSsegConfig->Loc_u8CommPort)
+	switch (Inprt_strctSsegConfig->enmCommPortId)
 	{
 	case SSEG_COMM_CATHODE:
 		return PRIV_vdWriteLeds(Inprt_strctSsegConfig, CLEAR);
@@ -135,21 +135,21 @@ void SSEG_vdClear(const SsegConfig_type* Inprt_strctSsegConfig)
  * Func. Name	: SSEG_vdEnable
  * Description	: This function allows the user to enable or disable the seven segment display
  * I/p Argument	: Inprt_strctSsegConfig
- * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
+ * I/p Argument	: Copy_enmEnable
  */
-void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enable)
+void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, Enable_type Copy_enmEnable)
 {
 	/*Enable the Seven Segment from the Common*/
-	switch (Inprt_strctSsegConfig->Loc_u8Type)
+	switch (Inprt_strctSsegConfig->enmPolarity)
 	{
 	case SSEG_COMM_CATHODE:
-		switch (Copy_u8Enable)
+		switch (Copy_enmEnable)
 		{
-		case SSEG_DISABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_HIGH);
+		case STD_DISABLE:
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, STD_HIGH);
 			break;
-		case SSEG_ENABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_LOW);
+		case STD_ENABLE:
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, STD_LOW);
 			break;
 		default:
 			return;
@@ -158,13 +158,13 @@ void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enabl
 		break;
 	
 	case SSEG_COMM_ANODE:
-		switch (Copy_u8Enable)
+		switch (Copy_enmEnable)
 		{
-		case SSEG_DISABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_LOW);
+		case STD_DISABLE:
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, STD_LOW);
 			break;
-		case SSEG_ENABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_HIGH);
+		case STD_ENABLE:
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, STD_HIGH);
 			break;
 		default:
 			return;
@@ -190,18 +190,18 @@ void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enabl
 static void PRIV_vdWriteLeds(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8LedArray)
 {
 	/*Variables Definitions*/
-	u8 Loc_u8LastPin = Inprt_strctSsegConfig->Loc_u8SegFirstPin + 7;
+	u8 Loc_u8LastPin = Inprt_strctSsegConfig->enmSegFirstPinId + 7;
 
 	/*I/p Validation*/
-	if (SSEG_NOT_A_PIN <= Loc_u8LastPin)
+	if (GPIO_NOT_A_PIN <= Loc_u8LastPin)
 	{
 		return;
 	}
 	
 	/*Writing LEDs*/
-	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->Loc_u8SegFirstPin; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
+	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->enmSegFirstPinId; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
-		GPIO_vdSetPinValue(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GET_BIT(Copy_u8LedArray, Loc_u8PinCounter));
+		GPIO_vdSetPinValue(Inprt_strctSsegConfig->enmSegPortId, Loc_u8PinCounter, GET_BIT(Copy_u8LedArray, Loc_u8PinCounter));
 		
 	}
 }
@@ -215,28 +215,33 @@ static void PRIV_vdWriteLeds(const SsegConfig_type* Inprt_strctSsegConfig, u8 Co
 static void PRIV_vdInitCommon(const SsegConfig_type* Inprt_strctSsegConfig)
 {
 	/*Initialize the Common if it is Connected to the MCU*/
-	if (SSEG_EXTERNAL_COMM > Inprt_strctSsegConfig->Loc_u8CommPort)
+	if (GPIO_NOT_A_PORT > Inprt_strctSsegConfig->enmCommPortId && GPIO_NOT_A_PIN > Inprt_strctSsegConfig->enmCommPinId)
 	{
+		if (GPIO_PORT_C == Inprt_strctSsegConfig->enmCommPortId && GPIO_PIN_13 > Inprt_strctSsegConfig->enmCommPinId)
+		{
+			return;
+		}
+		
 		/*Enable Peripheral for the Port that the Common is Connected to*/
-		RCC_vdEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->Loc_u8CommPort]);
+		RCC_vdEnablePeripheralClk(Glob_u8Peripheral[Inprt_strctSsegConfig->enmCommPortId]);
 		
 
 		/*Configure the Pin that the Common is Connected to*/
-		GPIO_vdSetPinMode(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_OUTPUT);
+		GPIO_vdSetPinMode(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, GPIO_OUTPUT);
 		
-		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_PUSH_PULL);
+		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, GPIO_PUSH_PULL);
 		
-		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_LOW_SPEED);
+		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, GPIO_LOW_SPEED);
 		
 
 		/*Enable the Seven Segment from the Common*/
-		switch (Inprt_strctSsegConfig->Loc_u8Type)
+		switch (Inprt_strctSsegConfig->enmPolarity)
 		{
 		case SSEG_COMM_CATHODE:
-			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_LOW);
+			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, STD_LOW);
 			break;
 		case SSEG_COMM_ANODE:
-			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_HIGH);
+			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->enmCommPortId, Inprt_strctSsegConfig->enmCommPinId, STD_HIGH);
 			break;
 		default:
 			return;
@@ -244,7 +249,7 @@ static void PRIV_vdInitCommon(const SsegConfig_type* Inprt_strctSsegConfig)
 		}
 		
 	}
-	else if (SSEG_EXTERNAL_COMM == Inprt_strctSsegConfig->Loc_u8CommPort)
+	else if (GPIO_NOT_A_PORT == Inprt_strctSsegConfig->enmCommPortId && GPIO_NOT_A_PIN == Inprt_strctSsegConfig->enmCommPinId)
 	{
 		/*Do nothing*/
 	}

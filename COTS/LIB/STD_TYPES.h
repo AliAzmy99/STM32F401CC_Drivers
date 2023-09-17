@@ -37,6 +37,13 @@ typedef enum
 	STD_LOW,
 	STD_HIGH
 }Value_type;
+
+	/*Enable Type*/
+typedef enum
+{
+	STD_DISABLE,
+	STD_ENABLE
+}Enable_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 

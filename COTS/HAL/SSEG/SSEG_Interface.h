@@ -10,59 +10,36 @@
 #define SSEG_INTERFACE_H
 
 
-/*Public Macros*/
-	/*Dot State Options*/
-#define SSEG_DOT_OFF	(0u)	/*Do Not Display Dot*/
-#define SSEG_DOT_ON		(1u)	/*Display Dot*/
+/*Types Definitions*/
+	/*Dot State Type*/
+typedef enum
+{
+	SSEG_DOT_OFF,
+	SSEG_DOT_ON
+}DotState_type;
 
-	/*Enable Options*/
-#define SSEG_DISABLE	(0u)	/*Disable the Display*/
-#define SSEG_ENABLE		(1u)	/*Enable the Display*/
-
-	/*Seven Segment Type Options*/
-#define SSEG_COMM_CATHODE		(0u)
-#define SSEG_COMM_ANODE			(1u)
-
-	/*Port Options*/
-#define SSEG_PORT_A						GPIO_PORT_A
-#define SSEG_PORT_B						GPIO_PORT_B
-#define SSEG_PORT_C						GPIO_PORT_C
-#define SSEG_EXTERNAL_COMM				GPIO_NOT_A_PORT
-
-	/*Pin Options*/
-#define SSEG_PIN_0			GPIO_PIN_0
-#define SSEG_PIN_1			GPIO_PIN_1
-#define SSEG_PIN_2			GPIO_PIN_2
-#define SSEG_PIN_3			GPIO_PIN_3
-#define SSEG_PIN_4			GPIO_PIN_4
-#define SSEG_PIN_5			GPIO_PIN_5
-#define SSEG_PIN_6			GPIO_PIN_6
-#define SSEG_PIN_7			GPIO_PIN_7
-#define SSEG_PIN_8			GPIO_PIN_8
-#define SSEG_PIN_9			GPIO_PIN_9
-#define SSEG_PIN_10			GPIO_PIN_10
-#define SSEG_PIN_11			GPIO_PIN_11
-#define SSEG_PIN_12			GPIO_PIN_12
-#define SSEG_PIN_13			GPIO_PIN_13
-#define SSEG_PIN_14			GPIO_PIN_14
-#define SSEG_PIN_15			GPIO_PIN_15
-#define SSEG_NOT_A_PIN		GPIO_NOT_A_PIN
+	/*Seven Segment Polarity Type*/
+typedef enum
+{
+	SSEG_COMM_CATHODE,
+	SSEG_COMM_ANODE
+}Polarity_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 
 /*Types Definitions*/
 	/*Seven Segment Configuration Structure*/
 typedef struct{
-	u8 Loc_u8SegPort;
-		/*The port the seven segment is connected to					Options: SSEG_PORT_A -> SSEG_PORT_B*/
-	u8 Loc_u8SegFirstPin;
-		/*The first pin that the seven segment is connected to			Options: SSEG_PIN_0 -> SSEG_PIN_8*/
-	u8 Loc_u8Type;
-		/*Type of seven segment											Options: SSEG_COMM_CATHODE, SSEG_COMM_ANODE, SSEG_EXTERNAL_COMM*/
-	u8 Loc_u8CommPort;
-		/*The port the seven segment common is connected to				Options: SSEG_PORT_A -> SSEG_PORT_C*/
-	u8 Loc_u8CommPin;
-		/*The pin the seven segment common is connected to				Options: SSEG_PIN_0 -> SSEG_PIN_15*/
+	PortId_type enmSegPortId;
+		/*The port the seven segment is connected to*/
+	PinId_type enmSegFirstPinId;
+		/*The first pin that the seven segment is connected to*/
+	Polarity_type enmPolarity;
+		/*Polarity of seven segment*/
+	PortId_type enmCommPortId;
+		/*The port the seven segment common is connected to. Note: Set it to GPIO_NOT_A_PORT if the common is not connected to the mcu*/
+	PinId_type enmCommPinId;
+		/*The pin the seven segment common is connected to. Note: Set it to GPIO_NOT_A_PIN if the common is not connected to the mcu*/
 }SsegConfig_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
@@ -95,9 +72,9 @@ void SSEG_vdClear(const SsegConfig_type* Inprt_strctSsegConfig);
  * Func. Name	: SSEG_vdEnable
  * Description	: This function allows the user to enable or disable the seven segment display
  * I/p Argument	: Inprt_strctSsegConfig
- * I/p Argument	: Copy_u8Enable				Options: SSEG_DISABLE, SSEG_ENABLE
+ * I/p Argument	: Copy_enmEnable
  */
-void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enable);
+void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, Enable_type Copy_enmEnable);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
