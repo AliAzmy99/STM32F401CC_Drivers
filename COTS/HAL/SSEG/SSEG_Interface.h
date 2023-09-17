@@ -1,5 +1,5 @@
 /************************************************************************/
-/* SWC			: Seven Segment Driver									*/
+/* SWC			: SSEG Driver											*/
 /* Author		: Ali Azmy												*/
 /* Version		: V0.0													*/
 /* Description	: SWC for Seven Segment Display							*/
@@ -24,10 +24,7 @@ typedef enum
 	SSEG_COMM_CATHODE,
 	SSEG_COMM_ANODE
 }Polarity_type;
-/*__________________________________________________________________________________________________________________________________________*/
 
-
-/*Types Definitions*/
 	/*Seven Segment Configuration Structure*/
 typedef struct{
 	PortId_type enmSegPortId;

@@ -1,5 +1,5 @@
 /************************************************************************/
-/* SWC			: Seven Segment Driver									*/
+/* SWC			: SSEG Driver											*/
 /* Author		: Ali Azmy												*/
 /* Version		: V0.0													*/
 /* Description	: SWC for Seven Segment Display							*/

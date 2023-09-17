@@ -1,9 +1,10 @@
 /************************************************************************/
-/* SWC			: Seven Segment Driver									*/
+/* SWC			: LEDMAT Driver											*/
 /* Author		: Ali Azmy												*/
 /* Version		: V0.0													*/
 /* Description	: SWC for LED Matrix									*/
 /************************************************************************/
+
 
 /*Include Needed Files*/
 	/*Include Needed LIB Files*/
