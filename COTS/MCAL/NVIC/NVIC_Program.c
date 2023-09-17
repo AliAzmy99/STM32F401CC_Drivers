@@ -192,8 +192,8 @@ void NVIC_vdGetPriority(IrqId_type Copy_enmIrqId, u8* Outptr_u8Group, u8* Outptr
 
 	/*Getting the Group and Subgroup of the IRQ*/
 	Loc_u8PriorityNibble = BYTE_TO_NIBBLE_NUM(Copy_enmIrqId % 4) + 1;
-	Loc_u8Priority = Get_NIBBLE(NVIC_IPR_FIRST_ADDRESS[DIV4(Copy_enmIrqId)], Loc_u8PriorityNibble);
+	Loc_u8Priority = GET_NIBBLE(NVIC_IPR_FIRST_ADDRESS[DIV4(Copy_enmIrqId)], Loc_u8PriorityNibble);
 
 	*Outptr_u8Group = Loc_u8Priority >> PRIORITY_STRUCTURE;
-	*Outptr_u8SubGroup = Loc_u8Priority & ~(0xFF << PRIORITY_STRUCTURE);
+	*Outptr_u8SubGroup = Loc_u8Priority & (~(0xFF << PRIORITY_STRUCTURE) & 0xFF);
 }
