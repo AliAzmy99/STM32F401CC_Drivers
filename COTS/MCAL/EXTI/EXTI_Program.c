@@ -148,6 +148,24 @@ void EXTI_vdTriggerSoftwareInterrupt(LineId_type Copy_enmLineId)
 	/*Unmask Interrupt*/
 	SET_BIT(EXTI_SWIER, Copy_enmLineId);
 }
+
+/* 
+ * Func. Name	: EXTI_vdGetPending
+ * Description	: This function allows the user to know whether a specific interrupt is pending
+ * I/p Argument	: Copy_enmLineId
+ * O/p Argument : Outptr_enmPending
+ */
+void EXTI_vdGetPending(LineId_type Copy_enmLineId, True_type* Outptr_enmPending)
+{
+	/*I/p validation*/
+	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
+	{
+		return;
+	}
+
+	/*Get Pending*/
+	*Outptr_enmPending = GET_BIT(EXTI_PR, Copy_enmLineId);
+}
 /*__________________________________________________________________________________________________________________________________________*/
 
 

@@ -87,6 +87,14 @@ void EXTI_vdSelectEdgeTriggers(LineId_type Copy_enmLineId, DetectedEdge_type Cop
  * I/p Argument	: Copy_enmLineId
  */
 void EXTI_vdTriggerSoftwareInterrupt(LineId_type Copy_enmLineId);
+
+/* 
+ * Func. Name	: EXTI_vdGetPending
+ * Description	: This function allows the user to know whether a specific interrupt is pending
+ * I/p Argument	: Copy_enmLineId
+ * O/p Argument : Outptr_enmPending
+ */
+void EXTI_vdGetPending(LineId_type Copy_enmLineId, True_type* Outptr_enmPending);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
