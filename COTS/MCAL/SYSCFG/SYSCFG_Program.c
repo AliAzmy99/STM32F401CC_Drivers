@@ -27,25 +27,25 @@
 /* 
  * Func. Name	: SYSCFG_vdSetExtiLinePort
  * Description	: This function allows the user to choose the Port that a particular EXTI line is connected to
- * I/p Argument	: Copy_u8Line			Options: SYSCFG_LINE_0 -> SYSCFG_LINE_15
- * I/p Argument : Copy_u8Port			Options: SYSCFG_PORT_A -> SYSCFG_PORT_C
+ * I/p Argument	: Copy_enmLineId
+ * I/p Argument : Copy_enmPortId
  */
-void SYSCFG_vdSetExtiLinePort(u8 Copy_u8Line, u8 Copy_u8Port)
+void SYSCFG_vdSetExtiLinePort(LineId_type Copy_enmLineId, PortId_type Copy_enmPortId)
 {
 	/*Variables Definitions*/
 	u8 Loc_u8RegisterNum = 0;
 	u8 Loc_u8NibbleNum = 0;
 
 	/*I/p Validation*/
-	if ((SYSCFG_PORT_C == Copy_u8Port && SYSCFG_LINE_13 > Copy_u8Line) || SYSCFG_NOT_A_LINE <= Copy_u8Line || SYSCFG_NOT_A_PORT <= Copy_u8Port)
+	if ((GPIO_PORT_C == Copy_enmPortId && EXTI_LINE_13 > Copy_enmLineId) ||EXTI_NOT_A_LINE <= Copy_enmLineId || GPIO_NOT_A_PORT <= Copy_enmPortId)
 	{
 		return;
 	}
 
 	/*Choosing Register and Bit*/
-	Loc_u8RegisterNum = Copy_u8Line >> 2;
-	Loc_u8NibbleNum = Copy_u8Line - (Loc_u8RegisterNum << 2);
+	Loc_u8RegisterNum = Copy_enmLineId >> 2;
+	Loc_u8NibbleNum = Copy_enmLineId - (Loc_u8RegisterNum << 2);
 
 	/*Setting Port*/
-	MAKE_NIBBLE(SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum], Loc_u8NibbleNum, Copy_u8Port);
+	MAKE_NIBBLE(SYSCFG_EXTICR_FIRST_ADDRESS[Loc_u8RegisterNum], Loc_u8NibbleNum, Copy_enmPortId);
 }
