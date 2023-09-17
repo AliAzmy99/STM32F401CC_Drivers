@@ -44,6 +44,13 @@ typedef enum
 	STD_DISABLE,
 	STD_ENABLE
 }Enable_type;
+
+	/*True Type*/
+typedef enum
+{
+	STD_FALSE,
+	STD_TRUE
+}True_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 
