@@ -25,16 +25,19 @@
 
 /*Public Functions Definitions*/
 /* 
- * Func. Name	: EXTI_vdInit
- * Description	: This function allows the user to initialize the external interrupts/events controller
+ * Func. Name	: EXTI_vdInitLine
+ * Description	: This function allows the user to initialize a certain line
+ * I/p Argument	: Copy_enmLineId			: Line to initialize
+ * I/p Argument	: Copy_enmPortId			: Port to connect the line to
+ * I/p Argument	: Copy_enmDetectedEdge		: Edges that trigger the line interrupt
+ * I/p Argument	: Inptr_vdCallbackFunction	: Function that is called when the line interrupt triggered
  */
-void EXTI_vdInit(void)
+void EXTI_vdInitLine(LineId_type Copy_enmLineId, PortId_type Copy_enmPortId, DetectedEdge_type Copy_enmDetectedEdge, void (* Inptr_vdCallbackFunction)(void))
 {
-	for (u8 Loc_u8LineCounter = 0; EXTI_NOT_A_LINE > Loc_u8LineCounter; ++Loc_u8LineCounter)
-	{
-		SYSCFG_vdSetExtiLinePort(Loc_u8LineCounter, Glob_u8LinePorts[Loc_u8LineCounter]);
-		
-	}
+	EXTI_vdDisableInterrupt(Copy_enmLineId);
+	SYSCFG_vdSetExtiLinePort(Copy_enmLineId, Copy_enmPortId);
+	EXTI_vdSelectEdgeTriggers(Copy_enmLineId, Copy_enmDetectedEdge);
+	EXTI_vdSetCallbackFunction(Copy_enmLineId, Inptr_vdCallbackFunction);
 }
 
 /* 
