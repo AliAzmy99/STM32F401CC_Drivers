@@ -31,18 +31,18 @@
 #define MAKE_8BITS(Var, BitNo, Val)				(Var) &= ((~(0xFF << (BitNo)))) | ((Val) << (BitNo))
 
 	/*Nibbles*/
-#define SET_NIBBLE(Var, NibbleNo)				(Var) |= 0xF << (NIBBLE_TO_BIT_NUM(NibbleNo))
-#define CLR_NIBBLE(Var, NibbleNo)				(Var) &= ~(0xF << (NIBBLE_TO_BIT_NUM(NibbleNo)))
-#define TOGGLE_NIBBLE(Var, NibbleNo)			(Var) ^= 0xF << (NIBBLE_TO_BIT_NUM(NibbleNo))
-#define GET_NIBBLE(Var, NibbleNo)				(((Var) >> (NIBBLE_TO_BIT_NUM(NibbleNo))) & 0xF)
-#define MAKE_NIBBLE(Var, NibbleNo, Val)			(Var) &= ((~(0xF << (NIBBLE_TO_BIT_NUM(NibbleNo))))) | ((Val) << (NIBBLE_TO_BIT_NUM(NibbleNo)))
+#define SET_NIBBLE(Var, NibbleNo)				SET_4BITS(Var, NIBBLE_TO_BIT_NUM(NibbleNo))		
+#define CLR_NIBBLE(Var, NibbleNo)				CLR_4BITS(Var, NIBBLE_TO_BIT_NUM(NibbleNo))		
+#define TOGGLE_NIBBLE(Var, NibbleNo)			TOGGLE_4BITS(Var, NIBBLE_TO_BIT_NUM(NibbleNo))	
+#define GET_NIBBLE(Var, NibbleNo)				GET_4BITS(Var, NIBBLE_TO_BIT_NUM(NibbleNo))		
+#define MAKE_NIBBLE(Var, NibbleNo, Val)			MAKE_4BITS(Var, NIBBLE_TO_BIT_NUM(NibbleNo), Val)	
 
 	/*Bytes*/
-#define SET_BYTE(Var, ByteNo)					(Var) |= 0xFF << (BYTE_TO_BIT_NUM(ByteNo))
-#define CLR_BYTE(Var, ByteNo)					(Var) &= ~(0xFF << (BYTE_TO_BIT_NUM(ByteNo)))
-#define TOGGLE_BYTE(Var, ByteNo)					(Var) ^= 0xFF << (BYTE_TO_BIT_NUM(ByteNo))
-#define GET_BYTE(Var, ByteNo)					(((Var) >> (BYTE_TO_BIT_NUM(ByteNo))) & 0xFF)
-#define MAKE_BYTE(Var, ByteNo, Val)				(Var) &= ((~(0xFF << (BYTE_TO_BIT_NUM(ByteNo))))) | ((Val) << (BYTE_TO_BIT_NUM(ByteNo)))
+#define SET_BYTE(Var, ByteNo)					SET_8BITS(Var, BYTE_TO_BIT_NUM(ByteNo))
+#define CLR_BYTE(Var, ByteNo)					CLR_8BITS(Var, BYTE_TO_BIT_NUM(ByteNo))
+#define TOGGLE_BYTE(Var, ByteNo)				TOGGLE_8BITS(Var, BYTE_TO_BIT_NUM(ByteNo))
+#define GET_BYTE(Var, ByteNo)					GET_8BITS(Var, BYTE_TO_BIT_NUM(ByteNo))
+#define MAKE_BYTE(Var, ByteNo, Val)				MAKE_8BITS(Var, BYTE_TO_BIT_NUM(ByteNo), Val)
 
 	/*Conversions*/
 #define BYTE_TO_NIBBLE_NUM(Var)					((Var) << 1)
