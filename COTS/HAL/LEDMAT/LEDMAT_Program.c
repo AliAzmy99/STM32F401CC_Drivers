@@ -53,22 +53,22 @@ void LEDMAT_vdInit(void)
 	/*Initializing Column Pins*/
 	for (u8 Loc_u8PinCounter = COLUMN_FIRST_PIN; Loc_u8ColumnLastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
-		GPIO_vdSetPinMode(COLUMN_PORT, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
+		GPIO_vdSetPinMode(COLUMN_PORT, Loc_u8PinCounter, GPIO_OUTPUT);
 		
-		GPIO_vdSetPinOutputType(COLUMN_PORT, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
+		GPIO_vdSetPinOutputType(COLUMN_PORT, Loc_u8PinCounter, GPIO_PUSH_PULL);
 		
-		GPIO_vdSetPinOutputSpeed(COLUMN_PORT, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_M);
+		GPIO_vdSetPinOutputSpeed(COLUMN_PORT, Loc_u8PinCounter, GPIO_LOW_SPEED);
 		
 	}
 
 	/*Initializing Row Pins*/
 	for (u8 Loc_u8PinCounter = ROW_FIRST_PIN; Loc_u8RowLastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
-		GPIO_vdSetPinMode(ROW_PORT, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
+		GPIO_vdSetPinMode(ROW_PORT, Loc_u8PinCounter, GPIO_OUTPUT);
 		
-		GPIO_vdSetPinOutputType(ROW_PORT, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
+		GPIO_vdSetPinOutputType(ROW_PORT, Loc_u8PinCounter, GPIO_PUSH_PULL);
 		
-		GPIO_vdSetPinOutputSpeed(ROW_PORT, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_M);
+		GPIO_vdSetPinOutputSpeed(ROW_PORT, Loc_u8PinCounter, GPIO_LOW_SPEED);
 		
 	}
 
@@ -96,7 +96,7 @@ void LEDMAT_vdDisplay(const u8* Inptr_u8Frame)
 		
 
 		/*Enable Column*/
-		GPIO_vdSetPinValue(COLUMN_PORT, Loc_u8ColCounter, GPIO_VALUE_L);
+		GPIO_vdSetPinValue(COLUMN_PORT, Loc_u8ColCounter, STD_LOW);
 		
 
 		/*Delay 2.5ms*/
@@ -122,7 +122,7 @@ static void PRIV_vdDisableCols(void)
 	#if (ANODE_AT_COLUMNS == MATRTIX_POLARITY)
 		Loc_u8DisablingVal = GPIO_VALUE_L;
 	#elif (CATHODE_AT_COLUMNS == MATRTIX_POLARITY)
-		Loc_u8DisablingVal = GPIO_VALUE_H;
+		Loc_u8DisablingVal = STD_HIGH;
 	#else
 		#error Error: Invalid MATRTIX_POLARITY Configuration
 	#endif

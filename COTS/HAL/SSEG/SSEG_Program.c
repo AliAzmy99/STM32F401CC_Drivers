@@ -50,11 +50,11 @@ void SSEG_vdInit(const SsegConfig_type* Inprt_strctSsegConfig)
 	/*Configure the Pins that the Display is connected to*/
 	for (u8 Loc_u8PinCounter = Inprt_strctSsegConfig->Loc_u8SegFirstPin; Loc_u8LastPin >= Loc_u8PinCounter; ++Loc_u8PinCounter)
 	{
-		GPIO_vdSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_MODE_OUTPUT);
+		GPIO_vdSetPinMode(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT);
 		
-		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_TYPE_PP);
+		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_PUSH_PULL);
 		
-		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_OUTPUT_SPEED_L);
+		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8SegPort, Loc_u8PinCounter, GPIO_LOW_SPEED);
 		
 	}
 	
@@ -146,10 +146,10 @@ void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enabl
 		switch (Copy_u8Enable)
 		{
 		case SSEG_DISABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_SET);
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_HIGH);
 			break;
 		case SSEG_ENABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_RST);
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_LOW);
 			break;
 		default:
 			return;
@@ -161,10 +161,10 @@ void SSEG_vdEnable(const SsegConfig_type* Inprt_strctSsegConfig, u8 Copy_u8Enabl
 		switch (Copy_u8Enable)
 		{
 		case SSEG_DISABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_RST);
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_LOW);
 			break;
 		case SSEG_ENABLE:
-			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_SET);
+			return GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_HIGH);
 			break;
 		default:
 			return;
@@ -222,21 +222,21 @@ static void PRIV_vdInitCommon(const SsegConfig_type* Inprt_strctSsegConfig)
 		
 
 		/*Configure the Pin that the Common is Connected to*/
-		GPIO_vdSetPinMode(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_MODE_OUTPUT);
+		GPIO_vdSetPinMode(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_OUTPUT);
 		
-		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_OUTPUT_TYPE_PP);
+		GPIO_vdSetPinOutputType(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_PUSH_PULL);
 		
-		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_OUTPUT_SPEED_L);
+		GPIO_vdSetPinOutputSpeed(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_LOW_SPEED);
 		
 
 		/*Enable the Seven Segment from the Common*/
 		switch (Inprt_strctSsegConfig->Loc_u8Type)
 		{
 		case SSEG_COMM_CATHODE:
-			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_RST);
+			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_LOW);
 			break;
 		case SSEG_COMM_ANODE:
-			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, GPIO_SET);
+			GPIO_vdSetPinValueDirectAccess(Inprt_strctSsegConfig->Loc_u8CommPort, Inprt_strctSsegConfig->Loc_u8CommPin, STD_HIGH);
 			break;
 		default:
 			return;

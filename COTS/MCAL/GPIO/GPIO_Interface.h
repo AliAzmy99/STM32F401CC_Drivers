@@ -9,61 +9,70 @@
 #ifndef GPIO_INTERFACE_H
 #define GPIO_INTERFACE_H
 
+/*Types Definitions*/
+	/*Port ID Type*/
+typedef enum
+{
+	GPIO_PORT_A,
+	GPIO_PORT_B,
+	GPIO_PORT_C,
+	GPIO_NOT_A_PORT		/*Must remain the last element*/
+}PortId_type;
 
-/*Public Macros*/
-	/*Port ID Options*/
-#define GPIO_PORT_A		(0u)
-#define GPIO_PORT_B		(1u)
-#define GPIO_PORT_C		(2u)
-#define GPIO_NOT_A_PORT	(3u)
+	/*Pin ID Type*/
+typedef enum
+{
+	GPIO_PIN_0,
+	GPIO_PIN_1,
+	GPIO_PIN_2,
+	GPIO_PIN_3,
+	GPIO_PIN_4,
+	GPIO_PIN_5,
+	GPIO_PIN_6,
+	GPIO_PIN_7,
+	GPIO_PIN_8,
+	GPIO_PIN_9,
+	GPIO_PIN_10,
+	GPIO_PIN_11,
+	GPIO_PIN_12,
+	GPIO_PIN_13,
+	GPIO_PIN_14,
+	GPIO_PIN_15,
+	GPIO_NOT_A_PIN		/*Must remain the last element*/
+}PinId_type;
 
-	/*Pin ID Options*/
-#define GPIO_PIN_0		(0u)
-#define GPIO_PIN_1		(1u)
-#define GPIO_PIN_2		(2u)
-#define GPIO_PIN_3		(3u)
-#define GPIO_PIN_4		(4u)
-#define GPIO_PIN_5		(5u)
-#define GPIO_PIN_6		(6u)
-#define GPIO_PIN_7		(7u)
-#define GPIO_PIN_8		(8u)
-#define GPIO_PIN_9		(9u)
-#define GPIO_PIN_10		(10u)
-#define GPIO_PIN_11		(11u)
-#define GPIO_PIN_12		(12u)
-#define GPIO_PIN_13		(13u)
-#define GPIO_PIN_14		(14u)
-#define GPIO_PIN_15		(15u)
-#define GPIO_NOT_A_PIN	(16u)
+	/*Pin Mode Type*/
+typedef enum
+{
+	GPIO_INPUT,
+	GPIO_OUTPUT,
+	GPIO_ALTERNATE_FUNCTION,
+	GPIO_ANALOG
+}PinMode_type;
 
-	/*Mode ID Options*/
-#define GPIO_MODE_INPUT		(0u)	/*Input mode*/
-#define GPIO_MODE_OUTPUT	(1u)	/*Output mode*/
-#define GPIO_MODE_ALT_FUN	(2u)	/*Alternate function mode*/
-#define GPIO_MODE_ANALOG	(3u)	/*Analog mode*/
+	/*Output Mode Type*/
+typedef enum
+{
+	GPIO_PUSH_PULL,
+	GPIO_OPEN_DRAIN
+}OutputMode_type;
 
-	/*Output Type ID Options*/
-#define GPIO_OUTPUT_TYPE_PP		(0u)	/*Output push-pull*/
-#define GPIO_OUTPUT_TYPE_OD		(1u)	/*Output open-drain*/
+	/*Output Speed Type*/
+typedef enum
+{
+	GPIO_LOW_SPEED,
+	GPIO_MEDIUM_SPEED,
+	GPIO_HIGH_SPEED,
+	GPIO_VERY_HIGH_SPEED
+}OutputSpeed_type;
 
-	/*Output Speed ID Options*/
-#define GPIO_OUTPUT_SPEED_L		(0u)	/*Low speed*/
-#define GPIO_OUTPUT_SPEED_M		(1u)	/*Medium speed*/
-#define GPIO_OUTPUT_SPEED_H		(2u)	/*High speed*/
-#define GPIO_OUTPUT_SPEED_VH	(3u)	/*Very High speed*/
-
-	/*Pull State ID Options*/
-#define GPIO_NO_PULL		(0u)	/*No pull (floating)*/
-#define GPIO_PULL_UP		(1u)	/*Pull-up*/
-#define GPIO_PULL_DOWN		(2u)	/*Pull-down*/
-
-	/*Value ID Options*/
-#define GPIO_VALUE_L		(0u)	/*Low value*/
-#define GPIO_VALUE_H		(1u)	/*High vale*/
-
-	/*Action ID Options*/
-#define GPIO_SET		(0u)	/*Set*/
-#define GPIO_RST		(1u)	/*Reset*/
+	/*Pull State Type*/
+typedef enum
+{
+	GPIO_FLOATING,
+	GPIO_PULL_UP,
+	GPIO_PULL_DOWN
+}PullState_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 
@@ -71,65 +80,65 @@
 /* 
  * Func. Name	: GPIO_vdSetPinMode
  * Description	: This function allows the user to select the mode of the mode of any pin
- * I/p Argument	: Copy_u8Port		Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin		Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: Copy_u8PinMode	Options: GPIO_MODE_INPUT, GPIO_MODE_OUTPUT, GPIO_MODE_ALT_FUN, GPIO_MODE_ANALOG
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmMode
  */
-void GPIO_vdSetPinMode(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinMode);
+void GPIO_vdSetPinMode(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, PinMode_type Copy_enmMode);
 
 /* 
  * Func. Name	: GPIO_vdSetPinOutputType
  * Description	: This function allows the user to select the output type of any pin
- * I/p Argument	: Copy_u8Port			Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin			Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: Copy_u8PinOutputType	Options: GPIO_OUTPUT_TYPE_PP, GPIO_OUTPUT_TYPE_OD
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmOutputMode
  */
-void GPIO_vdSetPinOutputType(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinOutputType);
+void GPIO_vdSetPinOutputType(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, OutputMode_type Copy_enmOutputMode);
 
 /* 
  * Func. Name	: GPIO_vdSetPinOutputSpeed
  * Description	: This function allows the user to select the output speed of any pin
- * I/p Argument	: Copy_u8Port					Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin					Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: GPIO_vdSetPinOutputSpeed		Options: GPIO_OUTPUT_SPEED_L -> GPIO_OUTPUT_SPEED_VH
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: GPIO_vdSetPinOutputSpeed
  */
-void GPIO_vdSetPinOutputSpeed(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinOutputSpeed);
+void GPIO_vdSetPinOutputSpeed(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, OutputSpeed_type Copy_enmOutputSpeed);
 
 /* 
  * Func. Name	: GPIO_vdSetPinPullState
  * Description	: This function allows the user to select the pull state of any pin
- * I/p Argument	: Copy_u8Port			Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin			Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: Copy_u8PinPullState	Options: GPIO_NO_PULL, GPIO_PULL_UP, GPIO_PULL_DOWN
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmPullState
  */
-void GPIO_vdSetPinPullState(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinPullState);
+void GPIO_vdSetPinPullState(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, PullState_type Copy_enmPullState);
 
 /* 
  * Func. Name	: GPIO_vdSetPinValue
  * Description	: This function allows the user to set the value of any pin
- * I/p Argument	: Copy_u8Port		Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin		Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: Copy_u8PinValue	Options: GPIO_VALUE_L, GPIO_VALUE_H
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmValue
  */
-void GPIO_vdSetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinValue);
+void GPIO_vdSetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue);
 
 /* 
  * Func. Name	: GPIO_vdSetPinValueDirectAccess
- * Description	: This function allows the user to set/reset any pin using direct access
- * I/p Argument	: Copy_u8Port		Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin		Options: GPIO_PIN_0 -> GPIO_PIN_15
- * I/p Argument	: Copy_u8PinAction	Options: GPIO_SET, GPIO_RST
+ * Description	: This function allows the user to set the value of any pin using direct access
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmValue
  */
-void GPIO_vdSetPinValueDirectAccess(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8PinAction);
+void GPIO_vdSetPinValueDirectAccess(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue);
 
 /* 
  * Func. Name	: GPIO_vdGetPinValue
  * Description	: This function allows the user to get the value of any pin
- * I/p Argument	: Copy_u8Port			Options: GPIO_PORT_A -> GPIO_PORT_C
- * I/p Argument	: Copy_u8Pin			Options: GPIO_PIN_0 -> GPIO_PIN_15
- * O/p Argument : Outptr_u8PinValue		Options: GPIO_VALUE_L, GPIO_VALUE_H
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * O/p Argument : Outptr_enmValue
  */
-void GPIO_vdGetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8* Outptr_u8PinValue);
+void GPIO_vdGetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type* Outptr_enmPinValue);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
