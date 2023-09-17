@@ -10,6 +10,11 @@
 #define SYSCFG_INTERFACE_H
 
 
+/*Include Needed MCAL Files*/
+#include "../EXTI/EXTI_Interface.h"
+/*__________________________________________________________________________________________________________________________________________*/
+
+
 /*Public Functions Declarations*/
 /* 
  * Func. Name	: SYSCFG_vdSetExtiLinePort
