@@ -38,47 +38,56 @@ void NECIR_vdActivateReceiver(void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data))
 /*__________________________________________________________________________________________________________________________________________*/
 
 
+#warning decide whether to add checking using the data inverse and to check for your address
 /*Private Functions Definitions*/
 static void PRIV_vdReceiveFrame(void)
 {
+	/*Variables Definitions*/
 	static u32 Loc_u32Frame = 0;
 	u32 Loc_u32ElapsedTicks = STK_vdGetElapsedTicks;
 
-	if (STD_FALSE == Glob_enmInTransmission)
+	/*Receiving Frame*/
+	if (STD_FALSE == Glob_enmInTransmission)	/*Startting transmission*/
 	{
 		STK_vdSetIntervalSingle(75000, &PRIV_vdPrepareForNewFrame);
 		Glob_enmInTransmission = STD_TRUE;
 	}
-	else if (13000 <= Loc_u32ElapsedTicks && 14000 >= Loc_u32ElapsedTicks && Glob_enmInTransmission)
+	else if (13000 <= Loc_u32ElapsedTicks && 14000 >= Loc_u32ElapsedTicks && Glob_enmInTransmission)	/*Starting frame*/
 	{
 		Glob_enmFrameStarted = STD_TRUE;
 	}
-	else if (875 <= Loc_u32ElapsedTicks && 1375 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)
+	else if (875 <= Loc_u32ElapsedTicks && 1375 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)		/*Logical 1*/
 	{
 		CLR_BIT(Loc_u32Frame, Glob_u8EdgeCounter);
 		++Glob_u8EdgeCounter;
 	}
-	else if (2000 <= Loc_u32ElapsedTicks && 2500 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)
+	else if (2000 <= Loc_u32ElapsedTicks && 2500 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)	/*Logical 0*/
 	{
 		SET_BIT(Loc_u32Frame, Glob_u8EdgeCounter);
 		++Glob_u8EdgeCounter;
 	}
-
-	if (32 == Glob_u8EdgeCounter)
+	else	/*Data corruption*/
 	{
-		Globptr_vdCallbackFunction(GET_BYTE(Loc_u32Frame, 2));
 		PRIV_vdPrepareForNewFrame();
 	}
-	else if (32 < Glob_u8EdgeCounter)
+
+	/*Ending Transmission*/
+	if (32 == Glob_u8EdgeCounter)	/*Frame received*/
+	{
+		Globptr_vdCallbackFunction(GET_BYTE(Loc_u32Frame, 2));	/*Sending Received byte to callback function*/
+		PRIV_vdPrepareForNewFrame();
+	}
+	else if (32 < Glob_u8EdgeCounter)	/*Receiving failed*/
 	{
 		PRIV_vdPrepareForNewFrame();
 	}
 	else
 	{
-		/*No Porblem. Continue Receiving Frame*/
+		/*Continue Receiving Frame*/
 	}
 }
 
+/*Called when the entire frame is received or when the transmission fails*/
 static void PRIV_vdPrepareForNewFrame(void)
 {
 	STK_vdStop();
