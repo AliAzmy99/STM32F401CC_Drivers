@@ -11,13 +11,16 @@
 
 
 /*Defining Macros*/
+/*
 #define TRUE			(1u)
 #define FALSE			(0u)
+*/
 
 #ifndef NULL
 #define NULL			((void*)0u)
 #endif
 
+/*
 #define IDLE			(0u)
 #define BUSY			(1u)
 
@@ -28,6 +31,7 @@
 #define BIT_LOW			(0u)
 #define BYTE_HIGH		(0xFF)
 #define BYTE_LOW		(0x00)
+*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 
