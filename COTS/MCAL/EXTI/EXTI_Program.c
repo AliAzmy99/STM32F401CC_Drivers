@@ -30,7 +30,7 @@
  * I/p Argument	: Copy_enmLineId			: Line to initialize
  * I/p Argument	: Copy_enmPortId			: Port to connect the line to
  * I/p Argument	: Copy_enmDetectedEdge		: Edges that trigger the line interrupt
- * I/p Argument	: Inptr_vdCallbackFunction	: Function that is called when the line interrupt triggered
+ * I/p Argument	: Inptr_vdCallbackFunction	: Pointer to the function that is called when the line interrupt triggered
  */
 void EXTI_vdInitLine(LineId_type Copy_enmLineId, PortId_type Copy_enmPortId, DetectedEdge_type Copy_enmDetectedEdge, void (* Inptr_vdCallbackFunction)(void))
 {
