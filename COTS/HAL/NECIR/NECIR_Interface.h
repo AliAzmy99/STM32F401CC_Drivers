@@ -20,7 +20,7 @@
  * Func. Name	: NECIR_vdInit
  * Description	: This function allows the user to initialize the IR driver
  */
-void NECIR_vdInit(void);
+void NECIR_vdInit(LineId_type Copy_enmReceiverLine, PortId_type Copy_enmReceiverPort);
 
 /* 
  * Func. Name	: NECIR_vdInit
