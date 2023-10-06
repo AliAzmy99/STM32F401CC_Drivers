@@ -6,7 +6,6 @@
 /************************************************************************/
 
 
-#warning Fix PLL
 /*Include Needed Files*/
 	/*Include Needed LIB Files*/
 #include "../../LIB/STD_TYPES.h"
@@ -80,6 +79,7 @@ void RCC_vdInitSysClk(void)
 
 		/*Choosing PLL*/
 	#elif (PLL == RCC_CLK_SRC)
+		#error Error: The code for using PLL as the clk src is currently still in development
 		/*1- Turn Off PLL*/
 		CLR_BIT(RCC_CR, RCC_CR_PLLON);
 		/*2- Choosing PLL Multiplier Parameters*/

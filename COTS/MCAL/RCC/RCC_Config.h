@@ -12,7 +12,7 @@
 
 /*CLK Src Configuration*/
 	/*CLK Src*/
-#define RCC_CLK_SRC		PLL							/*Options: HSI, HSE, PLL*/
+#define RCC_CLK_SRC		HSI							/*Options: HSI, HSE, PLL*/
 
 	/*Whether to Bypass HSE Oscillator*/
 #define RCC_OSCILLATOR_BYPASS		DIS_OSC_BYPASS	/*Options: EN_OSC_BYPASS, DIS_OSC_BYPASS*/
