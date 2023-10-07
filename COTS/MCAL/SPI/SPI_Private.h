@@ -12,15 +12,15 @@
 
 /*Private Macros*/
 	/*Registers*/
-#define SPI_CR1			(*((volatile u32*)0x40013000))
-#define SPI_CR2			(*((volatile u32*)0x40013004))
-#define SPI_SR			(*((volatile u32*)0x40013008))
-#define SPI_DR			(*((volatile u32*)0x4001300C))
-#define SPI_CRPR		(*((volatile u32*)0x40013010))
-#define SPI_RXCRCR		(*((volatile u32*)0x40013014))
-#define SPI_TXCRCR		(*((volatile u32*)0x40013018))
-#define SPI_I2SCFGR		(*((volatile u32*)0x4001301C))
-#define SPI_I2SPR		(*((volatile u32*)0x40013020))
+#define SPI_CR1			(*((volatile u16*)0x40013000))
+#define SPI_CR2			(*((volatile u16*)0x40013004))
+#define SPI_SR			(*((volatile u16*)0x40013008))
+#define SPI_DR			(*((volatile u16*)0x4001300C))
+#define SPI_CRPR		(*((volatile u16*)0x40013010))
+#define SPI_RXCRCR		(*((volatile u16*)0x40013014))
+#define SPI_TXCRCR		(*((volatile u16*)0x40013018))
+#define SPI_I2SCFGR		(*((volatile u16*)0x4001301C))
+#define SPI_I2SPR		(*((volatile u16*)0x40013020))
 
 	/*Bits*/
 		/*SPI_CR1*/
