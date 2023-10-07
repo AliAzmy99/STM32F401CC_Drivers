@@ -34,16 +34,14 @@ void NECIR_vdInit(LineId_type Copy_enmReceiverLine, PortId_type Copy_enmReceiver
 	Glob_enmReceiverLine = Copy_enmReceiverLine;
 
 	EXTI_vdInitLine(Copy_enmReceiverLine, Copy_enmReceiverPort, EXTI_FALLING_EDGE, &PRIV_vdReceiveFrame);
-
-	RCC_vdEnablePeripheralClk(Copy_enmReceiverPort);
 	
 	GPIO_vdSetPinMode(Copy_enmReceiverPort, Copy_enmReceiverLine, GPIO_INPUT);
 	GPIO_vdSetPinPullState(Copy_enmReceiverPort, Copy_enmReceiverLine, GPIO_PULL_UP);
 }
 
 /* 
- * Func. Name	: NECIR_vdInit
- * Description	: This function allows the user to initialize the IR driver
+ * Func. Name	: NECIR_vdActivateReceiver
+ * Description	: This function allows the user to activate the IR receiver
  * I/p Argument	: Inptr_vdCallbackFunction	: Pointer to the function to be called when a frame is received.
  * 				  It takes the received byte as an argument.
  */
@@ -52,10 +50,18 @@ void NECIR_vdActivateReceiver(void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data))
 	EXTI_vdEnableInterrupt(Glob_enmReceiverLine);
 	Globptr_vdCallbackFunction = Inptr_vdCallbackFunction;
 }
+
+/* 
+ * Func. Name	: NECIR_vdDeactivateReceiver
+ * Description	: This function allows the user to deactivate the IR receiver
+ */
+void NECIR_vdDeactivateReceiver(void)
+{
+	EXTI_vdDisableInterrupt(Glob_enmReceiverLine);
+}
 /*__________________________________________________________________________________________________________________________________________*/
 
 
-#warning decide whether to add checking using the data inverse and to check for your address
 /*Private Functions Definitions*/
 /* 
  * Func. Name	: PRIV_vdReceiveFrame
@@ -73,16 +79,16 @@ static void PRIV_vdReceiveFrame(void)
 		STK_vdSetIntervalSingle(75000, &PRIV_vdPrepareForNewFrame);
 		Glob_enmInTransmission = STD_TRUE;
 	}
-	else if (13000 <= Loc_u32ElapsedTicks && 14000 >= Loc_u32ElapsedTicks && Glob_enmInTransmission)	/*Starting frame*/
+	else if (13000 <= Loc_u32ElapsedTicks && 14000 >= Loc_u32ElapsedTicks && Glob_enmInTransmission && (!Glob_enmFrameStarted))		/*Starting frame*/
 	{
 		Glob_enmFrameStarted = STD_TRUE;
 	}
-	else if (875 <= Loc_u32ElapsedTicks && 1375 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)		/*Logical 1*/
+	else if (875 <= Loc_u32ElapsedTicks && 1375 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)		/*Logical 0*/
 	{
 		CLR_BIT(Loc_u32Frame, Glob_u8EdgeCounter);
 		++Glob_u8EdgeCounter;
 	}
-	else if (2000 <= Loc_u32ElapsedTicks && 2500 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)	/*Logical 0*/
+	else if (2000 <= Loc_u32ElapsedTicks && 2500 >= Loc_u32ElapsedTicks && Glob_enmFrameStarted)	/*Logical 1*/
 	{
 		SET_BIT(Loc_u32Frame, Glob_u8EdgeCounter);
 		++Glob_u8EdgeCounter;
@@ -109,7 +115,7 @@ static void PRIV_vdReceiveFrame(void)
 }
 
 /* 
- * Func. Name	: PRIV_vdReceiveFrame
+ * Func. Name	: PRIV_vdPrepareForNewFrame
  * Description	: This function is used by the driver to reset the variables used by PRIV_vdReceiveFrame
  * 				  to prepare it for receiving another frame.
  * Use Case		: This function is called when the entire frame is received or when the transmission fails
