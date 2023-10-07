@@ -1,13 +1,13 @@
 /************************************************************************/
-/* SWC			: Seven Segment Driver									*/
+/* SWC			: STP Driver											*/
 /* Author		: Ali Azmy												*/
 /* Version		: V0.0													*/
-/* Description	: SWC for Seven Segment Display							*/
+/* Description	: SWC for Serial to Parallel using 74HC595				*/
 /************************************************************************/
 
 
-#ifndef NECIR_CONFIG_H
-#define NECIR_CONFIG_H
+#ifndef STP_PRIVATE_H
+#define STP_PRIVATE_H
 
 
-#endif /*NECIR_CONFIG_H*/
+#endif /*STP_PRIVATE_H*/
