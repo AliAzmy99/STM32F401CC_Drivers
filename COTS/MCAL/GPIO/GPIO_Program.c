@@ -10,7 +10,7 @@
 	/*Include Needed LIB Files*/
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-#include "../../LIB/MACROS.h"y_u8PinOutputSpeed
+#include "../../LIB/MACROS.h"
 
 	/*Include Needed GPIO Files*/
 #include "GPIO_Config.h"
