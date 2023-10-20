@@ -10,12 +10,7 @@
 #define SPI_INTERFACE_H
 
 /*Types Definitions*/
-	/*Slave Master Type*/
-typedef enum
-{
-	SPI_SLAVE,
-	SPI_MASTER
-}SlaveMaster_type;
+
 /*__________________________________________________________________________________________________________________________________________*/
 
 

@@ -11,6 +11,16 @@
 
 
 /*Private Macros*/
+	/*SPI_CLK_PRE Options*/
+#define SPI_FP_2	(0b000)
+#define SPI_FP_4	(0b001)
+#define SPI_FP_8	(0b010)
+#define SPI_FP_16	(0b011)
+#define SPI_FP_32	(0b100)
+#define SPI_FP_64	(0b101)
+#define SPI_FP_128	(0b110)
+#define SPI_FP_256	(0b111)
+
 	/*Registers*/
 #define SPI_CR1			(*((volatile u16*)0x40013000))
 #define SPI_CR2			(*((volatile u16*)0x40013004))
@@ -40,6 +50,10 @@
 #define SPI_CR1_CRCEN		(13u)
 #define SPI_CR1_BIDIOE		(14u)
 #define SPI_CR1_BIDIMODE	(15u)
+		/*SPI_SR*/
+#define SPI_SR_RXNE		(0u)
+#define SPI_SR_TXE		(1u)
+#define SPI_SR_BSY		(7u)
 /*__________________________________________________________________________________________________________________________________________*/
 
 
