@@ -48,19 +48,6 @@ void SPI_vdInit(SpiId_type Copy_enmSpiId, SpiConfig_type* strctSpiConfig)
 		break;
 	}
 
-	/*Setting-Up Pins*/
-	GPIO_vdSetPinMode(strctSpiConfig->enmMosiPortId, strctSpiConfig->enmMosiPinId, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmMosiPortId, strctSpiConfig->enmMosiPinId, strctSpiConfig->enmMosiAf);
-
-	GPIO_vdSetPinMode(strctSpiConfig->enmMisoPortId, strctSpiConfig->enmMisoPinId, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmMisoPortId, strctSpiConfig->enmMisoPinId, strctSpiConfig->enmMisoAf);
-
-	GPIO_vdSetPinMode(strctSpiConfig->enmSckPortId, strctSpiConfig->enmSckPinId, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmSckPortId, strctSpiConfig->enmSckPinId, strctSpiConfig->enmSckAf);
-
-	GPIO_vdSetPinMode(strctSpiConfig->enmNssPortId, strctSpiConfig->enmNssPinId, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmNssPortId, strctSpiConfig->enmNssPinId, strctSpiConfig->enmNssAf);
-
 	/*Configuring SPI Registers*/
 	Loc_strctSpiRegister->CR1 = 0b0000000000000000;
 	if (strctSpiConfig->enmIsMaster)

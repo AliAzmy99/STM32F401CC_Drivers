@@ -52,22 +52,6 @@ typedef enum
 
 	/*Seven Segment Configuration Structure*/
 typedef struct{
-	PortId_type enmMosiPortId;			/*The port of the MOSI pin*/
-	PinId_type enmMosiPinId;			/*The MOSI pin*/
-	AlternativeFunction_type enmMosiAf;	/*The MOSI pin alternative function*/
-
-	PortId_type enmMisoPortId;			/*The port of the MISO pin*/
-	PinId_type enmMisoPinId;			/*The MISO pin*/
-	AlternativeFunction_type enmMisoAf;	/*The MISO pin alternative function*/
-	
-	PortId_type enmSckPortId;			/*The port of the SCK pin*/
-	PinId_type enmSckPinId;				/*The SCK pin*/
-	AlternativeFunction_type enmSckAf;	/*The SCK pin alternative function*/
-	
-	PortId_type enmNssPortId;			/*The port of the NSS pin*/
-	PinId_type enmNssPinId;				/*The NSS pin*/
-	AlternativeFunction_type enmNssAf;	/*The NSS pin alternative function*/
-
 	True_type enmIsMaster;				/*Whether the SPI is in Master mode*/
 	
 	SpiClkPre_type enmSpiClkPre;		/*The Prescaler for the SPI Clk from its bus*/
