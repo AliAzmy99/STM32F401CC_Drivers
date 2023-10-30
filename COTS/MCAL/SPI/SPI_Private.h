@@ -21,6 +21,14 @@
 #define SPI_FP_128	(0b110)
 #define SPI_FP_256	(0b111)
 
+	/*SPI_CPOL Options*/
+#define SPI_IDLE_LOW		(0u)		/*CK to 0 when idle*/
+#define SPI_IDLE_HIGH		(1u)		/*CK to 1 when idle*/
+
+	/*SPI_CPHA Options*/
+#define SPI_READ_AT_LEADING		(0u)	/*The first clock transition is the first data capture edge*/
+#define SPI_WRITE_AT_LEADING	(1u)	/*The second clock transition is the first data capture edge*/
+
 	/*Registers*/
 #define SPI_CR1			(*((volatile u16*)0x40013000))
 #define SPI_CR2			(*((volatile u16*)0x40013004))
@@ -50,10 +58,18 @@
 #define SPI_CR1_CRCEN		(13u)
 #define SPI_CR1_BIDIOE		(14u)
 #define SPI_CR1_BIDIMODE	(15u)
+		/*SPI_CR2*/
+#define SPI_CR2_RXNEIE		(6u)
+#define SPI_CR2_TXEIE		(7u)
 		/*SPI_SR*/
 #define SPI_SR_RXNE		(0u)
 #define SPI_SR_TXE		(1u)
 #define SPI_SR_BSY		(7u)
+/*__________________________________________________________________________________________________________________________________________*/
+
+
+/*Private Global Variables Definitions*/
+static void (* Globptr_vdCallbackFunction)(u8 Copy_u8Data) = NULL;	/*The callback function called when the master transmits data*/
 /*__________________________________________________________________________________________________________________________________________*/
 
 
