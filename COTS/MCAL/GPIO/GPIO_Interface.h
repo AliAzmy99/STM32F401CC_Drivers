@@ -73,6 +73,28 @@ typedef enum
 	GPIO_PULL_UP,
 	GPIO_PULL_DOWN
 }PullState_type;
+
+	/*Alternative Function Type*/
+typedef enum
+{
+	GPIO_AF_0,
+	GPIO_AF_1,
+	GPIO_AF_2,
+	GPIO_AF_3,
+	GPIO_AF_4,
+	GPIO_AF_5,
+	GPIO_AF_6,
+	GPIO_AF_7,
+	GPIO_AF_8,
+	GPIO_AF_9,
+	GPIO_AF_10,
+	GPIO_AF_11,
+	GPIO_AF_12,
+	GPIO_AF_13,
+	GPIO_AF_14,
+	GPIO_AF_15,
+	GPIO_NOT_AN_AF		/*Must remain the last element*/
+}AlternativeFunction_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 
@@ -139,6 +161,15 @@ void GPIO_vdSetPinValueDirectAccess(PortId_type Copy_enmPortId, PinId_type Copy_
  * O/p Argument : Outptr_enmValue
  */
 void GPIO_vdGetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type* Outptr_enmPinValue);
+
+/* 
+ * Func. Name	: GPIO_vdSetAlternativeFunction
+ * Description	: This function allows the user to set the alternative function of any pin
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmAltFunNum
+ */
+void GPIO_vdSetAlternativeFunction(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, AlternativeFunction_type Copy_enmAltFunNum);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

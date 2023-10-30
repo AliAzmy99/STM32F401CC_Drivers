@@ -388,3 +388,58 @@ void GPIO_vdGetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Va
 	/*Outputting Value*/
 	*Outptr_enmPinValue = GET_BIT(*Locptr_u32IDRxAddress, Copy_enmPinId);
 }
+
+/* 
+ * Func. Name	: GPIO_vdSetAlternativeFunction
+ * Description	: This function allows the user to set the alternative function of any pin
+ * I/p Argument	: Copy_enmPortId
+ * I/p Argument	: Copy_enmPinId
+ * I/p Argument	: Copy_enmAltFunNum
+ */
+void GPIO_vdSetAlternativeFunction(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, AlternativeFunction_type Copy_enmAltFunNum)
+{
+	/*Variables Definitions*/
+	volatile u32* Locptr_u32AFRxAddress = NULL;
+	u8 Loc_u8RegNumber = 0;
+
+	/*I/p Validation*/
+	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	{
+		return;
+	}
+
+	if (GPIO_NOT_AN_AF <= Copy_enmAltFunNum)
+	{
+		return;
+	}
+
+	if (7 >= Copy_enmPinId)
+	{
+		Loc_u8RegNumber = GPIO_AFRL_NO;
+	}
+	else
+	{
+		Loc_u8RegNumber = GPIO_AFRH_NO;
+		Copy_enmPinId -= 8;
+	}
+
+	/*Choosing Correct Register Address*/
+	switch (Copy_enmPortId)
+	{
+	case GPIO_PORT_A:
+		Locptr_u32AFRxAddress = ((u32*) GPIOA_FIRST_ADDRESS) + Loc_u8RegNumber;
+		break;
+	case GPIO_PORT_B:
+		Locptr_u32AFRxAddress = ((u32*) GPIOB_FIRST_ADDRESS) + Loc_u8RegNumber;
+		break;
+	case GPIO_PORT_C:
+		Locptr_u32AFRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + Loc_u8RegNumber;
+		break;
+	default:
+		return;
+		break;
+	}
+
+	/*Setting Alternative Function*/
+	MAKE_4BITS(*Locptr_u32AFRxAddress, Copy_enmPinId << 2, Copy_enmAltFunNum);
+}
