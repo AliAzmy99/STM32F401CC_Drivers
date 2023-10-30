@@ -62,17 +62,18 @@ void SPI_vdInit(SpiId_type Copy_enmSpiId, SpiConfig_type* strctSpiConfig)
 	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmNssPortId, strctSpiConfig->enmNssPinId, strctSpiConfig->enmNssAf);
 
 	/*Configuring SPI Registers*/
+	Loc_strctSpiRegister->CR1 = 0b0000000000000000;
 	if (strctSpiConfig->enmIsMaster)
 	{
-		Loc_strctSpiRegister->CR1 = 0b0000001101000000;		/*0b 0000 0011 0100 0000*/
+		SET_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_MSTR);			/*Setting as master*/
+		SET_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_SSM);			/*Enabling the software slave management*/
+		SET_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_SSI);			/*Deselecting as slave internally*/
 	}
-	else
-	{
-		Loc_strctSpiRegister->CR1 = 0b0000000101000000;		/*0b 0000 0001 0100 0000*/
-	}
+	
 	Loc_strctSpiRegister->CR1 |= (strctSpiConfig->enmSpiClkPre) << SPI_CR1_BR0;		/*Setting prescaler*/
 	MAKE_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_CPOL, strctSpiConfig->enmSpiCpol);	/*Setting Clk Polarity*/
 	MAKE_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_CPHA, strctSpiConfig->enmSpiCpha);	/*Setting Clk Phase*/
+	SET_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_SPE);								/*Enabling the SPI*/
 }
 
 void SPI_voidMasterTranceive(SpiId_type Copy_enmSpiId, PortId_type Copy_enmSlavePortId, PinId_type Copy_enmSlavePinId, u8 Copy_u8DataToTransmit, u8* Outptr_DataRecieved)
