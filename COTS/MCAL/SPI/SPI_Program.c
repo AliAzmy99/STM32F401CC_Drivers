@@ -23,61 +23,155 @@
 
 
 /*Public Functions Definitions*/
-void SPI_vdInit(void)
+void SPI_vdInit(SpiId_type Copy_enmSpiId, SpiConfig_type* strctSpiConfig)
 {
-	GPIO_vdSetPinMode(PORT_MOSI, PIN_MOSI, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(PORT_MOSI, PIN_MOSI, AF_MOSI);
+	/*Variables Definitions*/
+	volatile SpiRegisters_type* Loc_strctSpiRegister;
 
-	GPIO_vdSetPinMode(PORT_MISO, PIN_MISO, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(PORT_MISO, PIN_MISO, AF_MISO);
-
-	GPIO_vdSetPinMode(PORT_SCK, PIN_SCK, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(PORT_SCK, PIN_SCK, AF_SCK);
-
-	GPIO_vdSetPinMode(PORT_NSS, PIN_NSS, GPIO_ALTERNATE_FUNCTION);
-	GPIO_vdSetAlternativeFunction(PORT_NSS, PIN_NSS, AF_NSS);
-
-	if (IS_MASTER)
+	/*Choosing Correct Register Address*/
+	switch (Copy_enmSpiId)
 	{
-		SPI_CR1 = 0b0000001101000000;		/*0b 0000 0011 0100 0000*/
+	case SPI_1:
+		Loc_strctSpiRegister = SPI1_FIRST_ADDRESS;
+		break;
+	case SPI_2:
+		Loc_strctSpiRegister = SPI2_FIRST_ADDRESS;
+		break;
+	case SPI_3:
+		Loc_strctSpiRegister = SPI3_FIRST_ADDRESS;
+		break;
+	case SPI_4:
+		Loc_strctSpiRegister = SPI4_FIRST_ADDRESS;
+		break;
+	default:
+		return;
+		break;
+	}
+
+	/*Setting-Up Pins*/
+	GPIO_vdSetPinMode(strctSpiConfig->enmMosiPortId, strctSpiConfig->enmMosiPinId, GPIO_ALTERNATE_FUNCTION);
+	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmMosiPortId, strctSpiConfig->enmMosiPinId, strctSpiConfig->enmMosiAf);
+
+	GPIO_vdSetPinMode(strctSpiConfig->enmMisoPortId, strctSpiConfig->enmMisoPinId, GPIO_ALTERNATE_FUNCTION);
+	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmMisoPortId, strctSpiConfig->enmMisoPinId, strctSpiConfig->enmMisoAf);
+
+	GPIO_vdSetPinMode(strctSpiConfig->enmSckPortId, strctSpiConfig->enmSckPinId, GPIO_ALTERNATE_FUNCTION);
+	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmSckPortId, strctSpiConfig->enmSckPinId, strctSpiConfig->enmSckAf);
+
+	GPIO_vdSetPinMode(strctSpiConfig->enmNssPortId, strctSpiConfig->enmNssPinId, GPIO_ALTERNATE_FUNCTION);
+	GPIO_vdSetAlternativeFunction(strctSpiConfig->enmNssPortId, strctSpiConfig->enmNssPinId, strctSpiConfig->enmNssAf);
+
+	/*Configuring SPI Registers*/
+	if (strctSpiConfig->enmIsMaster)
+	{
+		Loc_strctSpiRegister->CR1 = 0b0000001101000000;		/*0b 0000 0011 0100 0000*/
 	}
 	else
 	{
-		SPI_CR1 = 0b0000000101000000;		/*0b 0000 0001 0100 0000*/
+		Loc_strctSpiRegister->CR1 = 0b0000000101000000;		/*0b 0000 0001 0100 0000*/
 	}
-	SPI_CR1 |= SPI_CLK_PRE << SPI_CR1_BR0;		/*Setting prescaler*/
-	MAKE_BIT(SPI_CR1, SPI_CR1_CPOL, SPI_CPOL);	/*Setting Clk Polarity*/
-	MAKE_BIT(SPI_CR1, SPI_CR1_CPHA, SPI_CPHA);	/*Setting Clk Phase*/
+	Loc_strctSpiRegister->CR1 |= (strctSpiConfig->enmSpiClkPre) << SPI_CR1_BR0;		/*Setting prescaler*/
+	MAKE_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_CPOL, strctSpiConfig->enmSpiCpol);	/*Setting Clk Polarity*/
+	MAKE_BIT(Loc_strctSpiRegister->CR1, SPI_CR1_CPHA, strctSpiConfig->enmSpiCpha);	/*Setting Clk Phase*/
 }
 
-void SPI_voidMasterTranceive(PortId_type Copy_enmSlavePortId, PinId_type Copy_enmSlavePinId, u8 Copy_u8DataToTransmit, u8* Outptr_DataRecieved)
+void SPI_voidMasterTranceive(SpiId_type Copy_enmSpiId, PortId_type Copy_enmSlavePortId, PinId_type Copy_enmSlavePinId, u8 Copy_u8DataToTransmit, u8* Outptr_DataRecieved)
 {
+	/*Variables Definitions*/
+	volatile SpiRegisters_type* Loc_strctSpiRegister;
+
+	/*Choosing Correct Register Address*/
+	switch (Copy_enmSpiId)
+	{
+	case SPI_1:
+		Loc_strctSpiRegister = SPI1_FIRST_ADDRESS;
+		break;
+	case SPI_2:
+		Loc_strctSpiRegister = SPI2_FIRST_ADDRESS;
+		break;
+	case SPI_3:
+		Loc_strctSpiRegister = SPI3_FIRST_ADDRESS;
+		break;
+	case SPI_4:
+		Loc_strctSpiRegister = SPI4_FIRST_ADDRESS;
+		break;
+	default:
+		return;
+		break;
+	}
+
 	/*Select Slave*/
 	GPIO_vdSetPinValue(Copy_enmSlavePortId, Copy_enmSlavePinId, STD_LOW);
 
 	/*Send Data*/
-	SPI_DR = Copy_u8DataToTransmit;		/*Writing to the DR register automatically triggers the transmition */
+	Loc_strctSpiRegister->DR = Copy_u8DataToTransmit;		/*Writing to the DR register automatically triggers the transmition */
 	
 	/*Wait Until SPI is not Busy*/
-	while(!GET_BIT(SPI_SR, SPI_SR_RXNE));
+	while(!GET_BIT(Loc_strctSpiRegister->SR, SPI_SR_RXNE));
 
 	/*Deselect Slave*/
 	GPIO_vdSetPinValue(Copy_enmSlavePortId, Copy_enmSlavePinId, STD_HIGH);
 
 	/*Output Data*/
-	*Outptr_DataRecieved = (u8) (SPI_DR);
+	*Outptr_DataRecieved = (u8) (Loc_strctSpiRegister->DR);
 }
 
-void SPI_voidSlaveTranceive(void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data), u8 Copy_u8InitialDataToTransmit)
+void SPI_voidSlaveTranceive(SpiId_type Copy_enmSpiId, void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data), u8 Copy_u8InitialDataToTransmit)
 {
-	SET_BIT(SPI_CR2, SPI_CR2_RXNEIE);
+	/*Variables Definitions*/
+	volatile SpiRegisters_type* Loc_strctSpiRegister;
+
+	/*Choosing Correct Register Address*/
+	switch (Copy_enmSpiId)
+	{
+	case SPI_1:
+		Loc_strctSpiRegister = SPI1_FIRST_ADDRESS;
+		break;
+	case SPI_2:
+		Loc_strctSpiRegister = SPI2_FIRST_ADDRESS;
+		break;
+	case SPI_3:
+		Loc_strctSpiRegister = SPI3_FIRST_ADDRESS;
+		break;
+	case SPI_4:
+		Loc_strctSpiRegister = SPI4_FIRST_ADDRESS;
+		break;
+	default:
+		return;
+		break;
+	}
+
+	SET_BIT(Loc_strctSpiRegister->CR2, SPI_CR2_RXNEIE);
 	Globptr_vdCallbackFunction = Inptr_vdCallbackFunction;
-	SPI_DR = Copy_u8InitialDataToTransmit;
+	Loc_strctSpiRegister->DR = Copy_u8InitialDataToTransmit;
 }
 
-void SPI_voidSlaveUpdateDataToTransmit(u8 Copy_u8DataToTransmit)
+void SPI_voidSlaveUpdateDataToTransmit(SpiId_type Copy_enmSpiId, u8 Copy_u8DataToTransmit)
 {
-	SPI_DR = Copy_u8DataToTransmit;
+	/*Variables Definitions*/
+	volatile SpiRegisters_type* Loc_strctSpiRegister;
+
+	/*Choosing Correct Register Address*/
+	switch (Copy_enmSpiId)
+	{
+	case SPI_1:
+		Loc_strctSpiRegister = SPI1_FIRST_ADDRESS;
+		break;
+	case SPI_2:
+		Loc_strctSpiRegister = SPI2_FIRST_ADDRESS;
+		break;
+	case SPI_3:
+		Loc_strctSpiRegister = SPI3_FIRST_ADDRESS;
+		break;
+	case SPI_4:
+		Loc_strctSpiRegister = SPI4_FIRST_ADDRESS;
+		break;
+	default:
+		return;
+		break;
+	}
+
+	Loc_strctSpiRegister->DR = Copy_u8DataToTransmit;
 }
 /*__________________________________________________________________________________________________________________________________________*/
 
@@ -85,9 +179,36 @@ void SPI_voidSlaveUpdateDataToTransmit(u8 Copy_u8DataToTransmit)
 /*Interrupt Service Routines Definitions*/
 void SPI1_IRQHandler(void)
 {
-	/*1- Call Callback Function*/
+	/*Call Callback Function*/
 	if (Globptr_vdCallbackFunction)
 	{
-		Globptr_vdCallbackFunction((u8) (SPI_DR));
+		Globptr_vdCallbackFunction((u8) (SPI1_FIRST_ADDRESS->DR));
+	}
+}
+
+void SPI2_IRQHandler(void)
+{
+	/*Call Callback Function*/
+	if (Globptr_vdCallbackFunction)
+	{
+		Globptr_vdCallbackFunction((u8) (SPI2_FIRST_ADDRESS->DR));
+	}
+}
+
+void SPI3_IRQHandler(void)
+{
+	/*Call Callback Function*/
+	if (Globptr_vdCallbackFunction)
+	{
+		Globptr_vdCallbackFunction((u8) (SPI3_FIRST_ADDRESS->DR));
+	}
+}
+
+void SPI4_IRQHandler(void)
+{
+	/*Call Callback Function*/
+	if (Globptr_vdCallbackFunction)
+	{
+		Globptr_vdCallbackFunction((u8) (SPI4_FIRST_ADDRESS->DR));
 	}
 }

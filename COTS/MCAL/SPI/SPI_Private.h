@@ -10,35 +10,37 @@
 #define SPI_PRIVATE_H
 
 
+/*Types Definitions*/
+typedef struct
+{
+	u16 CR1;
+	const u16 Reserved_1;
+	u16 CR2;
+	const u16 Reserved_2;
+	u16 SR;
+	const u16 Reserved_3;
+	u16 DR;
+	const u16 Reserved_4;
+	u16 CRPR;
+	const u16 Reserved_5;
+	u16 RXCRCR;
+	const u16 Reserved_6;
+	u16 TXCRCR;
+	const u16 Reserved_7;
+	u16 I2SCFGR;
+	const u16 Reserved_8;
+	u16 I2SPR;
+}SpiRegisters_type;
+/*__________________________________________________________________________________________________________________________________________*/
+
+
 /*Private Macros*/
-	/*SPI_CLK_PRE Options*/
-#define SPI_FP_2	(0b000)
-#define SPI_FP_4	(0b001)
-#define SPI_FP_8	(0b010)
-#define SPI_FP_16	(0b011)
-#define SPI_FP_32	(0b100)
-#define SPI_FP_64	(0b101)
-#define SPI_FP_128	(0b110)
-#define SPI_FP_256	(0b111)
-
-	/*SPI_CPOL Options*/
-#define SPI_IDLE_LOW		(0u)		/*CK to 0 when idle*/
-#define SPI_IDLE_HIGH		(1u)		/*CK to 1 when idle*/
-
-	/*SPI_CPHA Options*/
-#define SPI_READ_AT_LEADING		(0u)	/*The first clock transition is the first data capture edge*/
-#define SPI_WRITE_AT_LEADING	(1u)	/*The second clock transition is the first data capture edge*/
-
 	/*Registers*/
-#define SPI_CR1			(*((volatile u16*)0x40013000))
-#define SPI_CR2			(*((volatile u16*)0x40013004))
-#define SPI_SR			(*((volatile u16*)0x40013008))
-#define SPI_DR			(*((volatile u16*)0x4001300C))
-#define SPI_CRPR		(*((volatile u16*)0x40013010))
-#define SPI_RXCRCR		(*((volatile u16*)0x40013014))
-#define SPI_TXCRCR		(*((volatile u16*)0x40013018))
-#define SPI_I2SCFGR		(*((volatile u16*)0x4001301C))
-#define SPI_I2SPR		(*((volatile u16*)0x40013020))
+#define SPI1_FIRST_ADDRESS	((volatile SpiRegisters_type*) 0x40013000)
+#define SPI2_FIRST_ADDRESS	((volatile SpiRegisters_type*) 0x40013800)
+#define SPI3_FIRST_ADDRESS	((volatile SpiRegisters_type*) 0x40013C00)
+#define SPI4_FIRST_ADDRESS	((volatile SpiRegisters_type*) 0x40013400)
+
 
 	/*Bits*/
 		/*SPI_CR1*/
