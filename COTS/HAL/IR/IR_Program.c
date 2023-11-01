@@ -42,8 +42,8 @@ void IR_vdInit(LineId_type Copy_enmReceiverLine, PortId_type Copy_enmReceiverPor
 /* 
  * Func. Name	: IR_vdActivateReceiver
  * Description	: This function allows the user to activate the IR receiver
- * I/p Argument	: Inptr_vdCallbackFunction	: Pointer to the function to be called when a frame is received.
- * 				  It takes the received byte as an argument.
+ * I/p Argument	: Inptr_vdCallbackFunction	: Pointer to the function to be called when a frame is received
+ * 				  							  It takes the received byte as an argument
  */
 void IR_vdActivateReceiver(void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data))
 {
