@@ -41,7 +41,6 @@ typedef struct
 #define SPI3_FIRST_ADDRESS	((volatile SpiRegisters_type*) 0x40013C00)
 #define SPI4_FIRST_ADDRESS	((volatile SpiRegisters_type*) 0x40013400)
 
-
 	/*Bits*/
 		/*SPI_CR1*/
 #define SPI_CR1_CPHA		(0u)

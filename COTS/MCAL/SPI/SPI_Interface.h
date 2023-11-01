@@ -63,7 +63,43 @@ typedef struct{
 
 
 /*Public Functions Declarations*/
+/* 
+ * Func. Name	: SPI_vdInit
+ * Description	: This function allows the user to initialize one of the SPIs
+ * I/p Argument	: Copy_enmSpiId				: The SPI to initialize
+ * I/p Argument	: strctSpiConfig			: The SPI config struct
+ */
+void SPI_vdInit(SpiId_type Copy_enmSpiId, SpiConfig_type* strctSpiConfig);
 
+/* 
+ * Func. Name	: SPI_voidMasterTranceive
+ * Description	: This function allows the user to tranceive data when in master mode
+ * I/p Argument	: Copy_enmSpiId				: The SPI to use
+ * I/p Argument	: Copy_enmSlavePortId		: The port of the pin used to select the slave
+ * I/p Argument	: Copy_enmSlavePinId		: The pin used to select the slave
+ * I/p Argument : Copy_u8DataToTransmit		: The data to be transmitted to the slave
+ * O/p Argument : Outptr_DataRecieved		: The data received from the slave
+ */
+void SPI_voidMasterTranceive(SpiId_type Copy_enmSpiId, PortId_type Copy_enmSlavePortId, PinId_type Copy_enmSlavePinId, u8 Copy_u8DataToTransmit, u8* Outptr_DataRecieved);
+
+/* 
+ * Func. Name	: SPI_voidSlaveTranceive
+ * Description	: This function allows the user to setup the SPI for data tranceiving when in slave mode
+ * I/p Argument	: Copy_enmSpiId						: The SPI to use
+ * I/p Argument	: Inptr_vdCallbackFunction			: Pointer to the function to be called when a transmission occurs
+ * 				  									  It takes the received byte as an argument
+ * I/p Argument : Copy_u8InitialDataToTransmit		: The data to be transmitted to the master during the first transmission
+ */
+void SPI_voidSlaveTranceive(SpiId_type Copy_enmSpiId, void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data), u8 Copy_u8InitialDataToTransmit);
+
+/* 
+ * Func. Name	: SPI_voidSlaveUpdateDataToTransmit
+ * Description	: This function allows the user to update the data to be sent by the SPI during the upcomming
+ * 											  transmission when in slave mode
+ * I/p Argument	: Copy_enmSpiId				: The SPI to use
+ * I/p Argument : Copy_u8DataToTransmit		: The data to be transmitted to the master during the next transmission
+ */
+void SPI_voidSlaveUpdateDataToTransmit(SpiId_type Copy_enmSpiId, u8 Copy_u8DataToTransmit);
 /*__________________________________________________________________________________________________________________________________________*/
 
 
