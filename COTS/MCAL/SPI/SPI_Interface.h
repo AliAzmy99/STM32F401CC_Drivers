@@ -16,8 +16,7 @@ typedef enum
 	SPI_1,
 	SPI_2,
 	SPI_3,
-	SPI_4,
-	SPI_NOT_AN_SPI		/*Must remain the last element*/
+	SPI_4
 }SpiId_type;
 
 	/*SPI Clk Prescaler Type*/
@@ -30,27 +29,24 @@ typedef enum
 	SPI_FP_32	= (0b100),	/*APB bus frequency / 32*/
 	SPI_FP_64	= (0b101),	/*APB bus frequency / 64*/
 	SPI_FP_128	= (0b110),	/*APB bus frequency / 128*/
-	SPI_FP_256	= (0b111),	/*APB bus frequency / 256*/
-	SPI_NOT_A_PRE		/*Must remain the last element*/
+	SPI_FP_256	= (0b111)	/*APB bus frequency / 256*/
 }SpiClkPre_type;
 
 	/*SPI Clk Polarity Type*/
 typedef enum
 {
 	SPI_IDLE_LOW,		/*CK to 0 when idle*/
-	SPI_IDLE_HIGH,		/*CK to 1 when idle*/
-	SPI_NOT_A_CPOL		/*Must remain the last element*/
+	SPI_IDLE_HIGH		/*CK to 1 when idle*/
 }SpiCpol_type;
 
 	/*SPI Clk Phase Type*/
 typedef enum
 {
 	SPI_READ_AT_LEADING,		/*The first clock transition is the first data capture edge*/
-	SPI_WRITE_AT_LEADING,		/*The second clock transition is the first data capture edge*/
-	SPI_NOT_A_CPHA				/*Must remain the last element*/
+	SPI_WRITE_AT_LEADING		/*The second clock transition is the first data capture edge*/
 }SpiCpha_type;
 
-	/*Seven Segment Configuration Structure*/
+	/*SPI Configuration Structure*/
 typedef struct{
 	True_type enmIsMaster;				/*Whether the SPI is in Master mode*/
 	

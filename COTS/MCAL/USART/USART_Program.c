@@ -23,31 +23,22 @@
 
 
 /*Public Functions Definitions*/
-/* 
- * Func. Name	: USART_vdInit
- * Description	: This function allows the user to initialize one of the USARTs
- * I/p Argument	: Copy_enmSpiId				: The USART to initialize
- * I/p Argument	: strctSpiConfig			: The USART config struct
- */
-void USART_vdInit(SpiId_type Copy_enmSpiId, SpiConfig_type* strctSpiConfig)
+void USART_vdInit(UsartId_type Copy_enmUsartId, UsartConfig_type* strctUsartConfig)
 {
 	/*Variables Definitions*/
-	volatile SpiRegisters_type* Loc_strctSpiRegister;
+	volatile UsartRegisters_type* Loc_strctUsartRegister;
 
 	/*Choosing Correct Register Address*/
-	switch (Copy_enmSpiId)
+	switch (Copy_enmUsartId)
 	{
 	case USART_1:
-		Loc_strctSpiRegister = USART1_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART1_FIRST_ADDRESS;
 		break;
 	case USART_2:
-		Loc_strctSpiRegister = USART2_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART2_FIRST_ADDRESS;
 		break;
-	case USART_3:
-		Loc_strctSpiRegister = USART3_FIRST_ADDRESS;
-		break;
-	case USART_4:
-		Loc_strctSpiRegister = USART4_FIRST_ADDRESS;
+	case USART_6:
+		Loc_strctUsartRegister = USART6_FIRST_ADDRESS;
 		break;
 	default:
 		return;
@@ -55,48 +46,36 @@ void USART_vdInit(SpiId_type Copy_enmSpiId, SpiConfig_type* strctSpiConfig)
 	}
 
 	/*Configuring USART Registers*/
-	Loc_strctSpiRegister->CR1 = 0b0000000000000000;
-	if (strctSpiConfig->enmIsMaster)
+	Loc_strctUsartRegister->CR1 = 0b0000000000000000;
+	if (strctUsartConfig->enmIsMaster)
 	{
-		SET_BIT(Loc_strctSpiRegister->CR1, USART_CR1_MSTR);			/*Setting as master*/
-		SET_BIT(Loc_strctSpiRegister->CR1, USART_CR1_SSM);			/*Enabling the software slave management*/
-		SET_BIT(Loc_strctSpiRegister->CR1, USART_CR1_SSI);			/*Deselecting as slave internally*/
+		SET_BIT(Loc_strctUsartRegister->CR1, USART_CR1_MSTR);			/*Setting as master*/
+		SET_BIT(Loc_strctUsartRegister->CR1, USART_CR1_SSM);			/*Enabling the software slave management*/
+		SET_BIT(Loc_strctUsartRegister->CR1, USART_CR1_SSI);			/*Deselecting as slave internally*/
 	}
 	
-	Loc_strctSpiRegister->CR1 |= (strctSpiConfig->enmSpiClkPre) << USART_CR1_BR0;		/*Setting prescaler*/
-	MAKE_BIT(Loc_strctSpiRegister->CR1, USART_CR1_CPOL, strctSpiConfig->enmSpiCpol);	/*Setting Clk Polarity*/
-	MAKE_BIT(Loc_strctSpiRegister->CR1, USART_CR1_CPHA, strctSpiConfig->enmSpiCpha);	/*Setting Clk Phase*/
-	SET_BIT(Loc_strctSpiRegister->CR1, USART_CR1_SPE);								/*Enabling the USART*/
+	Loc_strctUsartRegister->CR1 |= (strctUsartConfig->enmUsartClkPre) << USART_CR1_BR0;		/*Setting prescaler*/
+	MAKE_BIT(Loc_strctUsartRegister->CR1, USART_CR1_CPOL, strctUsartConfig->enmUsartCpol);	/*Setting Clk Polarity*/
+	MAKE_BIT(Loc_strctUsartRegister->CR1, USART_CR1_CPHA, strctUsartConfig->enmUsartCpha);	/*Setting Clk Phase*/
+	SET_BIT(Loc_strctUsartRegister->CR1, USART_CR1_SPE);								/*Enabling the USART*/
 }
 
-/* 
- * Func. Name	: USART_voidMasterTranceive
- * Description	: This function allows the user to tranceive data when in master mode
- * I/p Argument	: Copy_enmSpiId				: The USART to use
- * I/p Argument	: Copy_enmSlavePortId		: The port of the pin used to select the slave
- * I/p Argument	: Copy_enmSlavePinId		: The pin used to select the slave
- * I/p Argument : Copy_u8DataToTransmit		: The data to be transmitted to the slave
- * O/p Argument : Outptr_DataRecieved		: The data received from the slave
- */
-void USART_voidMasterTranceive(SpiId_type Copy_enmSpiId, PortId_type Copy_enmSlavePortId, PinId_type Copy_enmSlavePinId, u8 Copy_u8DataToTransmit, u8* Outptr_DataRecieved)
+void USART_voidMasterTranceive(UsartId_type Copy_enmUsartId, PortId_type Copy_enmSlavePortId, PinId_type Copy_enmSlavePinId, u8 Copy_u8DataToTransmit, u8* Outptr_DataRecieved)
 {
 	/*Variables Definitions*/
-	volatile SpiRegisters_type* Loc_strctSpiRegister;
+	volatile UsartRegisters_type* Loc_strctUsartRegister;
 
 	/*Choosing Correct Register Address*/
-	switch (Copy_enmSpiId)
+	switch (Copy_enmUsartId)
 	{
 	case USART_1:
-		Loc_strctSpiRegister = USART1_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART1_FIRST_ADDRESS;
 		break;
 	case USART_2:
-		Loc_strctSpiRegister = USART2_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART2_FIRST_ADDRESS;
 		break;
-	case USART_3:
-		Loc_strctSpiRegister = USART3_FIRST_ADDRESS;
-		break;
-	case USART_4:
-		Loc_strctSpiRegister = USART4_FIRST_ADDRESS;
+	case USART_6:
+		Loc_strctUsartRegister = USART6_FIRST_ADDRESS;
 		break;
 	default:
 		return;
@@ -107,89 +86,68 @@ void USART_voidMasterTranceive(SpiId_type Copy_enmSpiId, PortId_type Copy_enmSla
 	GPIO_vdSetPinValue(Copy_enmSlavePortId, Copy_enmSlavePinId, STD_LOW);
 
 	/*Send Data*/
-	Loc_strctSpiRegister->DR = Copy_u8DataToTransmit;		/*Writing to the DR register automatically triggers the transmition */
+	Loc_strctUsartRegister->DR = Copy_u8DataToTransmit;		/*Writing to the DR register automatically triggers the transmition */
 	
 	/*Wait Until USART is not Busy*/
-	while(!GET_BIT(Loc_strctSpiRegister->SR, USART_SR_RXNE));
+	while(!GET_BIT(Loc_strctUsartRegister->SR, USART_SR_RXNE));
 
 	/*Deselect Slave*/
 	GPIO_vdSetPinValue(Copy_enmSlavePortId, Copy_enmSlavePinId, STD_HIGH);
 
 	/*Output Data*/
-	*Outptr_DataRecieved = (u8) (Loc_strctSpiRegister->DR);
+	*Outptr_DataRecieved = (u8) (Loc_strctUsartRegister->DR);
 }
 
-/* 
- * Func. Name	: USART_voidSlaveTranceive
- * Description	: This function allows the user to setup the USART for data tranceiving when in slave mode
- * I/p Argument	: Copy_enmSpiId						: The USART to use
- * I/p Argument	: Inptr_vdCallbackFunction			: Pointer to the function to be called when a transmission occurs
- * 				  									  It takes the received byte as an argument
- * I/p Argument : Copy_u8InitialDataToTransmit		: The data to be transmitted to the master during the first transmission
- */
-void USART_voidSlaveTranceive(SpiId_type Copy_enmSpiId, void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data), u8 Copy_u8InitialDataToTransmit)
+void USART_voidSlaveTranceive(UsartId_type Copy_enmUsartId, void (* Inptr_vdCallbackFunction)(u8 Copy_u8Data), u8 Copy_u8InitialDataToTransmit)
 {
 	/*Variables Definitions*/
-	volatile SpiRegisters_type* Loc_strctSpiRegister;
+	volatile UsartRegisters_type* Loc_strctUsartRegister;
 
 	/*Choosing Correct Register Address*/
-	switch (Copy_enmSpiId)
+	switch (Copy_enmUsartId)
 	{
 	case USART_1:
-		Loc_strctSpiRegister = USART1_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART1_FIRST_ADDRESS;
 		break;
 	case USART_2:
-		Loc_strctSpiRegister = USART2_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART2_FIRST_ADDRESS;
 		break;
-	case USART_3:
-		Loc_strctSpiRegister = USART3_FIRST_ADDRESS;
-		break;
-	case USART_4:
-		Loc_strctSpiRegister = USART4_FIRST_ADDRESS;
+	case USART_6:
+		Loc_strctUsartRegister = USART6_FIRST_ADDRESS;
 		break;
 	default:
 		return;
 		break;
 	}
 
-	SET_BIT(Loc_strctSpiRegister->CR2, USART_CR2_RXNEIE);
+	SET_BIT(Loc_strctUsartRegister->CR2, USART_CR2_RXNEIE);
 	Globptr_vdCallbackFunction = Inptr_vdCallbackFunction;
-	Loc_strctSpiRegister->DR = Copy_u8InitialDataToTransmit;
+	Loc_strctUsartRegister->DR = Copy_u8InitialDataToTransmit;
 }
 
-/* 
- * Func. Name	: USART_voidSlaveUpdateDataToTransmit
- * Description	: This function allows the user to update the data to be sent by the USART during the upcomming
- * 											  transmission when in slave mode
- * I/p Argument	: Copy_enmSpiId				: The USART to use
- * I/p Argument : Copy_u8DataToTransmit		: The data to be transmitted to the master during the next transmission
- */
-void USART_voidSlaveUpdateDataToTransmit(SpiId_type Copy_enmSpiId, u8 Copy_u8DataToTransmit)
+void USART_voidSlaveUpdateDataToTransmit(UsartId_type Copy_enmUsartId, u8 Copy_u8DataToTransmit)
 {
 	/*Variables Definitions*/
-	volatile SpiRegisters_type* Loc_strctSpiRegister;
+	volatile UsartRegisters_type* Loc_strctUsartRegister;
 
 	/*Choosing Correct Register Address*/
-	switch (Copy_enmSpiId)
+	switch (Copy_enmUsartId)
 	{
 	case USART_1:
-		Loc_strctSpiRegister = USART1_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART1_FIRST_ADDRESS;
 		break;
 	case USART_2:
-		Loc_strctSpiRegister = USART2_FIRST_ADDRESS;
+		Loc_strctUsartRegister = USART2_FIRST_ADDRESS;
 		break;
-	case USART_3:
-		Loc_strctSpiRegister = USART3_FIRST_ADDRESS;
-		break;
-	case USART_4:
-		Loc_strctSpiRegister = USART4_FIRST_ADDRESS;
+	case USART_6:
+		Loc_strctUsartRegister = USART6_FIRST_ADDRESS;
 		break;
 	default:
 		return;
 		break;
 	}
 
-	Loc_strctSpiRegister->DR = Copy_u8DataToTransmit;
+	Loc_strctUsartRegister->DR = Copy_u8DataToTransmit;
 }
 /*__________________________________________________________________________________________________________________________________________*/
 
@@ -222,27 +180,14 @@ void USART2_IRQHandler(void)
 }
 
 /*
- * Func. Name	: USART3_IRQHandler
+ * Func. Name	: USART6_IRQHandler
  * Description	: This function calls the callback function giving it the received data and clears the interrupt flag
  */
-void USART3_IRQHandler(void)
+void USART6_IRQHandler(void)
 {
 	/*Call Callback Function*/
 	if (Globptr_vdCallbackFunction)
 	{
-		Globptr_vdCallbackFunction((u8) (USART3_FIRST_ADDRESS->DR));
-	}
-}
-
-/*
- * Func. Name	: USART4_IRQHandler
- * Description	: This function calls the callback function giving it the received data and clears the interrupt flag
- */
-void USART4_IRQHandler(void)
-{
-	/*Call Callback Function*/
-	if (Globptr_vdCallbackFunction)
-	{
-		Globptr_vdCallbackFunction((u8) (USART4_FIRST_ADDRESS->DR));
+		Globptr_vdCallbackFunction((u8) (USART6_FIRST_ADDRESS->DR));
 	}
 }

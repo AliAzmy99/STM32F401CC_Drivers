@@ -29,7 +29,7 @@ static void PRIV_vdReceiveFrame(void);
 /* 
  * Func. Name	: PRIV_vdPrepareForNewFrame
  * Description	: This function is used by the driver to reset the variables used by PRIV_vdReceiveFrame
- * 				  to prepare it for receiving another frame.
+ * 				  to prepare it for receiving another frame
  * Use Case		: This function is called when the entire frame is received or when the transmission fails
  */
 static void PRIV_vdPrepareForNewFrame(void);

@@ -37,7 +37,7 @@ void SYSCFG_vdSetExtiLinePort(LineId_type Copy_enmLineId, PortId_type Copy_enmPo
 	u8 Loc_u8NibbleNum = 0;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && EXTI_LINE_13 > Copy_enmLineId) ||EXTI_NOT_A_LINE <= Copy_enmLineId || GPIO_NOT_A_PORT <= Copy_enmPortId)
+	if (GPIO_PORT_C == Copy_enmPortId && EXTI_LINE_13 > Copy_enmLineId)
 	{
 		return;
 	}

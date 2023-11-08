@@ -152,8 +152,11 @@ void SPI_voidSlaveTranceive(SpiId_type Copy_enmSpiId, void (* Inptr_vdCallbackFu
 		break;
 	}
 
+	/*Enabling the Receive Buffer not Empty Interrupt*/
 	SET_BIT(Loc_strctSpiRegister->CR2, SPI_CR2_RXNEIE);
+	/*Setting Callback Function*/
 	Globptr_vdCallbackFunction = Inptr_vdCallbackFunction;
+	/*Setting the Initial Data to Transmit*/
 	Loc_strctSpiRegister->DR = Copy_u8InitialDataToTransmit;
 }
 
@@ -189,6 +192,7 @@ void SPI_voidSlaveUpdateDataToTransmit(SpiId_type Copy_enmSpiId, u8 Copy_u8DataT
 		break;
 	}
 
+	/*Updating the Initial Data to Transmit*/
 	Loc_strctSpiRegister->DR = Copy_u8DataToTransmit;
 }
 /*__________________________________________________________________________________________________________________________________________*/

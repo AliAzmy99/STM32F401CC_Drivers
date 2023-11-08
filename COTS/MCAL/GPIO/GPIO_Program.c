@@ -33,7 +33,7 @@ void GPIO_vdSetPinMode(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Pin
 	volatile u32* Locptr_u32MODERxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
@@ -93,7 +93,7 @@ void GPIO_vdSetPinOutputType(PortId_type Copy_enmPortId, PinId_type Copy_enmPinI
 	volatile u32* Locptr_u32OTYPERxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
@@ -143,7 +143,7 @@ void GPIO_vdSetPinOutputSpeed(PortId_type Copy_enmPortId, PinId_type Copy_enmPin
 	volatile u32* Locptr_u32OSPEEDRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
@@ -203,7 +203,7 @@ void GPIO_vdSetPinPullState(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId
 	volatile u32* Locptr_u32PUPDRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
@@ -248,7 +248,7 @@ void GPIO_vdSetPinPullState(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId
 
 /* 
  * Func. Name	: GPIO_vdSetPinValue
- * Description	: This function allows the user to set the value of any pin
+ * Description	: This function allows the user to set the value of any pin using direct access
  * I/p Argument	: Copy_enmPortId
  * I/p Argument	: Copy_enmPinId
  * I/p Argument	: Copy_enmValue
@@ -256,60 +256,10 @@ void GPIO_vdSetPinPullState(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId
 void GPIO_vdSetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue)
 {
 	/*Variables Definitions*/
-	volatile u32* Locptr_u32ODRxAddress = NULL;
-
-	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
-	{
-		return;
-	}
-
-	/*Choosing Correct Register Address*/
-	switch (Copy_enmPortId)
-	{
-	case GPIO_PORT_A:
-		Locptr_u32ODRxAddress = ((u32*) GPIOA_FIRST_ADDRESS) + GPIO_ODR_NO;
-		break;
-	case GPIO_PORT_B:
-		Locptr_u32ODRxAddress = ((u32*) GPIOB_FIRST_ADDRESS) + GPIO_ODR_NO;
-		break;
-	case GPIO_PORT_C:
-		Locptr_u32ODRxAddress = ((u32*) GPIOC_FIRST_ADDRESS) + GPIO_ODR_NO;
-		break;
-	default:
-		return;
-		break;
-	}
-
-	/*Setting Value*/
-	switch(Copy_enmValue)
-	{
-		case STD_LOW:
-			CLR_BIT(*Locptr_u32ODRxAddress, Copy_enmPinId);
-			break;
-		case STD_HIGH:
-			SET_BIT(*Locptr_u32ODRxAddress, Copy_enmPinId);
-			break;
-		default:
-			return;
-			break;
-	}
-}
-
-/* 
- * Func. Name	: GPIO_vdSetPinValueDirectAccess
- * Description	: This function allows the user to set the value of any pin using direct access
- * I/p Argument	: Copy_enmPortId
- * I/p Argument	: Copy_enmPinId
- * I/p Argument	: Copy_enmValue
- */
-void GPIO_vdSetPinValueDirectAccess(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue)
-{
-	/*Variables Definitions*/
 	volatile u32* Locptr_u32BSRRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
@@ -359,7 +309,7 @@ void GPIO_vdGetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Va
 	volatile u32* Locptr_u32IDRxAddress = NULL;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
@@ -403,16 +353,12 @@ void GPIO_vdSetAlternativeFunction(PortId_type Copy_enmPortId, PinId_type Copy_e
 	u8 Loc_u8RegNumber = 0;
 
 	/*I/p Validation*/
-	if ((GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId) || GPIO_NOT_A_PIN <= Copy_enmPinId)
+	if (GPIO_PORT_C == Copy_enmPortId && GPIO_PIN_13 > Copy_enmPinId)
 	{
 		return;
 	}
 
-	if (GPIO_NOT_AN_AF <= Copy_enmAltFunNum)
-	{
-		return;
-	}
-
+	/*Choosing the Correct Register Number*/
 	if (7 >= Copy_enmPinId)
 	{
 		Loc_u8RegNumber = GPIO_AFRL_NO;

@@ -50,9 +50,7 @@ typedef enum
 	RCC_PERIPHERAL_SYSCFG,
 	RCC_PERIPHERAL_TIM9, /*Bit 16*/
 	RCC_PERIPHERAL_TIM10,
-	RCC_PERIPHERAL_TIM11,
-		
-	RCC_NOT_A_PERIPHERAL	/*Must remain the last element*/
+	RCC_PERIPHERAL_TIM11
 }PeripheralId_type;
 /*__________________________________________________________________________________________________________________________________________*/
 

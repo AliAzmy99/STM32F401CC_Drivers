@@ -22,17 +22,11 @@
 /*Public Functions Definitions*/
 /* 
  * Func. Name	: SCB_vdSetNvicPriorityStructure
- * Description	: This function allows the user to choose the number of priority groups and subgroups the for the NVIC
- * I/p Argument	: Copy_u8PriorityStructure		Options: SCB_G16_SG01, SCB_G08_SG02, SCB_G04_SG04, SCB_G02_SG08, SCB_G01_SG16
+ * Description	: This function allows the user to control the priority grouping for the exception model
+ * I/p Argument	: Copy_enmPriorityGrouping
  */
-void SCB_vdSetNvicPriorityStructure(u8 Copy_u8PriorityStructure)
+void SCB_vdConfigPriorityGrouping(PriorityGrouping_type Copy_enmPriorityGrouping)
 {
-	/*I/p Validation*/
-	if (SCB_G01_SG16 < Copy_u8PriorityStructure)
-	{
-		return;
-	}
-
 	/*Setting Priority Structure*/
-	SCB_AIRCR = VECTKEY | ((Copy_u8PriorityStructure + 3) << SCB_AIRCR_PRIGROUP);	/*Adding the register key to the choosen structure writing to register*/
+	SCB_AIRCR = (VECTKEY << SCB_AIRCR_VECTKEY) | ((Copy_enmPriorityGrouping + 3) << SCB_AIRCR_PRIGROUP);	/*Adding the register key to the choosen structure writing to register*/
 }

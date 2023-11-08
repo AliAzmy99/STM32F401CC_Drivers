@@ -17,9 +17,10 @@
 	/*Bits*/
 		/*AIRCR*/
 #define SCB_AIRCR_PRIGROUP		(8u)
+#define SCB_AIRCR_VECTKEY		(16u)
 
 	/*Keys*/
-#define VECTKEY					(0x5FA0000)
+#define VECTKEY					(0x5FA)
 /*__________________________________________________________________________________________________________________________________________*/
 
 

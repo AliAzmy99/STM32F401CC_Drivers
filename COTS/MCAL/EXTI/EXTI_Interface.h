@@ -38,8 +38,7 @@ typedef enum
 	EXTI_LINE_12,
 	EXTI_LINE_13,
 	EXTI_LINE_14,
-	EXTI_LINE_15,
-	EXTI_NOT_A_LINE		/*Must remain the last element*/
+	EXTI_LINE_15
 }LineId_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
@@ -48,12 +47,13 @@ typedef enum
 /* 
  * Func. Name	: EXTI_vdInitLine
  * Description	: This function allows the user to initialize a certain line
+ * 				  It also disables the initialized line
+ * Note			: To choose which port this line is connected to, use SYSCFG_vdSetExtiLinePort()
  * I/p Argument	: Copy_enmLineId			: Line to initialize
- * I/p Argument	: Copy_enmPortId			: Port to connect the line to
  * I/p Argument	: Copy_enmDetectedEdge		: Edges that trigger the line interrupt
- * I/p Argument	: Inptr_vdCallbackFunction	: Function that is called when the line interrupt triggered
+ * I/p Argument	: Inptr_vdCallbackFunction	: Pointer to the function that is called when the line interrupt triggered
  */
-void EXTI_vdInitLine(LineId_type Copy_enmLineId, PortId_type Copy_enmPortId, DetectedEdge_type Copy_enmDetectedEdge, void (* Inptr_vdCallbackFunction)(void));
+void EXTI_vdInitLine(LineId_type Copy_enmLineId, DetectedEdge_type Copy_enmDetectedEdge, void (* Inptr_vdCallbackFunction)(void));
 
 /* 
  * Func. Name	: EXTI_vdEnableInterrupt
@@ -68,22 +68,6 @@ void EXTI_vdEnableInterrupt(LineId_type Copy_enmLineId);
  * I/p Argument	: Copy_enmLineId
  */
 void EXTI_vdDisableInterrupt(LineId_type Copy_enmLineId);
-
-/* 
- * Func. Name	: EXTI_vdSetCallbackFunction
- * Description	: This function allows the user set the callback function that will be called when a certain interrupt line triggers its ISR
- * I/p Argument	: Copy_enmLineId
- * I/p Argument	: Inptr_vdCallbackFunction
- */
-void EXTI_vdSetCallbackFunction(LineId_type Copy_enmLineId, void (* Inptr_vdCallbackFunction)(void));
-
-/* 
- * Func. Name	: EXTI_vdSelectEdgeTriggers
- * Description	: This function allows the user to choose which edges trigger a certain interrupt line
- * I/p Argument	: Copy_enmLineId
- * I/p Argument	: Copy_enmDetectedEdge
- */
-void EXTI_vdSelectEdgeTriggers(LineId_type Copy_enmLineId, DetectedEdge_type Copy_enmDetectedEdge);
 
 /* 
  * Func. Name	: EXTI_vdTriggerSoftwareInterrupt

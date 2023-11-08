@@ -77,12 +77,6 @@ typedef enum
 
 /*Public Functions Declarations*/
 /* 
- * Func. Name	: NVIC_vdInit
- * Description	: This function allows the user to initialize the nested vectored interrupt controller
- */
-void NVIC_vdInit(void);
-
-/* 
  * Func. Name	: NVIC_vdEnableInterrupt
  * Description	: This function allows the user to enable a specific interrupt
  * I/p Argument	: Copy_enmIrqId
@@ -121,6 +115,7 @@ void NVIC_vdClearPending(IrqId_type Copy_enmIrqId);
 /* 
  * Func. Name	: NVIC_vdSetPriority
  * Description	: This function allows the user to set the priority group and subgroup of a specific interrupt
+ * Note			: To control the priority grouping for the exception model, use SCB_vdConfigPriorityGrouping()
  * I/p Argument	: Copy_enmIrqId
  * I/p Argument	: copy_u8Group
  * I/p Argument	: copy_u8SubGroup
@@ -130,6 +125,7 @@ void NVIC_vdSetPriority(IrqId_type Copy_enmIrqId, u8 copy_u8Group, u8 copy_u8Sub
 /* 
  * Func. Name	: NVIC_vdGetPriority
  * Description	: This function allows the user to get the priority group and subgroup of a specific interrupt
+ * Note			: To control the priority grouping for the exception model, use SCB_vdConfigPriorityGrouping()
  * I/p Argument	: Copy_enmIrqId
  * O/p Argument	: Outptr_u8Group
  * O/p Argument	: Outptr_u8SubGroup

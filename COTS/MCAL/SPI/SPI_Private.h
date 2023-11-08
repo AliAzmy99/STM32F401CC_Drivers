@@ -11,6 +11,7 @@
 
 
 /*Types Definitions*/
+	/*SPI Registers Type*/
 typedef struct
 {
 	u16 CR1;

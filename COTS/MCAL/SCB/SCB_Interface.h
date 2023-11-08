@@ -10,23 +10,26 @@
 #define SCB_INTERFACE_H
 
 
-/*Public Macros*/
-	/*Group and Subgroup ID Options*/
-#define SCB_G16_SG01	(0u)		/*16 Group(s) and 01 Subgroup(s) in each*/
-#define SCB_G08_SG02	(1u)		/*08 Group(s) and 02 Subgroup(s) in each*/
-#define SCB_G04_SG04	(2u)		/*04 Group(s) and 04 Subgroup(s) in each*/
-#define SCB_G02_SG08	(3u)		/*02 Group(s) and 08 Subgroup(s) in each*/
-#define SCB_G01_SG16	(4u)		/*01 Group(s) and 16 Subgroup(s) in each*/
+/*Types Definitions*/
+	/*Priority Grouping Type*/
+typedef enum
+{
+	SCB_G16_SG01,		/*16 Group(s) and 01 Subgroup(s) in each*/
+	SCB_G08_SG02,		/*08 Group(s) and 02 Subgroup(s) in each*/
+	SCB_G04_SG04,		/*04 Group(s) and 04 Subgroup(s) in each*/
+	SCB_G02_SG08,		/*02 Group(s) and 08 Subgroup(s) in each*/
+	SCB_G01_SG16		/*01 Group(s) and 16 Subgroup(s) in each*/
+}PriorityGrouping_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
 
 /*Public Functions Declarations*/
 /* 
  * Func. Name	: SCB_vdSetNvicPriorityStructure
- * Description	: This function allows the user to choose the number of priority groups and subgroups the for the NVIC
- * I/p Argument	: Copy_u8PriorityStructure		Options: SCB_G16_SG01, SCB_G08_SG02, SCB_G04_SG04, SCB_G02_SG08, SCB_G01_SG16
+ * Description	: This function allows the user to control the priority grouping for the exception model
+ * I/p Argument	: Copy_enmPriorityGrouping
  */
-void SCB_vdSetNvicPriorityStructure(u8 Copy_u8PriorityStructure);
+void SCB_vdConfigPriorityGrouping(PriorityGrouping_type Copy_enmPriorityGrouping);
 /*__________________________________________________________________________________________________________________________________________*/
 
 

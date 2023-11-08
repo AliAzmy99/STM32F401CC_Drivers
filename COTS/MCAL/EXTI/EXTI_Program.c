@@ -14,7 +14,6 @@
 
 	/*Include Needed MCAL Files*/
 #include "../GPIO/GPIO_Interface.h"
-#include "../SYSCFG/SYSCFG_Interface.h"
 
 	/*Include Needed EXTI Files*/
 #include "EXTI_Config.h"
@@ -27,88 +26,16 @@
 /* 
  * Func. Name	: EXTI_vdInitLine
  * Description	: This function allows the user to initialize a certain line
+ * 				  It also disables the initialized line
+ * Note			: To choose which port this line is connected to, use SYSCFG_vdSetExtiLinePort()
  * I/p Argument	: Copy_enmLineId			: Line to initialize
- * I/p Argument	: Copy_enmPortId			: Port to connect the line to
  * I/p Argument	: Copy_enmDetectedEdge		: Edges that trigger the line interrupt
  * I/p Argument	: Inptr_vdCallbackFunction	: Pointer to the function that is called when the line interrupt triggered
  */
-void EXTI_vdInitLine(LineId_type Copy_enmLineId, PortId_type Copy_enmPortId, DetectedEdge_type Copy_enmDetectedEdge, void (* Inptr_vdCallbackFunction)(void))
+void EXTI_vdInitLine(LineId_type Copy_enmLineId, DetectedEdge_type Copy_enmDetectedEdge, void (* Inptr_vdCallbackFunction)(void))
 {
+	/*Disable Interrupts for the Line*/
 	EXTI_vdDisableInterrupt(Copy_enmLineId);
-	SYSCFG_vdSetExtiLinePort(Copy_enmLineId, Copy_enmPortId);
-	EXTI_vdSelectEdgeTriggers(Copy_enmLineId, Copy_enmDetectedEdge);
-	EXTI_vdSetCallbackFunction(Copy_enmLineId, Inptr_vdCallbackFunction);
-}
-
-/* 
- * Func. Name	: EXTI_vdEnableInterrupt
- * Description	: This function allows the user to enable a certain interrupt
- * I/p Argument	: Copy_enmLineId
- */
-void EXTI_vdEnableInterrupt(LineId_type Copy_enmLineId)
-{
-	/*I/p validation*/
-	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
-	{
-		return;
-	}
-
-	/*Unmask Interrupt*/
-	SET_BIT(EXTI_IMR, Copy_enmLineId);
-}
-
-/* 
- * Func. Name	: EXTI_vdDisableInterrupt
- * Description	: This function allows the user to disable a certain interrupt
- * I/p Argument	: Copy_enmLineId
- */
-void EXTI_vdDisableInterrupt(LineId_type Copy_enmLineId)
-{
-	/*I/p validation*/
-	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
-	{
-		return;
-	}
-
-	/*Mask Interrupt*/
-	CLR_BIT(EXTI_IMR, Copy_enmLineId);
-}
-
-/* 
- * Func. Name	: EXTI_vdSetCallbackFunction
- * Description	: This function allows the user set the callback function that will be called when a certain interrupt line triggers its ISR
- * I/p Argument	: Copy_enmLineId
- * I/p Argument	: Inptr_vdCallbackFunction
- */
-void EXTI_vdSetCallbackFunction(LineId_type Copy_enmLineId, void (* Inptr_vdCallbackFunction)(void))
-{
-	/*I/p validation*/
-	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
-	{
-		return;
-	}
-	if (!Inptr_vdCallbackFunction)
-	{
-		return;
-	}
-	
-	/*Set Callback Function*/
-	Globptr_vdCallbackFunctions[Copy_enmLineId] = Inptr_vdCallbackFunction;
-}
-
-/* 
- * Func. Name	: EXTI_vdSelectEdgeTriggers
- * Description	: This function allows the user to choose which edges trigger a certain interrupt line
- * I/p Argument	: Copy_enmLineId
- * I/p Argument	: Copy_enmDetectedEdge
- */
-void EXTI_vdSelectEdgeTriggers(LineId_type Copy_enmLineId, DetectedEdge_type Copy_enmDetectedEdge)
-{
-	/*I/p validation*/
-	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
-	{
-		return;
-	}
 
 	/*Enable / Disable Edge Triggers*/
 	switch (Copy_enmDetectedEdge)
@@ -133,6 +60,31 @@ void EXTI_vdSelectEdgeTriggers(LineId_type Copy_enmLineId, DetectedEdge_type Cop
 		return;
 		break;
 	}
+
+	/*Set Callback Function*/
+	Globptr_vdCallbackFunctions[Copy_enmLineId] = Inptr_vdCallbackFunction;
+}
+
+/* 
+ * Func. Name	: EXTI_vdEnableInterrupt
+ * Description	: This function allows the user to enable a certain interrupt
+ * I/p Argument	: Copy_enmLineId
+ */
+void EXTI_vdEnableInterrupt(LineId_type Copy_enmLineId)
+{
+	/*Unmask Interrupt*/
+	SET_BIT(EXTI_IMR, Copy_enmLineId);
+}
+
+/* 
+ * Func. Name	: EXTI_vdDisableInterrupt
+ * Description	: This function allows the user to disable a certain interrupt
+ * I/p Argument	: Copy_enmLineId
+ */
+void EXTI_vdDisableInterrupt(LineId_type Copy_enmLineId)
+{
+	/*Mask Interrupt*/
+	CLR_BIT(EXTI_IMR, Copy_enmLineId);
 }
 
 /* 
@@ -142,12 +94,6 @@ void EXTI_vdSelectEdgeTriggers(LineId_type Copy_enmLineId, DetectedEdge_type Cop
  */
 void EXTI_vdTriggerSoftwareInterrupt(LineId_type Copy_enmLineId)
 {
-	/*I/p validation*/
-	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
-	{
-		return;
-	}
-
 	/*Unmask Interrupt*/
 	SET_BIT(EXTI_SWIER, Copy_enmLineId);
 }
@@ -160,12 +106,6 @@ void EXTI_vdTriggerSoftwareInterrupt(LineId_type Copy_enmLineId)
  */
 void EXTI_vdGetPending(LineId_type Copy_enmLineId, True_type* Outptr_enmPending)
 {
-	/*I/p validation*/
-	if (EXTI_NOT_A_LINE <= Copy_enmLineId)
-	{
-		return;
-	}
-
 	/*Get Pending*/
 	*Outptr_enmPending = GET_BIT(EXTI_PR, Copy_enmLineId);
 }

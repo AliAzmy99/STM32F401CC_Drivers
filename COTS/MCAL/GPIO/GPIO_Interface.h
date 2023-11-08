@@ -15,8 +15,7 @@ typedef enum
 {
 	GPIO_PORT_A,
 	GPIO_PORT_B,
-	GPIO_PORT_C,
-	GPIO_NOT_A_PORT		/*Must remain the last element*/
+	GPIO_PORT_C
 }PortId_type;
 
 	/*Pin ID Type*/
@@ -37,8 +36,7 @@ typedef enum
 	GPIO_PIN_12,
 	GPIO_PIN_13,
 	GPIO_PIN_14,
-	GPIO_PIN_15,
-	GPIO_NOT_A_PIN		/*Must remain the last element*/
+	GPIO_PIN_15
 }PinId_type;
 
 	/*Pin Mode Type*/
@@ -92,8 +90,7 @@ typedef enum
 	GPIO_AF_12,
 	GPIO_AF_13,
 	GPIO_AF_14,
-	GPIO_AF_15,
-	GPIO_NOT_AN_AF		/*Must remain the last element*/
+	GPIO_AF_15
 }AlternativeFunction_type;
 /*__________________________________________________________________________________________________________________________________________*/
 
@@ -137,21 +134,12 @@ void GPIO_vdSetPinPullState(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId
 
 /* 
  * Func. Name	: GPIO_vdSetPinValue
- * Description	: This function allows the user to set the value of any pin
- * I/p Argument	: Copy_enmPortId
- * I/p Argument	: Copy_enmPinId
- * I/p Argument	: Copy_enmValue
- */
-void GPIO_vdSetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue);
-
-/* 
- * Func. Name	: GPIO_vdSetPinValueDirectAccess
  * Description	: This function allows the user to set the value of any pin using direct access
  * I/p Argument	: Copy_enmPortId
  * I/p Argument	: Copy_enmPinId
  * I/p Argument	: Copy_enmValue
  */
-void GPIO_vdSetPinValueDirectAccess(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue);
+void GPIO_vdSetPinValue(PortId_type Copy_enmPortId, PinId_type Copy_enmPinId, Value_type Copy_enmValue);
 
 /* 
  * Func. Name	: GPIO_vdGetPinValue

@@ -58,6 +58,7 @@ void STP_vdSendSynch(u32 Copy_u32Data)
 		STK_vdSetWait(1);
 		GPIO_vdSetPinValueDirectAccess(SH_CLK_PORT, SH_CLK_PIN, STD_LOW);
 	}
+	
 	STK_vdSetWait(1);
 	GPIO_vdSetPinValueDirectAccess(ST_CLK_PORT, ST_CLK_PIN, STD_HIGH);
 	STK_vdSetWait(1);
